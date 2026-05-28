@@ -13,8 +13,8 @@ Body::Body(const JPH::BodyCreationSettings& settings)
 Body::Body(const JPH::ShapeRefC& shape, const Transform& transform, MotionType mt, Layers layer)
 {
 	JPH::ShapeRefC shapeSettings = shape;
-	Math::Vector3D pos = transform.position;
-	Math::Quaternion rot = transform.rotation;
+	Math::Vector3D pos = transform.GetPosition();
+	Math::Quaternion rot = transform.GetRotation();
 	JPH::Vec3 shapePos(pos.x, pos.y, pos.z);
 	JPH::Quat shapeRot(rot.x, rot.y, rot.z, rot.w);
 

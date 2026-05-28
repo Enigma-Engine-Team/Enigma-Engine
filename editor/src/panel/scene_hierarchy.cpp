@@ -80,14 +80,14 @@ void UI::SceneHierarchyPanel::Draw()
 					newGO = currentScene->AddGameObject("Directional Light");
 					Light* lightComp = newGO->AddComponent<Light>();
 					lightComp->SetLightTypeEnum(ELightType::DIRECTIONAL);
-					newGO->transform.rotation = newRot;
+					newGO->transform.SetRotation(newRot);
 				}
 				if (ImGui::MenuItem("Spot Light"))
 				{
 					newGO = currentScene->AddGameObject("Spot Light");
 					Light* lightComp = newGO->AddComponent<Light>();
 					lightComp->SetLightTypeEnum(ELightType::SPOT);
-					newGO->transform.rotation = newRot;
+					newGO->transform.SetRotation(newRot);
 				}
 
 				if (ImGui::MenuItem("Point Light"))
@@ -101,20 +101,18 @@ void UI::SceneHierarchyPanel::Draw()
 			}
 
 			if (newGO)
-				newGO->transform.position = newPos;
+				newGO->transform.SetPosition(newPos);
 
 			if (ImGui::BeginMenu("GUI Items"))
 			{
 				if (ImGui::MenuItem("2D Text"))
 				{
 					newGO = currentScene->AddGameObject("Text");
-					newGO->transform.position = { 0.f, 0.f, 0.f };
 					newGO->AddComponent<Text>();
 				}
 				if (ImGui::MenuItem("Button"))
 				{
 					newGO = currentScene->AddGameObject("Button");
-					newGO->transform.position = { 0.f, 0.f, 0.f };
 					newGO->AddComponent<Button>();
 				}
 

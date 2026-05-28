@@ -169,26 +169,28 @@ void ShadowSystem::RenderScene(Scene* scene, EnigmaRHI::ICommandBuffer& cmd,
 {
     for (GameObject* go : scene->GetGameObjects())
     {
+        Math::Matrix4x4 global = go->transform.GetGlobalMatrix();
+
         MeshRenderer* mr = go->GetComponent<MeshRenderer>();
         if (!mr || !mr->CastShadows()) continue;
 
-        mr->UpdateMeshRenderData(go->transform.global, rhi);
+        mr->UpdateMeshRenderData(global, rhi);
 
         EShadowMapType type = sm->GetType();
 
         if (type == EShadowMapType::Directional)
         {
-            directionalShadowPipeline->SendToGPU("model", go->transform.global.m);
+            directionalShadowPipeline->SendToGPU("model", global.m);
         }
         else if (type == EShadowMapType::Spot)
         {
-            spotShadowPipeline->SendToGPU("model", go->transform.global.m);
+            spotShadowPipeline->SendToGPU("model", global.m);
             spotShadowPipeline->SendToGPU("lightSpaceMatrix", sm->GetLightSpaceMatrix().m);
         }
         else if (type == EShadowMapType::Point)
         {
             auto* pm = static_cast<PointMap*>(sm);
-            pointShadowPipeline->SendToGPU("model", go->transform.global.m);
+            pointShadowPipeline->SendToGPU("model", global.m);
             pointShadowPipeline->SendToGPU("lightPos", light->GetPosition().x, light->GetPosition().y, light->GetPosition().z);
             pointShadowPipeline->SendToGPU("farPlane", pm->GetFarPlane());
         }

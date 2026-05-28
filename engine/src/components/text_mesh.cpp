@@ -40,8 +40,8 @@ void TextMesh::Create()
 
 void TextMesh::Render(Math::Matrix4x4 camVP, Math::Matrix4x4 camViewMatrix, EnigmaRHI::ICommandBuffer& cmd, EnigmaRHI::IDevice* device)
 {
-	Math::Vector3D worldPos = gameObject->transform.position + localPos;
-	Math::Quaternion rot = gameObject->transform.worldRotation.Conjugate();
+	Math::Vector3D worldPos = gameObject->transform.GetPosition() + localPos;
+	Math::Quaternion rot = gameObject->transform.GetWorldRotation().Conjugate();
 	WidgetRenderer::GetInstance().GetTextRenderer()->Render3D(text, worldPos, fontSize, color, camVP, camViewMatrix, font, cmd, device, faceCamera, rot);
 }
 

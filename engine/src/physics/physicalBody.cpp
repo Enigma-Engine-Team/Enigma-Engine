@@ -13,10 +13,10 @@ Physicalbody::Physicalbody(GameObject* go)
 {
     gameObject = go;
     collisionManager = new CollisionManager();
-    previousPositionAfterPhysics = gameObject->transform.position;
-    positionAfterPhysics = gameObject->transform.position;
-    previousRotationAfterPhysics = gameObject->transform.rotation;
-    rotationAfterPhysics = gameObject->transform.rotation;
+    previousPositionAfterPhysics = gameObject->transform.GetPosition();
+    positionAfterPhysics = gameObject->transform.GetPosition();
+    previousRotationAfterPhysics = gameObject->transform.GetRotation();
+    rotationAfterPhysics = gameObject->transform.GetRotation();
     motionType = MotionType::STATIC;
     layer = Layers::NON_MOVING;
     body = nullptr;
@@ -199,7 +199,7 @@ void Physicalbody::UpdateWorldTransform(GameObject* go)
     if (GameObject* parent = go->GetParent())
     {
         UpdateWorldTransform(parent);
-        SceneGraph::GetInstance().UpdateParenting(go, parent->transform.global);
+        SceneGraph::GetInstance().UpdateParenting(go, parent->transform.GetGlobalMatrix());
     }
     else
         SceneGraph::GetInstance().UpdateParenting(go, Math::Matrix4x4::TRS({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, { 1.f, 1.f, 1.f }));
@@ -210,9 +210,9 @@ Transform Physicalbody::BuildBodyTransform(GameObject* go)
     UpdateWorldTransform(go);
 
     Transform bodyTransform;
-    bodyTransform.position = go->transform.worldPosition;
-    bodyTransform.rotation = go->transform.worldRotation;
-    bodyTransform.scale = go->transform.worldScale;
+    bodyTransform.SetPosition(go->transform.GetWorldPosition());
+    bodyTransform.SetRotation(go->transform.GetWorldRotation());
+    bodyTransform.SetScale(go->transform.GetWorldScale());
     return bodyTransform;
 }
 
@@ -223,8 +223,8 @@ void Physicalbody::UpdateParentTransform(float alpha) const
     else if (alpha > 1.0f)
         alpha = 1.0f;
 
-    gameObject->transform.position = Math::Vector3D::Lerp(previousPositionAfterPhysics, positionAfterPhysics, alpha);
-    gameObject->transform.rotation = Math::Quaternion::Slerp(previousRotationAfterPhysics, rotationAfterPhysics, alpha);
+    gameObject->transform.SetPosition(Math::Vector3D::Lerp(previousPositionAfterPhysics, positionAfterPhysics, alpha));
+    gameObject->transform.SetRotation(Math::Quaternion::Slerp(previousRotationAfterPhysics, rotationAfterPhysics, alpha));
 }
 
 void Physicalbody::UpdatePhysicsTransform(bool changedScale)
@@ -241,8 +241,8 @@ void Physicalbody::UpdatePhysicsTransform(bool changedScale)
     }
     Rebuild();
 
-    Math::Vector3D newPos = gameObject->transform.worldPosition;
-    Math::Quaternion newRot = (gameObject->transform.worldRotation).Conjugate();
+    Math::Vector3D newPos = gameObject->transform.GetWorldPosition();
+    Math::Quaternion newRot = (gameObject->transform.GetWorldRotation()).Conjugate();
 
     Physics::GetInstance().GetBodyInterface()->SetPositionAndRotation(
         body->GetBodyID(),

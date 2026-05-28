@@ -143,7 +143,7 @@ void MeshRenderer::UpdateMeshRenderData(Math::Matrix4x4 TRS, EnigmaRHI::IRenderI
 
 	renderMeshDataBuffer->CopyData(&meshUbo, sizeof(meshUbo));
 
-	aabb.Update(gameObject->transform.global);
+	aabb.Update(gameObject->transform.GetGlobalMatrix());
 }
 
 void MeshRenderer::SetMaterial(Material* _material)

@@ -24,7 +24,7 @@ void SoundEmitter::Destroy()
 
 void SoundEmitter::Update()
 {
-    Math::Vector3D pos = gameObject->transform.worldPosition;
+    Math::Vector3D pos = gameObject->transform.GetWorldPosition();
     for (auto* sound : sounds)
         sound->SetPosition(pos);
 }
@@ -35,7 +35,7 @@ void SoundEmitter::AddSound(Sound* sound)
         return;
 
     sounds.push_back(sound);
-    const Math::Vector3D pos = gameObject ? gameObject->transform.worldPosition : Math::Vector3D::Zero;
+    const Math::Vector3D pos = gameObject ? gameObject->transform.GetWorldPosition() : Math::Vector3D::Zero;
     sound->SetPosition(pos);
 }
 

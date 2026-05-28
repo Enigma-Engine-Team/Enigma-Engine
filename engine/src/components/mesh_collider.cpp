@@ -32,7 +32,7 @@ void MeshCollider::OnDraw(Math::Vector3D camPos)
     if (MeshRenderer* renderer = gameObject->GetComponent<MeshRenderer>())
         meshes.push_back(renderer->GetMesh());
 
-    Gizmos::DrawMesh(meshes, gameObject->transform.global);
+    Gizmos::DrawMesh(meshes, gameObject->transform.GetGlobalMatrix());
 }
 
 void MeshCollider::SetScale()

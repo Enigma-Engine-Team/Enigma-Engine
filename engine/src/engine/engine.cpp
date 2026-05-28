@@ -142,19 +142,20 @@ void Engine::PickObject(Math::Vector2D viewportSize, Math::Vector2D viewportPos)
 		if (go == renderer->GetSelectedGameObject())
 			continue;
 
+		Math::Matrix4x4 global = go->transform.GetGlobalMatrix();
 		for (size_t i = 0; i < mr->GetMesh()->GetIndices().size(); i += 3)
 		{
-			Math::Vector3D v0 = go->transform.global *
+			Math::Vector3D v0 = global *
 				Math::Vector4D(
 					mr->GetMesh()->GetVertices()[mr->GetMesh()->GetIndices()[i]].position,
 					1.f);
 
-			Math::Vector3D v1 = go->transform.global *
+			Math::Vector3D v1 = global *
 				Math::Vector4D(
 					mr->GetMesh()->GetVertices()[mr->GetMesh()->GetIndices()[i + 1]].position,
 					1.f);
 
-			Math::Vector3D v2 = go->transform.global *
+			Math::Vector3D v2 = global *
 				Math::Vector4D(
 					mr->GetMesh()->GetVertices()[mr->GetMesh()->GetIndices()[i + 2]].position,
 					1.f);

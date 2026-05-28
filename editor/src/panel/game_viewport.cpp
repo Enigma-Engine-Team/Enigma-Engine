@@ -76,7 +76,7 @@ void UI::GameViewportPanel::Draw()
 	}
 
 	float matrix[16];
-	memcpy(matrix, selectedGameObject->transform.global.m, sizeof(float) * 16);
+	memcpy(matrix, selectedGameObject->transform.GetGlobalMatrix().m, sizeof(float) * 16);
 
 	Math::Matrix4x4 projection = Math::Matrix4x4::Orthographic(-gameWidth * 0.5f, gameWidth * 0.5f, -gameHeight * 0.5f, gameHeight * 0.5f, -10.f, 10.f);
 	Math::Matrix4x4 view = Math::Matrix4x4::LookAt(Math::Vector3D(0.f, 0.f, 1.f), Math::Vector3D(0.f, 0.f, -1.f), Math::Vector3D::Up);
@@ -98,7 +98,7 @@ void UI::GameViewportPanel::Draw()
 
 		if (selectedGameObject->GetParent())
 		{
-			Math::Matrix4x4 parentGlobalInverse = selectedGameObject->GetParent()->transform.global.Inverse();
+			Math::Matrix4x4 parentGlobalInverse = selectedGameObject->GetParent()->transform.GetGlobalMatrix().Inverse();
 			Math::Matrix4x4 localMatrix = parentGlobalInverse * modifiedGlobalMatrix;
 			ImGuizmo::DecomposeMatrixToComponents(localMatrix.m, &localPos.x, &localRot.x, &localScale.x);
 		}
@@ -107,7 +107,7 @@ void UI::GameViewportPanel::Draw()
 			ImGuizmo::DecomposeMatrixToComponents(modifiedGlobalMatrix.m, &localPos.x, &localRot.x, &localScale.x);
 		}
 
-		bool changedScale = (localScale != selectedGameObject->transform.scale);
+		bool changedScale = (localScale != selectedGameObject->transform.GetScale());
 
 		selectedGameObject->SetTransform(localPos, localRot, localScale);
 

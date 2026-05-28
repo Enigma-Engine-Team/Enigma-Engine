@@ -52,8 +52,8 @@ void Light::Destroy()
 
 void Light::Update()
 {
-	lightData.position = gameObject->transform.worldPosition;
-	lightData.direction = gameObject->transform.worldRotation.Conjugate().Forward();
+	lightData.position = gameObject->transform.GetWorldPosition();
+	lightData.direction = gameObject->transform.GetWorldRotation().Conjugate().Forward();
 }
 
 void Light::OnDraw(Math::Vector3D camPos)
@@ -108,7 +108,7 @@ void Light::OnDraw(Math::Vector3D camPos)
 			(-right - up).Normalized()
 		};
 
-		Gizmos::DrawCircle(lightData.position, gameObject->transform.worldRotation.Conjugate(), radius);
+		Gizmos::DrawCircle(lightData.position, gameObject->transform.GetWorldRotation().Conjugate(), radius);
 
 		for (int i = 0; i < 8; ++i)
 		{

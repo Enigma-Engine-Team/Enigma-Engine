@@ -42,15 +42,16 @@ void BoxCollider::OnDraw(Math::Vector3D camPos)
 {
 	Gizmos::color = { 0.f, 1.f, 0.f, 1.f };
 	Gizmos::DrawCube(
-		gameObject->transform.worldPosition + position,
-		gameObject->transform.worldRotation * rotation,
-		scale * gameObject->transform.worldScale
+		gameObject->transform.GetWorldPosition() + position,
+		gameObject->transform.GetWorldRotation() * rotation,
+		scale * gameObject->transform.GetWorldScale()
 	);
 }
 
 void BoxCollider::SetScale()
 {
-	if (gameObject->transform.worldScale.x == 0 || gameObject->transform.worldScale.y == 0 || gameObject->transform.worldScale.z == 0 ||
+	Math::Vector3D worldScale = gameObject->transform.GetWorldScale();
+	if (worldScale.x == 0 || worldScale.y == 0 || worldScale.z == 0 ||
 		scale.x == 0 || scale.y == 0 || scale.z == 0)
 		return;
 

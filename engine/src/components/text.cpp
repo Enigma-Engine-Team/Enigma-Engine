@@ -38,7 +38,7 @@ void Text::Create()
 
 void Text::Render(Math::Matrix4x4 camVP, Math::Matrix4x4 camViewMatrix, EnigmaRHI::ICommandBuffer& cmd, EnigmaRHI::IDevice* device)
 {
-	Math::Vector3D pos = gameObject->transform.position;
+	Math::Vector3D pos = gameObject->transform.GetPosition();
 
 	Math::Vector2D finalScreenPos = Math::Vector2D(pos.x, pos.y) + screenPos;
 	WidgetRenderer::GetInstance().GetTextRenderer()->Render(text, finalScreenPos.x, finalScreenPos.y, fontSize, color, font, cmd, device);

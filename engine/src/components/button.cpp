@@ -65,7 +65,7 @@ void Button::OnUpdate()
         InputManager::UpdateGameRect({ mousePos2.x, mousePos2.y }, 1920.f, 1080.f);
     }
 
-    Math::Vector3D pos = gameObject->transform.position;
+    Math::Vector3D pos = gameObject->transform.GetPosition();
     Math::Vector2D finalPos = Math::Vector2D(pos.x, pos.y) + screenPos;
 
     Math::Vector2D buttonBorder = { finalPos.x - width * 0.5f, finalPos.y - height * 0.5f };
@@ -94,7 +94,7 @@ void Button::Render(Math::Matrix4x4 camVP, Math::Matrix4x4 camViewMatrix, Enigma
     if(WidgetRenderer::GetInstance().IsInputActive())
         OnUpdate();
 
-    Math::Vector3D pos = gameObject->transform.position;
+    Math::Vector3D pos = gameObject->transform.GetPosition();
     Math::Vector2D finalPos = Math::Vector2D(pos.x, pos.y) + screenPos;
 
     float bx = finalPos.x - width * 0.5f;

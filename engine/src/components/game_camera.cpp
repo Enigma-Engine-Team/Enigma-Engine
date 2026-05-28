@@ -27,12 +27,12 @@ void GameCamera::Create()
 void GameCamera::OnDraw(Math::Vector3D camPos)
 {
 	Gizmos::color = { 1.f, 1.f, 1.f, 1.f };
-	Gizmos::DrawFrustum(camera.cameraMode, gameObject->transform.worldPosition, gameObject->transform.worldRotation.Conjugate(), camera.fov, camera.aspectRatio, camera.zNear, camera.zFar);
+	Gizmos::DrawFrustum(camera.cameraMode, gameObject->transform.GetWorldPosition(), gameObject->transform.GetWorldRotation().Conjugate(), camera.fov, camera.aspectRatio, camera.zNear, camera.zFar);
 }
 
 void GameCamera::Update(float width, float height)
 {
-	camera.position = gameObject->transform.worldPosition;
-	camera.orientationQuat = gameObject->transform.worldRotation.Conjugate();
+	camera.position = gameObject->transform.GetWorldPosition();
+	camera.orientationQuat = gameObject->transform.GetWorldRotation().Conjugate();
 	camera.Update(width, height);
 }

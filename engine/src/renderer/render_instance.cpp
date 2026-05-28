@@ -20,7 +20,7 @@ void RenderInstance::GeometryPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd)
         MeshRenderer* mr = go->GetComponent<MeshRenderer>();
         if (!mr) continue;
 
-        mr->UpdateMeshRenderData(go->transform.global, ctx->GetRHI());
+        mr->UpdateMeshRenderData(go->transform.GetGlobalMatrix(), ctx->GetRHI());
 
         if (!mr->GetMaterial()) { Debug::LogError("Material null"); continue; }
 
@@ -106,7 +106,7 @@ void RenderInstance::ForwardPass(EnigmaRHI::ICommandBuffer& cmd)
     sorted.reserve(transparentObjects.size());
     Math::Vector3D camPos = camera.GetPosition();
     for (GameObject* go : transparentObjects)
-        sorted.push_back({ (camPos - go->transform.position).SquaredMagnitude(), go });
+        sorted.push_back({ (camPos - go->transform.GetPosition()).SquaredMagnitude(), go });
     std::sort(sorted.begin(), sorted.end(), [](const TransparentEntry& a, const TransparentEntry& b) { return a.distance > b.distance; });
 
     for (const auto& entry : sorted)
@@ -115,7 +115,7 @@ void RenderInstance::ForwardPass(EnigmaRHI::ICommandBuffer& cmd)
         MeshRenderer* mr = entry.go->GetComponent<MeshRenderer>();
         if (!mr) continue;
 
-        mr->UpdateMeshRenderData(entry.go->transform.global, ctx->GetRHI());
+        mr->UpdateMeshRenderData(entry.go->transform.GetGlobalMatrix(), ctx->GetRHI());
         desc->BindBuffer(2, EnigmaRHI::EBufferTarget::UNIFORM_BUFFER, mr->GetRenderMeshDatas());
 
         cmd.BindPipeline(ctx->GetDevice(), pipelines->GetBackTransparentPipeline());

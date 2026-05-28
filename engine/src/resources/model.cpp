@@ -11,24 +11,25 @@ void Model::InstantiateIntoScene(Model* model, GameObject* parent, Scene* scene)
 
     auto ApplyTransform = [](GameObject* go, const Math::Matrix4x4& t)
     {
-        go->transform.position = { t.m[12], t.m[13], t.m[14] };
+        go->transform.SetPosition({ t.m[12], t.m[13], t.m[14] });
 
         Math::Vector3D col0 = { t.m[0], t.m[1], t.m[2] };
         Math::Vector3D col1 = { t.m[4], t.m[5], t.m[6] };
         Math::Vector3D col2 = { t.m[8], t.m[9], t.m[10] };
-        go->transform.scale = { col0.Magnitude(), col1.Magnitude(), col2.Magnitude() };
+        go->transform.SetScale({ col0.Magnitude(), col1.Magnitude(), col2.Magnitude() });
 
+        Math::Vector3D scale = go->transform.GetScale();
         Math::Matrix3x3 rotMat;
-        rotMat.m[0] = t.m[0] / go->transform.scale.x;
-        rotMat.m[1] = t.m[1] / go->transform.scale.x;
-        rotMat.m[2] = t.m[2] / go->transform.scale.x;
-        rotMat.m[3] = t.m[4] / go->transform.scale.y;
-        rotMat.m[4] = t.m[5] / go->transform.scale.y;
-        rotMat.m[5] = t.m[6] / go->transform.scale.y;
-        rotMat.m[6] = t.m[8] / go->transform.scale.z;
-        rotMat.m[7] = t.m[9] / go->transform.scale.z;
-        rotMat.m[8] = t.m[10] / go->transform.scale.z;
-        go->transform.rotation = Math::Quaternion::FromRotationMatrix(rotMat);
+        rotMat.m[0] = t.m[0] / scale.x;
+        rotMat.m[1] = t.m[1] / scale.x;
+        rotMat.m[2] = t.m[2] / scale.x;
+        rotMat.m[3] = t.m[4] / scale.y;
+        rotMat.m[4] = t.m[5] / scale.y;
+        rotMat.m[5] = t.m[6] / scale.y;
+        rotMat.m[6] = t.m[8] / scale.z;
+        rotMat.m[7] = t.m[9] / scale.z;
+        rotMat.m[8] = t.m[10] / scale.z;
+        go->transform.SetRotation(Math::Quaternion::FromRotationMatrix(rotMat));
     };
 
     if (subMeshes.size() == 1)

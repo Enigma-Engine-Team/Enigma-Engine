@@ -41,7 +41,7 @@ Math::Vector3D Collider::GetGlobalScale(GameObject* go)
 	Math::Vector3D scale = Math::Vector3D::One;
 	while(go)
 	{
-		scale *= go->transform.scale;
+		scale *= go->transform.GetScale();
 		go = go->GetParent();
 	}
 	return scale;

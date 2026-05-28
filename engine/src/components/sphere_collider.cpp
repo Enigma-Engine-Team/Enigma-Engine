@@ -28,12 +28,12 @@ void SphereCollider::Create()
 void SphereCollider::OnDraw(Math::Vector3D camPos)
 {
 	Gizmos::color = { 0.f, 1.f, 0.f, 1.f };
-	Gizmos::DrawSphere(gameObject->transform.worldPosition, radius * gameObject->transform.worldScale.x);
+	Gizmos::DrawSphere(gameObject->transform.GetWorldPosition(), radius * gameObject->transform.GetWorldScale().x);
 }
 
 void SphereCollider::SetScale()
 {
-	if (gameObject->transform.worldScale.x == 0 || radius == 0)
+	if (gameObject->transform.GetWorldScale().x == 0 || radius == 0)
 		return;
 
 	shape = new JPH::SphereShape(radius * GetGlobalScale(gameObject).x);

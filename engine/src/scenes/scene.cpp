@@ -24,10 +24,6 @@ Scene::Scene()
 
 	world = new GameObject();
 	world->SetName("world");
-	world->transform.position = { 0.f, 0.f, 0.f };
-	world->transform.rotation = Math::Quaternion::FromEuler({ 0.f, 0.f, 0.f });
-	world->transform.scale = { 1.f, 1.f, 1.f };
-
 	gameObjects.push_back(world);
 }
 

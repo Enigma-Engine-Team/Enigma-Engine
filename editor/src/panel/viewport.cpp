@@ -144,7 +144,7 @@ void UI::ViewportPanel::ComputeDragAndDrop(Scene* scene)
 					UIEditor::engine.AddModelToAwait(fileName, newGO, scene);
 				}
 
-				newGO->transform.position = scene->GetEngineCam()->GetPosition() + scene->GetEngineCam()->GetForward() * 2.f;
+				newGO->transform.SetPosition(scene->GetEngineCam()->GetPosition() + scene->GetEngineCam()->GetForward() * 2.f);
 				UIEditor::engine.GetRenderer()->SetSelectedGameObject(newGO);
 			}
 		}
@@ -174,7 +174,7 @@ void UI::ViewportPanel::ComputeDragAndDrop(Scene* scene)
 						model->CreateGPUResources(UIEditor::engine.GetRHI());
 					}
 				}
-				newGO->transform.position = scene->GetEngineCam()->GetPosition() + scene->GetEngineCam()->GetForward() * 2.f;
+				newGO->transform.SetPosition(scene->GetEngineCam()->GetPosition() + scene->GetEngineCam()->GetForward() * 2.f);
 				UIEditor::engine.GetRenderer()->SetSelectedGameObject(newGO);
 			}
 		}
@@ -208,7 +208,7 @@ void UI::ViewportPanel::ComputeGizmos(Scene* scene, Math::Vector2D windowPos, Ma
 	ImGuizmo::SetRect(windowPos.x, windowPos.y, windowSize.x, windowSize.y);
 
 	float matrix[16];
-	memcpy(matrix, selectedGameObject->transform.global.m, sizeof(float) * 16);
+	memcpy(matrix, selectedGameObject->transform.GetGlobalMatrix().m, sizeof(float) * 16);
 
 	ImGuizmo::Manipulate(scene->GetEngineCam()->GetView().m, scene->GetEngineCam()->GetProjection().m, (ImGuizmo::OPERATION)currentGizmoMode, ImGuizmo::LOCAL, matrix);
 
@@ -227,7 +227,7 @@ void UI::ViewportPanel::ComputeGizmos(Scene* scene, Math::Vector2D windowPos, Ma
 
 		if (selectedGameObject->GetParent())
 		{
-			Math::Matrix4x4 parentGlobalInverse = selectedGameObject->GetParent()->transform.global.Inverse();
+			Math::Matrix4x4 parentGlobalInverse = selectedGameObject->GetParent()->transform.GetGlobalMatrix().Inverse();
 			Math::Matrix4x4 localMatrix = parentGlobalInverse * modifiedGlobalMatrix;
 			ImGuizmo::DecomposeMatrixToComponents(localMatrix.m, &localPos.x, &localRot.x, &localScale.x);
 		}
@@ -236,7 +236,7 @@ void UI::ViewportPanel::ComputeGizmos(Scene* scene, Math::Vector2D windowPos, Ma
 			ImGuizmo::DecomposeMatrixToComponents(modifiedGlobalMatrix.m, &localPos.x, &localRot.x, &localScale.x);
 		}
 
-		bool changedScale = (localScale != selectedGameObject->transform.scale);
+		bool changedScale = (localScale != selectedGameObject->transform.GetScale());
 
 		selectedGameObject->SetTransform(localPos, localRot, localScale);
 

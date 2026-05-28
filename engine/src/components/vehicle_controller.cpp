@@ -346,9 +346,9 @@ void VehicleController::SetMaxBreakTorque(float _maxBreakTorque)
 void VehicleController::CreateBody()
 {
 	// Create vehicle body
-	Math::Vector3D vehiclePos = gameObject->transform.position;
+	Math::Vector3D vehiclePos = gameObject->transform.GetPosition();
 	JPH::RVec3 position(vehiclePos.x, vehiclePos.y, vehiclePos.z);
-	Math::Quaternion vehicleRot = gameObject->transform.rotation;
+	Math::Quaternion vehicleRot = gameObject->transform.GetRotation();
 	JPH::Quat rotation(vehicleRot.x, vehicleRot.y, vehicleRot.z, vehicleRot.w);
 	JPH::Vec3 offset(0, -0.5f, 0);
 	JPH::ShapeRefC shape = EmptyCollider().GetShape();

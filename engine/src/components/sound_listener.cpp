@@ -20,8 +20,8 @@ void SoundListener::Destroy()
 
 void SoundListener::Update() const
 {
-    Math::Vector3D pos = gameObject->transform.worldPosition;
-    Math::Quaternion rot = gameObject->transform.worldRotation;
+    Math::Vector3D pos = gameObject->transform.GetWorldPosition();
+    Math::Quaternion rot = gameObject->transform.GetWorldRotation();
 
     ma_engine_listener_set_position(&SoundManager::GetInstance().engine, 0, pos.x, pos.y, pos.z);
     ma_engine_listener_set_direction(&SoundManager::GetInstance().engine, 0, -rot.Forward().x, rot.Forward().y, rot.Forward().z);
