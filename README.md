@@ -31,6 +31,8 @@ designed for developing racing car games
 - **Physics** : [JoltPhysics](https://github.com/jrouwe/JoltPhysics)
 - **UI** : [ImGui](https://github.com/ocornut/imgui) (Docking TAG)
 - **Reflection** : [RTTR](https://github.com/rttrorg/rttr)
+- **Sound** : [MiniAudio](https://github.com/mackron/miniaudio)
+- **Network** : [Enet](https://github.com/lsalzman/enet)
 - **Camera Controls**
 - **Entity Component System**
 
