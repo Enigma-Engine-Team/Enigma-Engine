@@ -1,0 +1,29 @@
+#version 460 core
+
+out vec4 FragColor;
+
+in vec2 TexCoords;
+
+layout (binding = 0) uniform sampler2D scene;
+layout (binding = 1) uniform sampler2D bloomBlur;
+uniform float exposure;
+uniform float bloomStrength = 0.04f;
+
+vec3 ComputeBloom()
+{
+    vec3 hdrColor = texture(scene, TexCoords).rgb;
+    vec3 bloomColor = texture(bloomBlur, TexCoords).rgb;
+    return mix(hdrColor, bloomColor, bloomStrength); // linear interpolation
+}
+
+void main()
+{
+    vec3 result = vec3(0.0);
+    result = ComputeBloom();
+    // tone mapping
+    result = vec3(1.0) - exp(-result * exposure);
+    // also gamma correct while we're at it
+    const float gamma = 2.2;
+    result = pow(result, vec3(1.0 / gamma));
+    FragColor = vec4(result, 1.0);
+}

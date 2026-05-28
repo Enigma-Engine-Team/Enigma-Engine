@@ -1,0 +1,52 @@
+{
+    "GameObject": {
+        "children": [],
+        "components": [
+            {
+                "Light": {
+                    "Color": {
+                        "Vector3D": {
+                            "x": 1.0,
+                            "y": 0.514851450920105,
+                            "z": 0.0
+                        }
+                    },
+                    "Inner CutOff": 21.799999237060547,
+                    "Intensity": 20.0,
+                    "Light Type": 2,
+                    "Outer CutOff": 30.0,
+                    "Range": 5.0
+                }
+            }
+        ],
+        "isInstancePrefab": true,
+        "name": "Point Light",
+        "prefabPath": "Point Light",
+        "transform": {
+            "Transform": {
+                "position": {
+                    "Vector3D": {
+                        "x": -3.9715192317962646,
+                        "y": 19.412504196166992,
+                        "z": 5.377134323120117
+                    }
+                },
+                "rotation": {
+                    "Quaternion": {
+                        "w": 1.0,
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                "scale": {
+                    "Vector3D": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                }
+            }
+        }
+    }
+}

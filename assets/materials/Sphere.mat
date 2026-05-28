@@ -1,0 +1,41 @@
+{
+    "Material": {
+        "materialData": {
+            "MaterialGPUData": {
+                "albedoColor": {
+                    "Vector4D": {
+                        "w": 1.0,
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 1.0
+                    }
+                },
+                "aoValue": 1.0,
+                "clearCoatFactor": 0.0,
+                "clearCoatRoughFactor": 0.0,
+                "emissiveColorIntensity": {
+                    "Vector4D": {
+                        "w": 1.0,
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                "metallicValue": 0.0,
+                "normalStrength": 1.0,
+                "roughnessValue": 1.0,
+                "useAOTexture": 0,
+                "useAlbedoTexture": 0,
+                "useClearCoatNormalTexture": 0,
+                "useClearCoatRoughTexture": 0,
+                "useClearCoatTexture": 0,
+                "useEmissiveTexture": 0,
+                "useMetallicRoughnessTexture": 0,
+                "useMetallicTexture": 0,
+                "useNormalTexture": 0,
+                "useRoughnessTexture": 0
+            }
+        },
+        "name": "Sphere"
+    }
+}

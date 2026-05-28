@@ -1,0 +1,14 @@
+physics.cpp(21): [INFO] Physics gravity: 0.000000, -9.810000, 0.000000
+mesh.cpp(67): [SUCCESS] Loaded mesh with 156299 vertices
+main.cpp(31): [INFO] Mesh: porsche.glb | Vertices: 156299
+vehicle_controller.cpp(24): [INFO] Vehicle Controller added to GameObject without Physicalbody. Adding empty PhysicalBody.
+physicalBody.cpp(36): [INFO] Creating body in GameObject : porsche
+mesh.cpp(67): [SUCCESS] Loaded mesh with 24 vertices
+collider.cpp(19): [INFO] Collider added to GameObject without Physicalbody. Adding empty PhysicalBody.
+physicalBody.cpp(36): [INFO] Creating body in GameObject : cube
+collision_parameter.cpp(90): [INFO] A body got activated
+physicalBody.cpp(96): [INFO] MotionType: 2
+physicalBody.cpp(96): [INFO] MotionType: 2
+gameobject.cpp(68): [SUCCESS] Attached script TestScript to GameObject cube
+collider.cpp(19): [INFO] Collider added to GameObject without Physicalbody. Adding empty PhysicalBody.
+physicalBody.cpp(36): [INFO] Creating body in GameObject : floor

@@ -1,0 +1,62 @@
+{
+    "GameObject": {
+        "children": [],
+        "components": [
+            {
+                "MeshRenderer": {
+                    "Cast Shadows": true,
+                    "aabb": {
+                        "AABB": {
+                            "maxCorner": {
+                                "Vector3D": {
+                                    "x": 0.49999985098838806,
+                                    "y": 0.5,
+                                    "z": 0.49999967217445374
+                                }
+                            },
+                            "minCorner": {
+                                "Vector3D": {
+                                    "x": -0.4999995231628418,
+                                    "y": -0.5,
+                                    "z": -0.5
+                                }
+                            }
+                        }
+                    },
+                    "materialName": "Sphere",
+                    "meshIndex": 0,
+                    "modelName": "sphere.gltf"
+                }
+            }
+        ],
+        "isInstancePrefab": true,
+        "name": "Sphere",
+        "prefabPath": "Sphere",
+        "transform": {
+            "Transform": {
+                "position": {
+                    "Vector3D": {
+                        "x": -8.633330345153809,
+                        "y": 19.178550720214844,
+                        "z": 0.6477950215339661
+                    }
+                },
+                "rotation": {
+                    "Quaternion": {
+                        "w": 0.7064348459243774,
+                        "x": 0.7077780961990356,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                },
+                "scale": {
+                    "Vector3D": {
+                        "x": 0.9193577170372009,
+                        "y": 0.9562193155288696,
+                        "z": 0.001676812767982483
+                    }
+                }
+            }
+        }
+    }
+}

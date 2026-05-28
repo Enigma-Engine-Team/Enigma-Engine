@@ -1,0 +1,2543 @@
+{
+    "EngineCamera": {
+        "camera": {
+            "Camera": {
+                "Exposure": 1.0,
+                "Orientation": {
+                    "Quaternion": {
+                        "w": 0.5236034393310547,
+                        "x": -0.07661918550729752,
+                        "y": -0.8395687937736511,
+                        "z": -0.12285462766885757
+                    }
+                },
+                "Position": {
+                    "Vector3D": {
+                        "x": -19.067031860351563,
+                        "y": 8.7181396484375,
+                        "z": -10.040032386779785
+                    }
+                },
+                "Velocity": {
+                    "Vector3D": {
+                        "x": -5.833020324745511e-38,
+                        "y": 1.9320726276823674e-38,
+                        "z": -2.842520482417634e-38
+                    }
+                }
+            }
+        }
+    },
+    "gameObjects": [
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "CollisionHandler": {
+                            "impulseForce": 300.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Floor",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 15.0,
+                                "y": 0.10000000149011612,
+                                "z": 15.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "Light": {
+                            "Color": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            },
+                            "Inner CutOff": 21.799999237060547,
+                            "Intensity": 1.0,
+                            "Light Type": 0,
+                            "Outer CutOff": 30.0,
+                            "Range": 5.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Directional Light",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 100.0,
+                                "y": 100.0,
+                                "z": 100.0
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 0.6526876091957092,
+                                "x": -0.21870273351669312,
+                                "y": 0.6877893209457397,
+                                "z": 0.23046442866325378
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "CollisionHandler": {
+                            "impulseForce": 700.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Bounce1",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 0.0,
+                                "y": 2.643810749053955,
+                                "z": 10.143803596496582
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 0.9238795042037964,
+                                "x": -0.3826834559440613,
+                                "y": -0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 15.0,
+                                "y": 0.10000000149011612,
+                                "z": 7.5
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "CollisionHandler": {
+                            "impulseForce": 700.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Bounce2",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 0.0,
+                                "y": 2.5978097915649414,
+                                "z": -10.097817420959473
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 0.9238795042037964,
+                                "x": 0.3826834559440613,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 15.0,
+                                "y": 0.10000000149011612,
+                                "z": 7.5
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "CollisionHandler": {
+                            "impulseForce": 700.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Bounce3",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 10.157123565673828,
+                                "y": 2.657123327255249,
+                                "z": 0.0
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 0.9238795042037964,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.3826834559440613
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 7.5,
+                                "y": 0.10000000149011612,
+                                "z": 15.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "CollisionHandler": {
+                            "impulseForce": 700.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Bounce4",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -10.0946683883667,
+                                "y": 2.5946691036224365,
+                                "z": 0.0
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 0.9238795042037964,
+                                "x": 0.0,
+                                "y": -0.0,
+                                "z": -0.3826834559440613
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 7.5,
+                                "y": 0.10000000149011612,
+                                "z": 15.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 2.4386658668518066,
+                                "y": 6.098231315612793,
+                                "z": 2.6540937423706055
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 2.299999952316284,
+                                "y": 2.299999952316284,
+                                "z": 2.299999952316284
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "GameCamera": {
+                            "Camera Mode": "",
+                            "Exposure": 1.0,
+                            "FOV": 90.0,
+                            "Far": 1000.0,
+                            "Near": 0.10000000149011612
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Camera",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -13.989999771118164,
+                                "y": 13.270000457763672,
+                                "z": -13.100000381469727
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 0.3730376660823822,
+                                "x": -0.1010025218129158,
+                                "y": -0.8902475833892822,
+                                "z": -0.24104084074497223
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 3.665558338165283,
+                                "y": 7.435209274291992,
+                                "z": 10.40460205078125
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.399999976158142,
+                                "y": 1.399999976158142,
+                                "z": 1.399999976158142
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -2.096224308013916,
+                                "y": 6.184298992156982,
+                                "z": 9.498756408691406
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -4.162463188171387,
+                                "y": 5.600076198577881,
+                                "z": 3.743913173675537
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1001.0
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -0.42778098583221436,
+                                "y": 4.428509712219238,
+                                "z": -0.7812392711639404
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 3.668170928955078,
+                                "y": 3.59222674369812,
+                                "z": -0.13762295246124268
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.899999976158142,
+                                "y": 1.899999976158142,
+                                "z": 1.899999976158142
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 1.7363426685333252,
+                                "y": 3.718294143676758,
+                                "z": -6.122988224029541
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 10.670793533325195,
+                                "y": 8.759392738342285,
+                                "z": -3.7621374130249023
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 1.6062076091766357,
+                                "y": 6.259725093841553,
+                                "z": -3.0990211963653564
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 0.5,
+                                "y": 0.5,
+                                "z": 0.5
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -0.48624008893966675,
+                                "y": 6.264802932739258,
+                                "z": -1.7220470905303955
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 0.699999988079071,
+                                "y": 0.699999988079071,
+                                "z": 0.699999988079071
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "ConvexCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1001.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Convex cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -3.192035436630249,
+                                "y": 6.249401092529297,
+                                "z": -0.3012443780899048
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.49999985098838806,
+                                            "y": 0.5,
+                                            "z": 0.49999967217445374
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.4999995231628418,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "sphere.gltf"
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 269.08258056640625
+                        }
+                    },
+                    {
+                        "SphereCollider": {
+                            "Collider Center": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Radius": 0.5,
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Sphere",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -1.7239755392074585,
+                                "y": 5.952411651611328,
+                                "z": 3.246713161468506
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 0.800000011920929,
+                                "y": 0.800000011920929,
+                                "z": 0.800000011920929
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.49999985098838806,
+                                            "y": 0.5,
+                                            "z": 0.49999967217445374
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.4999995231628418,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "sphere.gltf"
+                        }
+                    },
+                    {
+                        "SphereCollider": {
+                            "Collider Center": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Radius": 0.5,
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Sphere",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 5.037426471710205,
+                                "y": 4.534054279327393,
+                                "z": -2.893707275390625
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 2.0,
+                                "y": 2.0,
+                                "z": 2.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.49999985098838806,
+                                            "y": 0.5,
+                                            "z": 0.49999967217445374
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.4999995231628418,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "sphere.gltf"
+                        }
+                    },
+                    {
+                        "SphereCollider": {
+                            "Collider Center": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Radius": 0.5,
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 4.699999809265137
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Sphere",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -4.017792701721191,
+                                "y": 2.6138267517089844,
+                                "z": -1.6505943536758423
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 2.9000000953674316,
+                                "y": 2.9000000953674316,
+                                "z": 2.9000000953674316
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.49999985098838806,
+                                            "y": 0.5,
+                                            "z": 0.49999967217445374
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.4999995231628418,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "sphere.gltf"
+                        }
+                    },
+                    {
+                        "SphereCollider": {
+                            "Collider Center": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Radius": 0.5,
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Sphere",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -0.2128206491470337,
+                                "y": 9.282405853271484,
+                                "z": 6.4264750480651855
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.7999999523162842,
+                                "y": 1.7999999523162842,
+                                "z": 1.7999999523162842
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 3.3063526153564453,
+                                "y": 7.078212261199951,
+                                "z": 4.699653625488281
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 0.699999988079071,
+                                "y": 0.699999988079071,
+                                "z": 0.699999988079071
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 6.407044887542725,
+                                "y": 5.7656450271606445,
+                                "z": 1.9605660438537598
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 0.800000011920929,
+                                "y": 0.800000011920929,
+                                "z": 0.800000011920929
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -4.561822891235352,
+                                "y": 11.54180908203125,
+                                "z": -4.248530864715576
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.5,
+                                            "y": 0.5,
+                                            "z": 0.5
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.5,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "cube.gltf"
+                        }
+                    },
+                    {
+                        "BoxCollider": {
+                            "Collider Position": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Scale": {
+                                "Vector3D": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Cube",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": -3.2894139289855957,
+                                "y": 10.035070419311523,
+                                "z": 0.9052145481109619
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.49999985098838806,
+                                            "y": 0.5,
+                                            "z": 0.49999967217445374
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.4999995231628418,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "sphere.gltf"
+                        }
+                    },
+                    {
+                        "SphereCollider": {
+                            "Collider Center": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Radius": 0.5,
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Sphere",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 0.41644954681396484,
+                                "y": 9.069540023803711,
+                                "z": -0.34446805715560913
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [],
+                "components": [
+                    {
+                        "MeshRenderer": {
+                            "Cast Shadows": true,
+                            "aabb": {
+                                "AABB": {
+                                    "maxCorner": {
+                                        "Vector3D": {
+                                            "x": 0.49999985098838806,
+                                            "y": 0.5,
+                                            "z": 0.49999967217445374
+                                        }
+                                    },
+                                    "minCorner": {
+                                        "Vector3D": {
+                                            "x": -0.4999995231628418,
+                                            "y": -0.5,
+                                            "z": -0.5
+                                        }
+                                    }
+                                }
+                            },
+                            "materialName": "DefaultMaterial",
+                            "meshIndex": 0,
+                            "modelName": "sphere.gltf"
+                        }
+                    },
+                    {
+                        "SphereCollider": {
+                            "Collider Center": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                }
+                            },
+                            "Collider Radius": 0.5,
+                            "Collider Rotation": {
+                                "Vector3D": {
+                                    "x": 0.0,
+                                    "y": -0.0,
+                                    "z": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Rigidbody": {
+                            "Gravity Factor": 1.0,
+                            "Is Kinematic": false,
+                            "Is Trigger": false,
+                            "Mass": 1.0
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "Sphere",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 2.3098678588867188,
+                                "y": 8.00596809387207,
+                                "z": -3.799046516418457
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1.0,
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "skyboxPath": "shaders/sky.hdr"
+}
