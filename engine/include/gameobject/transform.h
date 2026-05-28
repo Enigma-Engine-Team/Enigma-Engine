@@ -32,6 +32,7 @@ public:
 	void ExtractScaleFromWorld();
 
 	Math::Matrix4x4 GetGlobalMatrix() const { return global; };
+	bool isDirty = true;
 
 private:
 

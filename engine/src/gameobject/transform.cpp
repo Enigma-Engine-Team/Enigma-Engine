@@ -26,7 +26,11 @@ Transform::Transform(Math::Vector3D pos, Math::Vector3D rot, Math::Vector3D scal
 
 void Transform::SetPosition(Math::Vector3D pos)
 {
+	if (position == pos)
+		return;
+
 	position = pos;
+	isDirty = true;
 
 	if (gameObject)
 	{
@@ -40,7 +44,11 @@ void Transform::SetPosition(Math::Vector3D pos)
 
 void Transform::SetRotation(Math::Quaternion rot)
 {
+	if (rotation == rot)
+		return;
+
 	rotation = rot;
+	isDirty = true;
 
 	if (gameObject)
 	{
@@ -60,7 +68,11 @@ void Transform::SetRotation(Math::Vector3D rot)
 
 void Transform::SetScale(Math::Vector3D _scale)
 {
+	if (scale == _scale)
+		return;
+
 	scale = _scale;
+	isDirty = true;
 
 	if (gameObject)
 	{

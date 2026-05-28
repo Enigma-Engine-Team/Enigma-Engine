@@ -30,16 +30,16 @@ std::string GameObject::GetName()
 
 void GameObject::SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::Vector3D scale)
 {
-	transform.position = pos;
-	transform.rotation = quat;
-	transform.scale = scale;
+	transform.SetPosition(pos);
+	transform.SetRotation(quat);
+	transform.SetScale(scale);
 }
 
 void GameObject::SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vector3D scale)
 {
-	transform.position = pos;
-	transform.rotation = Math::Quaternion::FromEuler(quat);
-	transform.scale = scale;
+	transform.SetPosition(pos);
+	transform.SetRotation(Math::Quaternion::FromEuler(quat));
+	transform.SetScale(scale);
 }
 
 void GameObject::Destroy()
@@ -82,9 +82,9 @@ void GameObject::AddChild(GameObject* newChild)
 	{
 		GameObject* oldParent = newChild->parent;
 
-		this->transform.position = transform.worldPosition;
-		this->transform.rotation = transform.worldRotation;
-		this->transform.scale = transform.worldScale;
+		this->transform.SetPosition(transform.GetWorldPosition());
+		this->transform.SetRotation(transform.GetWorldRotation());
+		this->transform.SetScale(transform.GetWorldScale());
 
 		newChild->RemoveChild(this);
 		this->parent = nullptr;
@@ -95,9 +95,9 @@ void GameObject::AddChild(GameObject* newChild)
 
 	children.push_back(newChild);
 
-	newChild->transform.position = newChild->transform.position - this->transform.position;
-	newChild->transform.rotation = this->transform.rotation.Inverse() * newChild->transform.rotation;
-	newChild->transform.scale = newChild->transform.scale / this->transform.scale;
+	newChild->transform.SetPosition(newChild->transform.GetPosition() - this->transform.GetPosition());
+	newChild->transform.SetRotation(this->transform.GetRotation().Inverse() * newChild->transform.GetRotation());
+	newChild->transform.SetScale(newChild->transform.GetScale() / this->transform.GetScale());
 
 	newChild->SetParent(this);
 }
