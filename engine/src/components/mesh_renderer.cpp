@@ -145,7 +145,6 @@ void MeshRenderer::UpdateMeshRenderData(Math::Matrix4x4 TRS, EnigmaRHI::IRenderI
 
 	if (gameObject->transform.isDirty)
 	{
-		Debug::Log("dirty");
 		aabb.Update(gameObject->transform.GetGlobalMatrix());
 		gameObject->transform.isDirty = false;
 	}
