@@ -374,4 +374,9 @@ Math::Quaternion Math::Quaternion::operator-()
 	return Opposite();
 }
 
+bool Math::Quaternion::operator==(const Quaternion &q) const
+{
+	return x == q.x && y == q.y && z == q.z;
+}
+
 #pragma endregion

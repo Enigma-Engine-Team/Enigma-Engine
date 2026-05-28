@@ -51,6 +51,7 @@ namespace Math
 		Quaternion operator*(const Quaternion& q) const;
 		Vector3D operator*(const Vector3D& v) const;
 		Quaternion operator-();
+		bool operator==(const Quaternion& q) const;
 
 		static const Quaternion Identity;
 	};
