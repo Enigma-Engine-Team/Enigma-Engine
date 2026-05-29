@@ -20,7 +20,7 @@ void ShadowSystem::Create(EnigmaRHI::IRenderInterface* rhi)
 
     EnigmaRHI::GraphicsPipeline depthDesc
     {
-        .cullMode = EnigmaRHI::ECullMode::DISABLED,
+        .cullMode = EnigmaRHI::ECullMode::BACK,
         .frontFaceMode = EnigmaRHI::EFrontFaceMode::COUNTER_CLOCK_WISE,
         .depthTestEnable = true,
         .depthWriteEnable = true,
@@ -169,28 +169,26 @@ void ShadowSystem::RenderScene(Scene* scene, EnigmaRHI::ICommandBuffer& cmd,
 {
     for (GameObject* go : scene->GetGameObjects())
     {
-        Math::Matrix4x4 global = go->transform.GetGlobalMatrix();
-
         MeshRenderer* mr = go->GetComponent<MeshRenderer>();
         if (!mr || !mr->CastShadows()) continue;
 
-        mr->UpdateMeshRenderData(global, rhi);
+        mr->UpdateMeshRenderData(go->transform.GetGlobalMatrix(), rhi);
 
         EShadowMapType type = sm->GetType();
 
         if (type == EShadowMapType::Directional)
         {
-            directionalShadowPipeline->SendToGPU("model", global.m);
+            directionalShadowPipeline->SendToGPU("model", go->transform.GetGlobalMatrix().m);
         }
         else if (type == EShadowMapType::Spot)
         {
-            spotShadowPipeline->SendToGPU("model", global.m);
+            spotShadowPipeline->SendToGPU("model", go->transform.GetGlobalMatrix().m);
             spotShadowPipeline->SendToGPU("lightSpaceMatrix", sm->GetLightSpaceMatrix().m);
         }
         else if (type == EShadowMapType::Point)
         {
             auto* pm = static_cast<PointMap*>(sm);
-            pointShadowPipeline->SendToGPU("model", global.m);
+            pointShadowPipeline->SendToGPU("model", go->transform.GetGlobalMatrix().m);
             pointShadowPipeline->SendToGPU("lightPos", light->GetPosition().x, light->GetPosition().y, light->GetPosition().z);
             pointShadowPipeline->SendToGPU("farPlane", pm->GetFarPlane());
         }

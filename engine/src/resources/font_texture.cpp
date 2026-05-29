@@ -37,7 +37,7 @@ void FontTexture::Load(const std::filesystem::path& filepath, EnigmaRHI::IRender
 			.width = 256,
 			.height = 256,
 			.depth = 128,
-			.internationalFormat = EnigmaRHI::EImageFormat::R8,
+			.internalFormat = EnigmaRHI::EImageFormat::R8,
 			.sampler =
 			{
 				.imageType = EnigmaRHI::EImageType::TYPE_2D_ARRAY,

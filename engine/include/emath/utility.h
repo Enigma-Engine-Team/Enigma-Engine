@@ -10,6 +10,7 @@ namespace Math
 	bool IsEqualZero(float num);
 	bool IsEqual(float a, float b);
 	float Clamp(float, float, float);
+	float Lerp(float a, float b, float t);
 	inline float MyToRadians(float x) { return (x * PI) / 180.f; }
 	inline float MyToDegrees(float x) { return x * 180.f / PI; }
 }

@@ -16,10 +16,10 @@ void Model::InstantiateIntoScene(Model* model, GameObject* parent, Scene* scene)
         Math::Vector3D col0 = { t.m[0], t.m[1], t.m[2] };
         Math::Vector3D col1 = { t.m[4], t.m[5], t.m[6] };
         Math::Vector3D col2 = { t.m[8], t.m[9], t.m[10] };
-        go->transform.SetScale({ col0.Magnitude(), col1.Magnitude(), col2.Magnitude() });
+        go->transform.SetScale({ col0.Magnitude(), col1.Magnitude(), col2.Magnitude() } );
 
-        Math::Vector3D scale = go->transform.GetScale();
         Math::Matrix3x3 rotMat;
+        Math::Vector3D scale = go->transform.GetScale();
         rotMat.m[0] = t.m[0] / scale.x;
         rotMat.m[1] = t.m[1] / scale.x;
         rotMat.m[2] = t.m[2] / scale.x;
@@ -117,9 +117,7 @@ Math::AABB Model::GetAABBForGameObject(int index)
 void Model::LoadModel(std::string path, EnigmaRHI::IRenderInterface* rhi)
 {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(path,
-        aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace | aiProcess_FlipUVs
-        | aiProcess_GenBoundingBoxes | aiProcess_OptimizeMeshes | aiProcess_ImproveCacheLocality);
+    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace | aiProcess_FlipUVs | aiProcess_GenBoundingBoxes);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {

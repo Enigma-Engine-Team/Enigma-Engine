@@ -25,7 +25,7 @@ void EnigmaRHI::GLSwapChain::Create(ISurface* surface)
 	{
 		.width = static_cast<uint32_t>(surface->GetWidth()),
 		.height = static_cast<uint32_t>(surface->GetHeight()),
-		.internationalFormat = EnigmaRHI::EImageFormat::RGB16F,
+		.internalFormat = EnigmaRHI::EImageFormat::RGB16F,
 		.sampler = samplerColor,
 		.format = EnigmaRHI::EImageFormat::RGBA8,
 		.data = nullptr
@@ -48,7 +48,7 @@ void EnigmaRHI::GLSwapChain::Create(ISurface* surface)
 	{
 		.width = static_cast<uint32_t>(surface->GetWidth()),
 		.height = static_cast<uint32_t>(surface->GetHeight()),
-		.internationalFormat = EnigmaRHI::EImageFormat::D24_UNORM_S8_UINT,
+		.internalFormat = EnigmaRHI::EImageFormat::D24_UNORM_S8_UINT,
 		.sampler = samplerDepth,
 		.format = EnigmaRHI::EImageFormat::D24_UNORM_S8_UINT,
 		.data = nullptr

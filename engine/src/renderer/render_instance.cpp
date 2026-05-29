@@ -40,7 +40,7 @@ void RenderInstance::GeometryPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd)
 
 void RenderInstance::LightingPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd)
 {
-    auto* desc = pipelines->GetLightningDescriptor();
+    EnigmaRHI::IDescriptor* desc = pipelines->GetLightningDescriptor();
     cmd.BindPipeline(ctx->GetDevice(), pipelines->GetLightningPipeline());
 
     lightingFBO->Bind();
@@ -57,6 +57,7 @@ void RenderInstance::LightingPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd)
     desc->BindImage(10, EnigmaRHI::EImageType::TYPE_2D, gBuffer->GetClearCoatFactors()->GetID());
     desc->BindImage(11, EnigmaRHI::EImageType::TYPE_2D, gBuffer->GetClearCoatNormal()->GetID());
     desc->BindImage(14, EnigmaRHI::EImageType::TYPE_2D, gBuffer->GetEmissiveMap()->GetID());
+    desc->BindImage(15, EnigmaRHI::EImageType::TYPE_2D, ssaoPass.GetSSAOBlurEntry().ssaoColorBuffer->GetID());
 
     // Camera
     desc->BindBuffer(4, EnigmaRHI::EBufferTarget::UNIFORM_BUFFER, camera.GetDataBuffer());
@@ -83,17 +84,41 @@ void RenderInstance::LightingPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd)
 
     lightingFBO->Bind();
 
+
     // Skybox
     cmd.BindPipeline(ctx->GetDevice(), env->envCtx->GetSkyboxPipeline());
+	pipelines->GetGeometryDescriptor()->BindBuffer(0, EnigmaRHI::EBufferTarget::UNIFORM_BUFFER, camera.GetDataBuffer());
     env->envCtx->RenderSkybox(cmd);
 
     ForwardPass(cmd);
 }
 
+void RenderInstance::SSAOPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd)
+{
+	SSAOEntry ssaoEntry = ssaoPass.GetSSAOEntry();
+	SSAOEntry ssaoBlurEntry = ssaoPass.GetSSAOBlurEntry();
+
+	ssaoEntry.ssaoFBO->Bind();
+    ssaoEntry.ssaoFBO->Resize(resolution.x, resolution.y);
+	renderPass->ClearBuffer(EnigmaRHI::EMask::COLOR);
+    cmd.BindPipeline(ctx->GetDevice(), ssaoEntry.ssaoPipeline);
+    ssaoPass.BindForLighning(gBuffer, resolution, camera.GetProjection(), camera.GetView());
+    cmd.Draw(EnigmaRHI::EDrawMode::TRIANGLES, 3);
+    ssaoEntry.ssaoFBO->Unbind();
+
+    ssaoBlurEntry.ssaoFBO->Bind();
+    ssaoBlurEntry.ssaoFBO->Resize(resolution.x, resolution.y);
+	renderPass->ClearBuffer(EnigmaRHI::EMask::COLOR);
+    cmd.BindPipeline(ctx->GetDevice(), ssaoBlurEntry.ssaoPipeline);
+    ssaoBlurEntry.ssaoDescriptor->BindImage(1, EnigmaRHI::EImageType::TYPE_2D, ssaoEntry.ssaoColorBuffer->GetID());
+	cmd.Draw(EnigmaRHI::EDrawMode::TRIANGLES, 3);
+    ssaoBlurEntry.ssaoFBO->Unbind();
+}
+
 void RenderInstance::ForwardPass(EnigmaRHI::ICommandBuffer& cmd)
 {
-    auto* desc = pipelines->GetGeometryDescriptor();
-    auto* env = resources->GetEnvironmentSystem();
+    EnigmaRHI::IDescriptor* desc = pipelines->GetGeometryDescriptor();
+    EnvironmentSystem* env = resources->GetEnvironmentSystem();
 
     cmd.BindVertexInput(pipelines->GetMeshVertexMode());
     desc->BindBuffer(0, EnigmaRHI::EBufferTarget::UNIFORM_BUFFER, camera.GetDataBuffer());

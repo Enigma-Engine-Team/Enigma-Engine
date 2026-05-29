@@ -22,7 +22,7 @@ void Skybox::Create(EnigmaRHI::IRenderInterface* rhi, std::string path)
 	{
 		.width = texture.GetWidth(),
 		.height = texture.GetHeight(),
-		.internationalFormat = EnigmaRHI::EImageFormat::RGB16F,
+		.internalFormat = EnigmaRHI::EImageFormat::RGB16F,
 		.sampler = HDRSampler,
 		.format = EnigmaRHI::EImageFormat::RGB8,
 		.data = texture.GetData()

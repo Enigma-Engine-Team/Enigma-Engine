@@ -22,6 +22,7 @@ public:
 	Math::Matrix4x4 GetView() const { return camera.view; };
 	float GetAspectRatio() const { return camera.aspectRatio; };
 	float GetExposure() const { return camera.exposure; };
+	Math::Matrix4x4 GetProjection() const { return camera.projection; }
 
 	void SetCameraMode(ECameraMode mode) { camera.cameraMode = mode; }
 	void SetFOV(float fov) { camera.fov = fov; }

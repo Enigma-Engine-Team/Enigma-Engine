@@ -16,6 +16,8 @@ unsigned int EnigmaRHI::GLUtilities::FormatToGLInternal(EnigmaRHI::EImageFormat 
 		return GL_RG16F;
 	case EImageFormat::RGB32F:
 		return GL_RGB32F;
+	case EImageFormat::RGBA32F:
+		return GL_RGBA32F;
 	case EImageFormat::RGB8:                
 		return GL_RGB8;
 	case EImageFormat::RGB16F:               

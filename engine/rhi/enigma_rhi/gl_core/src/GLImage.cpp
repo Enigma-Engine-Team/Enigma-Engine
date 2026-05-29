@@ -132,7 +132,7 @@ void EnigmaRHI::GLImage::GenerateCubemap(ImageData cubemapData)
 {
 	for (unsigned int i = 0; i < 6; ++i)
 	{
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GLUtilities::FormatToGLInternal(cubemapData.internationalFormat), cubemapData.width,
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GLUtilities::FormatToGLInternal(cubemapData.internalFormat), cubemapData.width,
 			cubemapData.height, 0,GLUtilities::FormatToGL(cubemapData.format), GLUtilities::DataTypeToGL(cubemapData.sampler.pixelType), cubemapData.data);
 	}
 }
@@ -142,13 +142,13 @@ void EnigmaRHI::GLImage::GenerateImage(ImageData imageData)
 	switch (imageData.sampler.dimensionMode)
 	{
 		case EDimensionMode::TWO_DIMENSION:
-			glTexImage2D(GLUtilities::ImageTypeToGL(imageData.sampler.imageType), 0, GLUtilities::FormatToGLInternal(imageData.internationalFormat), imageData.width, imageData.height, 0, GLUtilities::FormatToGL(imageData.format), GLUtilities::DataTypeToGL(imageData.sampler.pixelType), imageData.data);
+			glTexImage2D(GLUtilities::ImageTypeToGL(imageData.sampler.imageType), 0, GLUtilities::FormatToGLInternal(imageData.internalFormat), imageData.width, imageData.height, 0, GLUtilities::FormatToGL(imageData.format), GLUtilities::DataTypeToGL(imageData.sampler.pixelType), imageData.data);
 			break;
 		case EDimensionMode::THREE_DIMENSION:
-			glTexImage3D(GLUtilities::ImageTypeToGL(imageData.sampler.imageType), 0, GLUtilities::FormatToGLInternal(imageData.internationalFormat), imageData.width, imageData.height, imageData.depth, 0, GLUtilities::FormatToGL(imageData.format), GLUtilities::DataTypeToGL(imageData.sampler.pixelType), imageData.data);
+			glTexImage3D(GLUtilities::ImageTypeToGL(imageData.sampler.imageType), 0, GLUtilities::FormatToGLInternal(imageData.internalFormat), imageData.width, imageData.height, imageData.depth, 0, GLUtilities::FormatToGL(imageData.format), GLUtilities::DataTypeToGL(imageData.sampler.pixelType), imageData.data);
 			break;
 		case EDimensionMode::ONE_DIMENSION:
-			glTexImage1D(GLUtilities::ImageTypeToGL(imageData.sampler.imageType), 0, GLUtilities::FormatToGLInternal(imageData.internationalFormat), imageData.width, 0, GLUtilities::FormatToGL(imageData.format), GLUtilities::DataTypeToGL(imageData.sampler.pixelType), imageData.data);
+			glTexImage1D(GLUtilities::ImageTypeToGL(imageData.sampler.imageType), 0, GLUtilities::FormatToGLInternal(imageData.internalFormat), imageData.width, 0, GLUtilities::FormatToGL(imageData.format), GLUtilities::DataTypeToGL(imageData.sampler.pixelType), imageData.data);
 			break;
 	}
 }

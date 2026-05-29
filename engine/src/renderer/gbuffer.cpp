@@ -44,7 +44,7 @@ void GBuffer::AllocateTextures(uint32_t w, uint32_t h)
             {
                 .width = w,
                 .height = h,
-                .internationalFormat = internalFmt,
+                .internalFormat = internalFmt,
                 .sampler = sampler,
                 .format = transferFmt,
                 .data = nullptr
@@ -56,13 +56,13 @@ void GBuffer::AllocateTextures(uint32_t w, uint32_t h)
         };
 
     // World-space position
-    gPosition = makeRT(EnigmaRHI::EImageFormat::RGB32F,
+    gPosition = makeRT(EnigmaRHI::EImageFormat::RGBA32F,
         EnigmaRHI::EImageFormat::RGB32F,
         EnigmaRHI::EDataType::FLOAT);
 
     // World-space normal
-    gNormal = makeRT(EnigmaRHI::EImageFormat::RGB16F,
-        EnigmaRHI::EImageFormat::RGBA8,
+    gNormal = makeRT(EnigmaRHI::EImageFormat::RGBA32F,
+        EnigmaRHI::EImageFormat::RGB32F,
         EnigmaRHI::EDataType::FLOAT);
 
     // Albedo (RGB) + AO (A)
@@ -104,7 +104,7 @@ void GBuffer::AllocateTextures(uint32_t w, uint32_t h)
     {
         .width = w,
         .height = h,
-        .internationalFormat = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
+        .internalFormat = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
         .sampler = depthSampler,
         .format = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
         .data = nullptr

@@ -15,7 +15,7 @@ namespace EnigmaRHI
 		uint32_t width;
 		uint32_t height;
 		uint32_t depth = 1;
-		EImageFormat internationalFormat;
+		EImageFormat internalFormat;
 		ImageSampler sampler;
 		EImageFormat format;
 		void* data;

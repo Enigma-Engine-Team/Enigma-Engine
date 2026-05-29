@@ -40,7 +40,7 @@ void EditorRenderInstance::Setup(RenderContext* _ctx, RenderPipelines* _pipeline
     {
         .width = static_cast<uint32_t>(resolution.x),
         .height = static_cast<uint32_t>(resolution.y),
-        .internationalFormat = EnigmaRHI::EImageFormat::RGB16F,
+        .internalFormat = EnigmaRHI::EImageFormat::RGB16F,
         .sampler = colorSampler,
         .format = EnigmaRHI::EImageFormat::RGBA8,
         .data = nullptr
@@ -50,7 +50,7 @@ void EditorRenderInstance::Setup(RenderContext* _ctx, RenderPipelines* _pipeline
     {
         .width = static_cast<uint32_t>(resolution.x),
         .height = static_cast<uint32_t>(resolution.y),
-        .internationalFormat = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
+        .internalFormat = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
         .sampler = depthSampler,
         .format = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
         .data = nullptr
@@ -93,6 +93,7 @@ void EditorRenderInstance::Setup(RenderContext* _ctx, RenderPipelines* _pipeline
         });
 
     bloomPass.Init(resolution.x, resolution.y, ctx->rhi);
+    ssaoPass.Create(resolution.x, resolution.y, ctx->rhi);
 }
 
 void EditorRenderInstance::Render(Scene* scene, EnigmaRHI::IDevice* device, EnigmaRHI::IRenderPass* renderPass, EnigmaRHI::ICommandBuffer& cmd)
@@ -109,6 +110,9 @@ void EditorRenderInstance::Render(Scene* scene, EnigmaRHI::IDevice* device, Enig
     RegisterGizmoCommands(scene);
     
     GeometryPass(scene, cmd);
+
+    SSAOPass(scene, cmd);
+
     LightingPass(scene, cmd);
 
     RenderGrid(cmd);
@@ -146,25 +150,26 @@ void EditorRenderInstance::RenderGizmos(Scene* scene, EnigmaRHI::IDevice* device
 
 void EditorRenderInstance::RegisterGizmoCommands(Scene* scene)
 {
-    if (selectedGameObject)
+    if (!selectedGameObject)
+        return;
+
+    MeshRenderer* mr = selectedGameObject->GetComponent<MeshRenderer>();
+
+    if (resources->GetGizmoRenderer().IsGizmosActive())
     {
-        MeshRenderer* mr = selectedGameObject->GetComponent<MeshRenderer>();
-        if (resources->GetGizmoRenderer().IsGizmosActive())
+        for (IComponent* c : selectedGameObject->GetComponents())
         {
-            for (IComponent* c : selectedGameObject->GetComponents())
-            {
-                if (typeid(*c) != typeid(MeshRenderer))
-                    c->OnDraw(scene->GetEngineCam()->GetPosition());
-            }
+            if (typeid(*c) != typeid(MeshRenderer))
+                c->OnDraw(scene->GetEngineCam()->GetPosition());
         }
-
-        if (mr)
-        {
-            if (resources->GetGizmoRenderer().DisplayAABB())
-                mr->OnDraw(scene->GetEngineCam()->GetPosition());
-        }
-
     }
+
+    if (mr)
+    {
+        if (resources->GetGizmoRenderer().DisplayAABB())
+            mr->OnDraw(scene->GetEngineCam()->GetPosition());
+    }
+
 }
 
 

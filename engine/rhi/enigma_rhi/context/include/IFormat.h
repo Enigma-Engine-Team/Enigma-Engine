@@ -12,6 +12,7 @@ namespace EnigmaRHI
 		RG16F,
 		RGB8,
 		RGB32F,
+		RGBA32F,
 		RGBA,
 		RGB16F,
 		RGBA8,

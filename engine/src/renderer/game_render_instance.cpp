@@ -40,7 +40,7 @@ void GameRenderInstance::Setup(RenderContext* _ctx, RenderPipelines* _pipelines,
     {
         .width = static_cast<uint32_t>(resolution.x),
         .height = static_cast<uint32_t>(resolution.y),
-        .internationalFormat = EnigmaRHI::EImageFormat::RGB16F,
+        .internalFormat = EnigmaRHI::EImageFormat::RGB16F,
         .sampler = colorSampler,
         .format = EnigmaRHI::EImageFormat::RGBA8,
         .data = nullptr
@@ -50,7 +50,7 @@ void GameRenderInstance::Setup(RenderContext* _ctx, RenderPipelines* _pipelines,
     {
         .width = static_cast<uint32_t>(resolution.x),
         .height = static_cast<uint32_t>(resolution.y),
-        .internationalFormat = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
+        .internalFormat = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
         .sampler = depthSampler,
         .format = EnigmaRHI::EImageFormat::D32_SFLOAT_S8_UINT,
         .data = nullptr
@@ -93,6 +93,7 @@ void GameRenderInstance::Setup(RenderContext* _ctx, RenderPipelines* _pipelines,
         });
 
     bloomPass.Init(resolution.x, resolution.y, ctx->rhi);
+    ssaoPass.Create(resolution.x, resolution.y, ctx->rhi);
 }
 
 void GameRenderInstance::Render(Scene* scene, EnigmaRHI::IDevice* device, EnigmaRHI::IRenderPass* renderPass, EnigmaRHI::ICommandBuffer& cmd)
@@ -120,6 +121,9 @@ void GameRenderInstance::Render(Scene* scene, EnigmaRHI::IDevice* device, Enigma
         pipelines->GetLightningDescriptor(), camera);
 
     GeometryPass(scene, cmd);
+
+    SSAOPass(scene, cmd);
+
     LightingPass(scene, cmd);
 
     lightingFBO->Unbind();

@@ -158,6 +158,7 @@ void RenderPipelines::CreateLightingDescriptor(EnigmaRHI::IRenderInterface* rhi)
 	lightingDescriptor->AddImageBinding(12); // CSM directional shadow map
 	lightingDescriptor->AddBufferBinding(13); // lightSpaceMatrices (CSM)
 	lightingDescriptor->AddImageBinding(14); // emissive
+	lightingDescriptor->AddImageBinding(15); // ssao texture
 
 	for (int i = 0; i < MAX_SPOT_LIGHTS; ++i)
 		lightingDescriptor->AddImageBinding(SPOT_SHADOW_BINDING + i);

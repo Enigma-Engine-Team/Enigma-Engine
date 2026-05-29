@@ -61,7 +61,7 @@ void DirectionalMap::CreateDepthMaps(EnigmaRHI::IRenderInterface* rhi)
 		.width = static_cast<uint32_t>(shadowResolution),
 		.height = static_cast<uint32_t>(shadowResolution),
 		.depth = static_cast<uint32_t>(shadowCascadeLevels.size() + 1),
-		.internationalFormat = EnigmaRHI::EImageFormat::D_COMPONENT,
+		.internalFormat = EnigmaRHI::EImageFormat::D_COMPONENT,
 		.sampler = depthSampler,
 		.format = EnigmaRHI::EImageFormat::D_COMPONENT,
 		.data = nullptr,
@@ -155,15 +155,13 @@ Math::Matrix4x4 DirectionalMap::GetLightSpaceMatrix(const Math::Vector3D& lightD
         minZ = std::min(minZ, trf.z); maxZ = std::max(maxZ, trf.z);
     }
 
-    float zExtend = 50.0f;
-    float xyExtend = 20.0f;
+    float zExtend = 100.0f;
+    float xyExtend = 1.0f;
 
     minX -= xyExtend;
     maxX += xyExtend;
     minY -= xyExtend;
     maxY += xyExtend;
-    minZ -= zExtend;
-    maxZ += zExtend;
     minZ -= zExtend;
     maxZ += zExtend;
 

@@ -35,7 +35,7 @@ void PointMap::CreateDepthCubeMap(EnigmaRHI::IRenderInterface* rhi)
         .width = static_cast<uint32_t>(shadowResolution),
         .height = static_cast<uint32_t>(shadowResolution),
         .depth = 6,
-        .internationalFormat = EnigmaRHI::EImageFormat::D_COMPONENT,
+        .internalFormat = EnigmaRHI::EImageFormat::D_COMPONENT,
         .sampler = depthSampler,
         .format = EnigmaRHI::EImageFormat::D_COMPONENT,
         .data = nullptr,

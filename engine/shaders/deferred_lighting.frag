@@ -2,7 +2,7 @@
 
 #define MAX_SPOT_LIGHTS      10
 #define MAX_POINT_LIGHTS     6
-#define SPOT_SHADOW_BINDING  15
+#define SPOT_SHADOW_BINDING  16
 #define POINT_SHADOW_BINDING (SPOT_SHADOW_BINDING + MAX_SPOT_LIGHTS)
 
 in vec2 TexCoords;
@@ -18,6 +18,7 @@ layout(binding = 3)  uniform sampler2D gMetalRough;
 layout(binding = 10) uniform sampler2D gClearCoatFactors;
 layout(binding = 11) uniform sampler2D gClearCoatNormal;
 layout(binding = 14) uniform sampler2D gEmissive;
+layout(binding = 15) uniform sampler2D gSSAO;
 
 // ── Camera ────────────────────────────────────────────────────────────────────
 layout(binding = 4) uniform CameraData
@@ -340,17 +341,19 @@ void main()
     vec3  N         = normalize(texture(gNormal, TexCoords).rgb);
     vec4  albAO     = texture(gAlbedoAO,   TexCoords);
     vec2  metalRgh  = texture(gMetalRough, TexCoords).rg;
+    float ssaoAO    = texture(gSSAO, TexCoords).r;
 
-    vec3  albedo    = albAO.rgb;
-    float ao        = albAO.a;
-    float metallic  = metalRgh.r;
-    float roughness = metalRgh.g;
+    vec3  albedo      = albAO.rgb;
+    float ao          = albAO.a;
+    float combinedAO  = ao * ssaoAO;
+    float metallic    = metalRgh.r;
+    float roughness   = metalRgh.g;
 
     // Clear coat
-    vec2  ccFactors = texture(gClearCoatFactors, TexCoords).rg;
-    vec3  ccNormal  = normalize(texture(gClearCoatNormal, TexCoords).rgb * 2.0 - 1.0);
-    float ccFactor  = ccFactors.r;
-    float ccRough   = ccFactors.g;
+    vec2  ccFactors  = texture(gClearCoatFactors, TexCoords).rg;
+    vec3  ccNormal   = normalize(texture(gClearCoatNormal, TexCoords).rgb * 2.0 - 1.0);
+    float ccFactor   = ccFactors.r;
+    float ccRough    = ccFactors.g;
 
     vec3 V  = normalize(cam.viewPos - WorldPos);
     vec3 R  = reflect(-V, N);
@@ -434,8 +437,8 @@ void main()
     vec2 brdf            = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
     vec3 specular_ibl    = prefilteredColor * (F_ibl * brdf.x + brdf.y);
 
-    vec3 ambientDiffuse = kD_ibl * diffuse * ao;
-    vec3 ambientSpecular = specular_ibl * ao;
+    vec3 ambientDiffuse = kD_ibl * diffuse * combinedAO;
+    vec3 ambientSpecular = specular_ibl * combinedAO;
 
     vec3 R_cc       = reflect(-V, ccNormal);
     vec3 F_cc_ibl   = fresnelSchlickRoughness(max(dot(ccNormal, V), 0.0), F0_cc, ccRough);

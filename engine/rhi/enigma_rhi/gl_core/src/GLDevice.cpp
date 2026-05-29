@@ -46,24 +46,22 @@ namespace EnigmaRHI
 				glDisable(GL_DEPTH_TEST);
 		}
 		
-		//if (pipelineGP.depthTestEnable)
-		//{
-			if (pipelineCache.depthWriteEnable != pipelineGP.depthWriteEnable)
-				glDepthMask(pipelineGP.depthWriteEnable);
-			if (pipelineCache.compareMode != pipelineGP.compareMode)
-				glDepthFunc(GLUtilities::DepthCompareOpToGL(pipelineGP.compareMode));
-		//}
+		if (pipelineCache.depthWriteEnable != pipelineGP.depthWriteEnable)
+			glDepthMask(pipelineGP.depthWriteEnable);
+
+		if (pipelineCache.compareMode != pipelineGP.compareMode)
+			glDepthFunc(GLUtilities::DepthCompareOpToGL(pipelineGP.compareMode));
 		
 		if (pipelineCache.cullMode != pipelineGP.cullMode)
 		{
 			if (pipelineGP.cullMode != ECullMode::DISABLED)
-			{
 				glEnable(GL_CULL_FACE);
-				glCullFace(GLUtilities::CullModeToGL(pipelineGP.cullMode));
-			}
 			else
 				glDisable(GL_CULL_FACE);
 		}
+
+		if(pipelineCache.cullMode != pipelineGP.cullMode && pipelineGP.cullMode != ECullMode::DISABLED)
+			glCullFace(GLUtilities::CullModeToGL(pipelineGP.cullMode));
 
 		if (pipelineCache.polygonMode != pipelineGP.polygonMode)
 		{

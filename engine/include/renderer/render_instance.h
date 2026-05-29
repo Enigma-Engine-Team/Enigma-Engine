@@ -5,22 +5,24 @@
 #include "renderer/render_resources.h"
 #include "scenes/scene.h"
 #include "bloom_pass.h"
+#include "ssao_pass.h"
 
 struct CameraProxy
 {
     EngineCamera* engineCam = nullptr;
     GameCamera* gameCam = nullptr;
 
-    EnigmaRHI::IBuffer* GetDataBuffer() const { return engineCam ? engineCam->GetCameraDataBuffer(): gameCam->GetCameraDataBuffer();}
-    Math::Vector3D GetPosition()        const { return engineCam ? engineCam->GetPosition(): gameCam->GetPosition();}
-    Math::Matrix4x4 GetVP()             const { return engineCam ? engineCam->GetVP() : gameCam->GetVP(); }
-    Math::Matrix4x4 GetView()           const { return engineCam ? engineCam->GetView() : gameCam->GetView();}
-    Math::Frustum GetFrustum()          const { return engineCam ? engineCam->GetFrustum() : gameCam->GetFrustum();}
-    float GetZNear()                    const { return engineCam ? engineCam->GetZNear() : gameCam->GetZNear(); }
-    float GetZFar()                     const { return engineCam ? engineCam->GetZFar() : gameCam->GetZFar(); }
-    float GetFOV()                      const { return engineCam ? engineCam->GetFOV() : gameCam->GetFOV(); }
-    float GetAspectRatio()              const { return engineCam ? engineCam->GetAspectRatio() : gameCam->GetAspectRatio(); }
-    float GetExposure()                 const { return engineCam ? engineCam->GetExposure() : gameCam->GetExposure(); }
+    EnigmaRHI::IBuffer* GetDataBuffer() const { return engineCam ? engineCam->GetCameraDataBuffer()     :gameCam->GetCameraDataBuffer();}
+    Math::Vector3D GetPosition()        const { return engineCam ? engineCam->GetPosition()             :gameCam->GetPosition();}
+    Math::Matrix4x4 GetVP()             const { return engineCam ? engineCam->GetVP()                   :gameCam->GetVP(); }
+    Math::Matrix4x4 GetView()           const { return engineCam ? engineCam->GetView()                 :gameCam->GetView();}
+    Math::Matrix4x4 GetProjection()     const { return engineCam ? engineCam->GetProjection()           :gameCam->GetProjection(); }
+    Math::Frustum GetFrustum()          const { return engineCam ? engineCam->GetFrustum()              :gameCam->GetFrustum();}
+    float GetZNear()                    const { return engineCam ? engineCam->GetZNear()                :gameCam->GetZNear(); }
+    float GetZFar()                     const { return engineCam ? engineCam->GetZFar()                 :gameCam->GetZFar(); }
+    float GetFOV()                      const { return engineCam ? engineCam->GetFOV()                  :gameCam->GetFOV(); }
+    float GetAspectRatio()              const { return engineCam ? engineCam->GetAspectRatio()          :gameCam->GetAspectRatio(); }
+    float GetExposure()                 const { return engineCam ? engineCam->GetExposure()             :gameCam->GetExposure(); }
 
     void Update(float width, float height)
     {
@@ -48,6 +50,7 @@ protected:
 
     void GeometryPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd);
     void LightingPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd);
+	void SSAOPass(Scene* scene, EnigmaRHI::ICommandBuffer& cmd);
     void ForwardPass(EnigmaRHI::ICommandBuffer& cmd);
     void BloomPass(unsigned int srcTexture, EnigmaRHI::IRenderPass* renderPass, EnigmaRHI::IDevice* device, EnigmaRHI::ICommandBuffer& cmd);
     void FXAAPass(EnigmaRHI::ICommandBuffer& cmd, unsigned int sourceImageID);
@@ -72,6 +75,7 @@ protected:
     std::vector<GameObject*>    transparentObjects;
 
     BloomRenderer bloomPass;
+    SSAORenderer ssaoPass;
 
     void CreateBuffers();
     void CreateFBOs();

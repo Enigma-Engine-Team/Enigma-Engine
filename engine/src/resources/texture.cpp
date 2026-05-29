@@ -72,7 +72,7 @@ void Texture::GenImage()
 	{
 		.width = static_cast<uint32_t>(width),
 		.height = static_cast<uint32_t>(height),
-		.internationalFormat = imageInternalFormat,
+		.internalFormat = imageInternalFormat,
 		.sampler = s,
 		.format = imageFormat,
 		.data = data,

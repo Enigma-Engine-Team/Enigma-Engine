@@ -1,6 +1,7 @@
 #version 460 core
 
 layout (location = 0) out vec4 FragColor;
+
 layout (location = 0) in vec3 WorldPos;
 
 layout (binding = 9) uniform sampler2D equirectangularMap; // texture HDR directe
