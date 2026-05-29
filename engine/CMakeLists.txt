@@ -104,7 +104,13 @@ FetchContent_Declare(
     GIT_TAG 0.11.25
 )
 
-FetchContent_MakeAvailable(glfw rttr joltphysics enet json assimp imgui imgizmo freetype miniaudio)
+FetchContent_Declare(
+    mesh_optimizer
+    GIT_REPOSITORY https://github.com/zeux/meshoptimizer.git
+    GIT_TAG v1.1
+)
+
+FetchContent_MakeAvailable(glfw rttr joltphysics enet json assimp imgui imgizmo freetype miniaudio mesh_optimizer)
 
 set(IMGUI_SOURCES
     ${imgui_SOURCE_DIR}/imgui.cpp
