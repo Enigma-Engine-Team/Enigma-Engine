@@ -84,7 +84,8 @@ void MyContactListener::OnContactAdded(const JPH::Body& inBody1, const JPH::Body
 	auto* pb = reinterpret_cast<Physicalbody*>(inBody1.GetUserData());
 	auto* pb2 = reinterpret_cast<Physicalbody*>(inBody2.GetUserData());
 
-	Physics::GetInstance().contactsAdded.emplace_back( pb->GetBody()->GetBodyID(), pb2->GetBody()->GetBodyID() );
+	if (pb && pb2)
+		Physics::GetInstance().contactsAdded.emplace_back( pb->GetBody()->GetBodyID(), pb2->GetBody()->GetBodyID() );
 }
 
 void MyContactListener::OnContactPersisted(const JPH::Body& inBody1, const JPH::Body& inBody2, const JPH::ContactManifold& inManifold, JPH::ContactSettings& ioSettings)
@@ -95,7 +96,8 @@ void MyContactListener::OnContactPersisted(const JPH::Body& inBody1, const JPH::
 	auto* pb = reinterpret_cast<Physicalbody*>(inBody1.GetUserData());
 	auto* pb2 = reinterpret_cast<Physicalbody*>(inBody2.GetUserData());
 
-	Physics::GetInstance().contactsPersisted.emplace_back( pb->GetBody()->GetBodyID(), pb2->GetBody()->GetBodyID() );
+	if (pb && pb2)
+		Physics::GetInstance().contactsPersisted.emplace_back( pb->GetBody()->GetBodyID(), pb2->GetBody()->GetBodyID() );
 }
 
 void MyContactListener::OnContactRemoved(const JPH::SubShapeIDPair& inSubShapePair)

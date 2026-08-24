@@ -44,6 +44,7 @@ int main()
 	Timer timer;
 
 	engine.CreateRenderer(&window);
+	engine.LinkDll();
 
 #ifndef BUILD_MODE
 	UI::UIEditor ui;
