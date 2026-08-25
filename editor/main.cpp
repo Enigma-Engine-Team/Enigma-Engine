@@ -10,8 +10,13 @@
 #include "events/event.h"
 #include <chrono>
 
+#include "AI/aitool.h"
+
 int main()
 {
+	AITool& tool = AITool::GetInstance();
+	tool.SendPrompt("Hello Comment ça va ?");
+
 	Window window;
 	window.SetCursorPosCallBack(InputManager::MousePositionCallback);
 	window.SetScrollCallBack(InputManager::MouseScrollCallback);

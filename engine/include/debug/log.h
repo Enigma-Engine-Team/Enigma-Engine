@@ -10,13 +10,11 @@
 class ENIGMA_API Debug
 {
 public:
-
 	struct Message
 	{
 		std::string content;
 		int color;
 	};
-
 	static void Log(std::string content, const std::source_location& loc = std::source_location::current());
 	static void LogSuccess(std::string content, const std::source_location& loc = std::source_location::current());
 	static void LogWarning(std::string content, const std::source_location& loc = std::source_location::current());

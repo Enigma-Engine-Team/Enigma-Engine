@@ -17,6 +17,8 @@
 
 #include <iostream>
 
+#include "panel/ai_console.h"
+
 GameObject*  UI::UIEditor::selectedGameObject = nullptr;
 unsigned int UI::UIEditor::gameTexture = 0;
 unsigned int UI::UIEditor::viewportTexture = 0;
@@ -43,6 +45,9 @@ void UI::UIEditor::Create(Window* window, Engine& engine)
 
 	IUIPanel* debugConsole = new DebugConsolePanel();
 	panels.push_back(debugConsole);
+
+	IUIPanel* aiConsole = new AiConsolePanel();
+	panels.push_back(aiConsole);
 
 	IUIPanel* gameViewport = new GameViewportPanel();
 	panels.push_back(gameViewport);

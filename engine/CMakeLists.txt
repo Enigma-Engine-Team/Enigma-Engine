@@ -104,7 +104,13 @@ FetchContent_Declare(
     GIT_TAG 0.11.25
 )
 
-FetchContent_MakeAvailable(glfw rttr joltphysics enet json assimp imgui imgizmo freetype miniaudio)
+FetchContent_Declare(
+    httplib
+    GIT_REPOSITORY https://github.com/yhirose/cpp-httplib.git
+    GIT_TAG v0.53.1
+)
+
+FetchContent_MakeAvailable(glfw rttr joltphysics enet json assimp imgui imgizmo freetype miniaudio httplib)
 
 set(IMGUI_SOURCES
     ${imgui_SOURCE_DIR}/imgui.cpp
@@ -131,7 +137,7 @@ target_include_directories(Engine PUBLIC
     ${enet_SOURCE_DIR}/include
 )
 
-target_link_libraries(Engine PUBLIC enet glfw RTTR::Core nlohmann_json::nlohmann_json EnigmaRHI Jolt ws2_32 winmm assimp freetype miniaudio)
+target_link_libraries(Engine PUBLIC enet glfw RTTR::Core nlohmann_json::nlohmann_json EnigmaRHI Jolt ws2_32 winmm assimp freetype miniaudio httplib)
 
 target_compile_definitions(Engine PUBLIC
         JPH_USE_SSE4_2
