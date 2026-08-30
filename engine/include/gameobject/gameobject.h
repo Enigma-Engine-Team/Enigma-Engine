@@ -9,6 +9,7 @@
 #include "physics/physicalBody.h"
 #include "transform.h"
 #include "../utilities/macro.h"
+#include "utilities/utility.h"
 
 enum class ELayer
 {
@@ -26,6 +27,7 @@ public:
 	template<typename T>
 	requires std::derived_from<T, IComponent>
 	T* AddComponent();
+	void CopyComponent(IComponent* component);
 
 	IComponent* AddComponentType(rttr::type type);
 
@@ -54,6 +56,8 @@ public:
 	void SetName(std::string name);
 	std::string GetName();
 
+	UUID GetUUID() const { return uuid; }
+
 	void Destroy();
 	void SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::Vector3D scale);
 	void SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vector3D scale);
@@ -71,7 +75,6 @@ public:
 	void SetLayer(ELayer newLayer) { layer = newLayer; };
 	void RebuildLayer();
 	bool IsInstancePrefab();
-	bool GetPrefabPath();
 	bool IsAncestorOf(const GameObject* other) const;
 
 private:
@@ -83,6 +86,7 @@ private:
 	ELayer layer = ELayer::OBJECT;
 	bool isInstancePrefab = false;
 	std::string prefabPath = "";
+	UUID uuid;
 
 	GameObject();
 	~GameObject() = default;

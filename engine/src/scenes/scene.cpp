@@ -8,6 +8,7 @@
 #include "components/convex_collider.h"
 #include "components/mesh_collider.h"
 #include "components/vehicle_controller.h"
+#include "utilities/shortcut.h"
 
 RTTR_REGISTRATION
 {
@@ -57,28 +58,44 @@ GameObject* Scene::AddGameObject(std::string _name)
 	newGameObject->SetName(_name);
 	gameObjects.push_back(newGameObject);
 	world->AddChild(newGameObject);
+
+	Shortcut::GetInstance().AddUndoAction("Delete GameObject", [this, newGameObject]{ this->DeleteGameObject(newGameObject); });
+
 	return newGameObject;
+}
+
+GameObject* Scene::AddGameObject(GameObject* gameObject)
+{
+	GameObject* go = AddGameObject(gameObject->GetName());
+	go->SetParent(gameObject->GetParent());
+	for (IComponent* component : gameObject->GetComponents())
+	{
+		go->CopyComponent(component);
+	}
+	go->physicalBody = gameObject->physicalBody;
+	go->physicalBody->gameObject = go;
+
+	return go;
 }
 
 void Scene::DeleteGameObject(GameObject* gameObject)
 {
 	auto it = std::find(gameObjects.begin(), gameObjects.end(), gameObject);
+
 	if (it != gameObjects.end())
 	{
+		if (gameObject == gameCam)
+			gameCam = nullptr;
+
+		deletedGameObjects.emplace_back();
+
+		//Copy de gameObject à faire
+		deletedGameObjects.back() = *it;
+
 		(*it)->Destroy();
 		delete *it;
-		*it = nullptr;
 
-		if (gameObject == gameCam)
-		{
-			gameCam = nullptr;
-		}
-
-		if (gameObjects.back() != *it)
-		{
-			*it = gameObjects.back();
-		}
-
+		*it = gameObjects.back();
 		gameObjects.pop_back();
 	}
 }
@@ -138,6 +155,16 @@ GameObject* Scene::GetGameObject(const std::string& name) const
 		{
 			return gameObject;
 		}
+	}
+	return nullptr;
+}
+
+GameObject* Scene::GetGameObject(UUID uuid) const
+{
+	for (const GameObject* gameObject : gameObjects)
+	{
+		if (gameObject->uuid.IsEqual(uuid))
+			return const_cast<GameObject*>(gameObject);
 	}
 	return nullptr;
 }

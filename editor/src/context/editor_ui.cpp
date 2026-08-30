@@ -18,6 +18,7 @@
 #include <iostream>
 
 #include "panel/ai_console.h"
+#include "utilities/shortcut.h"
 
 GameObject*  UI::UIEditor::selectedGameObject = nullptr;
 unsigned int UI::UIEditor::gameTexture = 0;
@@ -234,6 +235,10 @@ void UI::UIEditor::GetEditorInput()
 			GameObject* newGO = newScene->AddGameObject("Camera");
 			newGO->AddComponent<GameCamera>();
 		}
+		else if (InputManager::GetKeyClicked(KEY_Z))
+			Shortcut::GetInstance().Undo();
+		else if (InputManager::GetKeyClicked(KEY_Y) || (InputManager::GetKeyDown(KEY_LEFT_SHIFT) && InputManager::GetKeyClicked(KEY_Z)))
+			Shortcut::GetInstance().Redo();
 	}
 
 	if (InputManager::GetKeyClicked(KEY_DELETE))

@@ -15,11 +15,13 @@ class ENIGMA_API Scene
 {
 public:
 	GameObject* AddGameObject(std::string name);
+	GameObject* AddGameObject(GameObject* gameObject);
 	void DeleteGameObject(GameObject* gameObject);
 	void LoadOnlyCurrentSceneAssets(Scene* scene, EnigmaRHI::IRenderInterface* rhi);
 	std::vector<GameObject*>& GetGameObjects();
 	GameObject* GetGameObject(int _index) const { return gameObjects[_index]; }
 	GameObject* GetGameObject(const std::string& name) const;
+	GameObject* GetGameObject(UUID uuid) const;
 	EngineCamera* GetEngineCam() const { return camera; };
 	GameObject* GetGameCam() const { return gameCam; };
 	void SetGameCam(GameObject* newGameCam);
@@ -39,6 +41,7 @@ public:
 private:
 	RTTR_REGISTRATION_FRIEND
 	std::vector<GameObject*> gameObjects;
+	std::vector<GameObject*> deletedGameObjects;
 	std::vector<Model*> modelsAwaiting;
 
 	int index = 0;
