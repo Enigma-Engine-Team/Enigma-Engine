@@ -196,24 +196,15 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
     }
 }
 
-void Serializer::RecursiveDeserialize(Scene* scene, nlohmann::json& j, GameObject* go)
+void Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go)
 {
     nlohmann::json goData = j["GameObject"];
     std::string goName = goData["name"];
     std::string goUUID = goData["uuid"];
 
-    GameObject* gameObject = nullptr;
-
-    if (goData["isInstancePrefab"])
-    {
-        gameObject = scene->AddGameObject(goName);
-        go->AddChild(gameObject);
-    }
-    else
-    {
-        gameObject = scene->AddGameObject(goName);
-        go->AddChild(gameObject);
-    }
+    GameObject* gameObject = scene->AddGameObject(UUID::ToUUID(goUUID));
+    gameObject->SetName(goName);
+    go->AddChild(gameObject);
 
     const auto& transformJSON = goData["transform"];
     Transform* transform = &gameObject->transform;

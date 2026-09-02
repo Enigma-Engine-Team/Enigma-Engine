@@ -6,6 +6,8 @@
 #include "scripting/scripting.h"
 #include "components/text.h"
 #include "components/text_mesh.h"
+#include "serialization/serializer.h"
+#include "utilities/shortcut.h"
 
 RTTR_REGISTRATION
 {

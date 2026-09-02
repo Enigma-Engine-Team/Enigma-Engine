@@ -14,9 +14,6 @@
 #include "context/style_manager.h"
 #include "serialization/serializer.h"
 #include "renderer/widget_renderer.h"
-
-#include <iostream>
-
 #include "panel/ai_console.h"
 #include "utilities/shortcut.h"
 
@@ -236,15 +233,14 @@ void UI::UIEditor::GetEditorInput()
 			newGO->AddComponent<GameCamera>();
 		}
 		else if (InputManager::GetKeyClicked(KEY_Z))
-			Shortcut::GetInstance().Undo();
+			Shortcut::Undo();
 		else if (InputManager::GetKeyClicked(KEY_Y) || (InputManager::GetKeyDown(KEY_LEFT_SHIFT) && InputManager::GetKeyClicked(KEY_Z)))
-			Shortcut::GetInstance().Redo();
+			Shortcut::Redo();
 	}
 
 	if (InputManager::GetKeyClicked(KEY_DELETE))
 	{
 		SceneManager::GetInstance().GetCurrentScene()->DeleteGameObject(selectedGameObject);
-		engine.GetRenderer()->SetSelectedGameObject(nullptr);
 	}
 
 	if (InputManager::IsCursorHidden())

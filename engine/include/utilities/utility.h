@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <random>
 
-#include "../../../out/build/x64-release/_deps/rttr-src/src/rttr/registration_friend.h"
+#include "rttr/registration_friend.h"
 
 class UUID
 {
@@ -12,6 +12,7 @@ public:
     static std::string ToString(uint64_t high, uint64_t low);
     std::string ToString() const;
     static UUID ToUUID(const std::string& str);
+    //return true if is equal to the other UUID
     bool IsEqual(const UUID& other) const { return high == other.high && low == other.low; }
 
 private:

@@ -19,7 +19,7 @@ void UI::InspectorPanel::Draw()
 {
 	ImGui::Begin("Inspector");
 
-	currentGameObject = UIEditor::engine.GetRenderer()->GetSelectedGameObject();
+	currentGameObject = Engine::GetRenderer()->GetSelectedGameObject();
 
 	if (currentGameObject)
 	{

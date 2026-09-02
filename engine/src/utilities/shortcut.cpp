@@ -1,34 +1,39 @@
 #include "utilities/shortcut.h"
 
-void Shortcut::AddUndoAction(const Action& action)
+std::vector<Action> Shortcut::undoActions;
+std::vector<Action> Shortcut::redoActions;
+ActionContext Shortcut::context = UNDO;
+
+Action::Action()
 {
-    undoActions.push_back(action);
-    redoActions.clear();
+    this->goID = UUID(0, 0);
 }
 
-void Shortcut::AddUndoAction(const std::string& actionName, const std::function<void()>& action)
+Action::Action(const std::string& actionName, const std::function<void()>& action, const UUID& goID, const nlohmann::json& snapshot)
 {
-    AddUndoAction({ actionName, action });
+    this->actionName = actionName;
+    this->action = action;
+    this->snapshot = snapshot;
+    this->goID = goID;
 }
 
-void Shortcut::AddRedoAction(const Action& action)
+void Shortcut::AddAction(const Action& action)
 {
-    redoActions.push_back(action);
-}
-
-void Shortcut::AddRedoAction(const std::string& actionName, const std::function<void()>& action)
-{
-    AddRedoAction({ actionName, action });
+    if (context == UNDO)
+        undoActions.push_back(action);
+    else if (context == REDO)
+        redoActions.push_back(action);
 }
 
 void Shortcut::Undo()
 {
     if (!undoActions.empty())
     {
+        context = REDO;
         Action action = undoActions.back();
         undoActions.pop_back();
         action.action();
-        AddRedoAction(action);
+        context = UNDO;
     }
 }
 
@@ -39,12 +44,11 @@ void Shortcut::Redo()
         Action action = redoActions.back();
         redoActions.pop_back();
         action.action();
-        AddUndoAction(action);
     }
 }
 
-Shortcut& Shortcut::GetInstance()
+void Shortcut::Clear()
 {
-    static Shortcut instance;
-    return instance;
+    undoActions.clear();
+    redoActions.clear();
 }

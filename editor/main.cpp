@@ -11,6 +11,7 @@
 #include <chrono>
 
 #include "AI/aitool.h"
+#include "utilities/shortcut.h"
 
 int main()
 {
@@ -60,6 +61,7 @@ int main()
 	}
 
 	Network::GetInstance().Create("config\\network.ini");
+	Shortcut::Clear();
 
 	while (!window.ShouldClose())
 	{
