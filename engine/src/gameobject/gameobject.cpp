@@ -21,12 +21,6 @@ RTTR_REGISTRATION
 		 .property("children", &GameObject::children);
 }
 
-void GameObject::CopyComponent(IComponent *component)
-{
-	component->SetParent(this);
-	components.push_back(component);
-}
-
 IComponent* GameObject::AddComponentType(rttr::type type)
 {
 	for (IComponent* component : components)
@@ -50,6 +44,12 @@ IComponent* GameObject::AddComponentType(rttr::type type)
 	component->Create();
 	components.push_back(component);
 
+	Action action("Delete Component", {}, uuid);
+	action.action = [this, component]() {
+		DeleteComponent(component);
+	};
+	Shortcut::AddAction(action);
+
 	return component;
 }
 
@@ -65,22 +65,29 @@ IComponent* GameObject::GetComponentType(const rttr::type& type) const
 	return nullptr;
 }
 
-void GameObject::DeleteComponent(IComponent* target)
+void GameObject::DeleteComponent(const IComponent* target)
 {
-	auto it = std::find(components.begin(), components.end(), target);
-	if (it != components.end())
-	{
-		if (dynamic_cast<Scripting::IScript*>(*it))
-		{
-			DeleteScript(dynamic_cast<Scripting::IScript*>(*it)->GetScriptName());
-			return;
-		}
-		(*it)->Destroy();
-		delete *it;
-		components.erase(it);
+	Action action("Restore Component", {}, uuid);
+	action.snapshot = nlohmann::json::object();
+	Serializer::GetInstance().RecursiveSerialize(target, action.snapshot);
+	action.action = [action]() {
+		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+		Serializer::GetInstance().DeserializeComponent(go, action.snapshot);
+	};
+	Shortcut::AddAction(action);
+
+	DestroyComponent(target);
+}
+
+void GameObject::DestroyComponent(const IComponent *target)
+{
+	const auto it = std::ranges::find(components, target);
+	if (it == components.end())
 		return;
-	}
-	Debug::LogError("Delete component failed");
+
+	(*it)->Destroy();
+	delete *it;
+	components.erase(it);
 }
 
 Scripting::IScript* GameObject::AddScript(const std::string& scriptName)
@@ -111,6 +118,19 @@ void GameObject::DeleteScript(const std::string& scriptName)
 		}
 		return false;
 	}).begin(), components.end());
+}
+
+void GameObject::DeleteScripts()
+{
+	for (int i = components.size() - 1; i >= 0; i--)
+	{
+		if (Scripting::IScript* script = dynamic_cast<Scripting::IScript*>(components[i]))
+		{
+			script->Destroy();
+			delete script;
+			components.erase(components.begin() + i);
+		}
+	}
 }
 
 void GameObject::SetInstancePrefab(std::string path)

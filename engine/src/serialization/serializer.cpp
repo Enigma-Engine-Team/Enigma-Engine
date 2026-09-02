@@ -218,35 +218,38 @@ void Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, Gam
 
     for (auto& compWrapper : goData["components"])
     {
-        for (auto it = compWrapper.begin(); it != compWrapper.end(); ++it)
-        {
-            const std::string& compTypeName = it.key();
-            rttr::type t = rttr::type::get_by_name(compTypeName);
-            rttr::type scriptBase = rttr::type::get<Scripting::IScript>();
-
-            if (t.is_valid() && t.is_derived_from(scriptBase))
-                continue;
-
-            if (t.is_valid())
-            {
-                IComponent* comp = gameObject->GetComponentType(t);
-
-                if (comp == nullptr)
-                {
-                    comp = gameObject->AddComponentType(t);
-                }
-
-                RecursiveSetProperties(comp, it.value());
-
-                comp->SetComponent();
-            }
-            else
-                SetScriptElement(compWrapper, compTypeName, goName, goUUID);
-        }
+        DeserializeComponent(gameObject, compWrapper);
     }
 }
 
-void Serializer::SetScriptElement(nlohmann::json& j, const std::string& scriptName, const std::string& goName, const std::string& uuid)
+void Serializer::DeserializeComponent(GameObject* gameObject, const nlohmann::json& component)
+{
+    for (auto it = component.begin(); it != component.end(); ++it)
+    {
+        const std::string& compTypeName = it.key();
+        rttr::type t = rttr::type::get_by_name(compTypeName);
+        rttr::type scriptBase = rttr::type::get<Scripting::IScript>();
+
+        if (t.is_valid() && t.is_derived_from(scriptBase))
+            return;
+
+        if (t.is_valid())
+        {
+            IComponent* comp = gameObject->GetComponentType(t);
+
+            if (comp == nullptr)
+                comp = gameObject->AddComponentType(t);
+
+            RecursiveSetProperties(comp, it.value());
+
+            comp->SetComponent();
+        }
+        else
+            SetScriptElement(component, compTypeName, gameObject->GetName(), gameObject->GetUUID().ToString());
+    }
+}
+
+void Serializer::SetScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& goName, const std::string& uuid)
 {
     nlohmann::json scriptData;
     scriptData["scriptName"] = scriptName;

@@ -27,7 +27,6 @@ public:
 	template<typename T>
 	requires std::derived_from<T, IComponent>
 	T* AddComponent();
-	void CopyComponent(IComponent* component);
 
 	IComponent* AddComponentType(rttr::type type);
 
@@ -42,16 +41,13 @@ public:
 	IComponent* GetComponentType(const rttr::type &type) const;
 
 	std::vector<IComponent*> GetComponents();
-
-	template<typename T>
-	requires std::derived_from<T, IComponent>
-	void DeleteComponent();
-
-	void DeleteComponent(IComponent* target);
+	void DeleteComponent(const IComponent* target);
+	void DestroyComponent(const IComponent* target);
 
 	Scripting::IScript* AddScript(const std::string& scriptName);
 	void DeleteScript(const std::string& scriptName);
-	
+	void DeleteScripts();
+
 	void SetInstancePrefab(std::string path);
 	void SetName(std::string name);
 	std::string GetName();
