@@ -21,6 +21,7 @@ int main()
 
 	window.Create(1920, 1080, "EnigmaEngine");
 	window.SetWindowIcon("internal_assets/logos/LogoDark.png");
+	InputManager::SetCurrentWindow(&window);
 
 	Physics& physics = Physics::GetInstance();
 	physics.Create();
@@ -37,6 +38,11 @@ int main()
 #endif
 
 	engine.CreateContext();
+
+	if (!InputManager::GetMouseButtonDown(MOUSE_BUTTON_RIGHT))
+	{
+		Shortcut::Clear();
+	}
 
 	Serializer::GetInstance().DeserializeScene(scene);
 	scene->LoadOnlyCurrentSceneAssets(scene, engine.GetRHI());

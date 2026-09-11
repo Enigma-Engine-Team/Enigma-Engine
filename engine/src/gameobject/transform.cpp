@@ -1,11 +1,14 @@
 #include "gameobject/transform.h"
 #include "scenes/scene_graph.h"
 #include "gameobject/gameobject.h"
+#include "scenes/scene_manager.h"
+#include "utilities/shortcut.h"
+#include "window/input_manager.h"
 
 RTTR_REGISTRATION
 {
 	rttr::registration::class_<Transform>("Transform")
-		 .property("position", &Transform::position)
+		 .property("position", &Transform::GetPosition, &Transform::SetPosition)
 		 .property("rotation", &Transform::rotation)
 		 .property("scale", &Transform::scale);
 }
@@ -26,6 +29,16 @@ Transform::Transform(Math::Vector3D pos, Math::Vector3D rot, Math::Vector3D scal
 
 void Transform::SetPosition(Math::Vector3D pos)
 {
+	if (InputManager::GetMouseButtonUp(MOUSE_BUTTON_LEFT))
+	{
+		Math::Vector3D oldPos = position;
+		Action action("SetPosition", {}, gameObject->GetUUID());
+		action.action = [action, oldPos]() {
+			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+			go->transform.SetPosition(oldPos);
+		};
+	}
+
 	position = pos;
 
 	if (gameObject)
@@ -36,6 +49,7 @@ void Transform::SetPosition(Math::Vector3D pos)
 		if (Physicalbody* pb = gameObject->physicalBody)
 			pb->UpdatePhysicsTransform(false);
 	}
+
 }
 
 void Transform::SetRotation(Math::Quaternion rot)

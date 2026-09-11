@@ -17,6 +17,10 @@ struct ENIGMA_API Transform
     Math::Quaternion worldRotation{};
     Math::Vector3D worldScale{ 1.0f, 1.0f, 1.0f };
 
+	Math::Vector3D GetPosition() const { return position; }
+	Math::Quaternion GetRotation() const { return rotation; }
+	Math::Vector3D GetScale() const { return scale; }
+
 	void SetPosition(Math::Vector3D pos);
 	void SetRotation(Math::Quaternion rot);
 	void SetRotation(Math::Vector3D rot);
