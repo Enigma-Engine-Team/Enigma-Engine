@@ -15,14 +15,14 @@ class ENIGMA_API Scene
 {
 public:
 	GameObject* AddGameObject(const std::string& name);
-	GameObject* AddGameObject(const UUID &uuid);
+	GameObject* AddGameObject(const Enigma::UUID &uuid);
 	void DeleteGameObject(GameObject* gameObject);
 	void DestroyGameObject(const GameObject* gameObject);
 	void LoadOnlyCurrentSceneAssets(Scene* scene, EnigmaRHI::IRenderInterface* rhi);
 	std::vector<GameObject*>& GetGameObjects();
 	GameObject* GetGameObject(int _index) const { return gameObjects[_index]; }
 	GameObject* GetGameObject(const std::string& name) const;
-	GameObject* GetGameObject(UUID uuid) const;
+	GameObject* GetGameObject(Enigma::UUID uuid) const;
 	EngineCamera* GetEngineCam() const { return camera; };
 	GameObject* GetGameCam() const { return gameCam; };
 	void SetGameCam(GameObject* newGameCam);

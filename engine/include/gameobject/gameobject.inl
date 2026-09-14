@@ -10,6 +10,7 @@ T* GameObject::AddComponent()
 		component->Create();
 		components.push_back(component);
 
+		DeleteCompAction(component);
 		return dynamic_cast<T*>(component);
 	}
 	Debug::LogError("Add component failed");

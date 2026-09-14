@@ -241,11 +241,11 @@ void UI::ViewportPanel::ComputeGizmos(Scene* scene, Math::Vector2D windowPos, Ma
 		selectedGameObject->SetTransform(localPos, localRot, localScale);
 
 		if (Physicalbody* pb = selectedGameObject->physicalBody)
-			selectedGameObject->physicalBody->UpdatePhysicsTransform(changedScale);
+			pb->UpdatePhysicsTransform(changedScale);
 
 		for (GameObject* child : selectedGameObject->GetChildren())
 		{
-			if (Physicalbody* pb = selectedGameObject->physicalBody)
+			if (Physicalbody* pb = child->physicalBody)
 				pb->UpdatePhysicsTransform(changedScale);
 		}
 	}

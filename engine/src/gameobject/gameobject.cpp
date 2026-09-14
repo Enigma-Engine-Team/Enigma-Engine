@@ -8,6 +8,8 @@
 #include "components/text_mesh.h"
 #include "serialization/serializer.h"
 #include "utilities/shortcut.h"
+#include "window/input.h"
+#include "window/input_manager.h"
 
 RTTR_REGISTRATION
 {
@@ -44,11 +46,7 @@ IComponent* GameObject::AddComponentType(rttr::type type)
 	component->Create();
 	components.push_back(component);
 
-	Action action("Delete Component", {}, uuid);
-	action.action = [this, component]() {
-		DeleteComponent(component);
-	};
-	Shortcut::AddAction(action);
+	DeleteCompAction(component);
 
 	return component;
 }
@@ -67,15 +65,7 @@ IComponent* GameObject::GetComponentType(const rttr::type& type) const
 
 void GameObject::DeleteComponent(const IComponent* target)
 {
-	Action action("Restore Component", {}, uuid);
-	action.snapshot = nlohmann::json::object();
-	Serializer::GetInstance().RecursiveSerialize(target, action.snapshot);
-	action.action = [action]() {
-		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
-		Serializer::GetInstance().DeserializeComponent(go, action.snapshot);
-	};
-	Shortcut::AddAction(action);
-
+	RegisterCompAction(target);
 	DestroyComponent(target);
 }
 
@@ -186,6 +176,21 @@ void GameObject::SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::V
 
 void GameObject::SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vector3D scale)
 {
+	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
+	{
+		Math::Vector3D oldPos = transform.position;
+		Math::Vector3D oldRot = transform.rotation.ToEuler();
+		Math::Vector3D oldScale = transform.scale;
+
+		Action action("SetTransform", {}, uuid);
+		action.action = [action, oldPos, oldRot, oldScale]() {
+			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+			go->SetTransform(oldPos, oldRot, oldScale);
+		};
+		Shortcut::AddAction(action);
+	}
+
 	transform.position = pos;
 	transform.rotation = Math::Quaternion::FromEuler(quat);
 	transform.scale = scale;
@@ -193,6 +198,16 @@ void GameObject::SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vec
 
 void GameObject::SetParent(GameObject* _parent)
 {
+	Action action("SetParent", {}, uuid);
+	Enigma::UUID oldParentUUID = parent ? parent->GetUUID() : Enigma::UUID();
+	action.action = [action, oldParentUUID]()
+	{
+		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+		GameObject* oldParent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(oldParentUUID);
+		go->SetParent(oldParent);
+	};
+	Shortcut::AddAction(action);
+
 	DetachFromParent();
 	parent = _parent;
 }
@@ -277,6 +292,27 @@ bool GameObject::IsAncestorOf(const GameObject* other) const
 		current = current->parent;
 	}
 	return false;
+}
+
+void GameObject::RegisterCompAction(const IComponent* component) const
+{
+	Action action("Restore Component", {}, uuid);
+	action.snapshot = nlohmann::json::object();
+	Serializer::GetInstance().RecursiveSerialize(component, action.snapshot);
+	action.action = [action]() {
+		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+		Serializer::GetInstance().DeserializeComponent(go, action.snapshot);
+	};
+	Shortcut::AddAction(action);
+}
+
+void GameObject::DeleteCompAction(IComponent *component)
+{
+	Action action("Delete Component", {}, uuid);
+	action.action = [this, component]() {
+		DeleteComponent(component);
+	};
+	Shortcut::AddAction(action);
 }
 
 GameObject::GameObject()

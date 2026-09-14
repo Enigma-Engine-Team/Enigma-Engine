@@ -14,14 +14,14 @@ enum ActionContext
     REDO
 };
 
-struct Action
+struct ENIGMA_API Action
 {
     Action();
-    Action(const std::string& actionName, const std::function<void()>& action, const UUID& goID, const nlohmann::json& snapshot = {});
+    Action(const std::string& actionName, const std::function<void()>& action, const Enigma::UUID& goID, const nlohmann::json& snapshot = {});
     std::string actionName;
     std::function<void()> action;
     nlohmann::json snapshot;
-    UUID goID;
+    Enigma::UUID goID;
 };
 
 class ENIGMA_API Shortcut

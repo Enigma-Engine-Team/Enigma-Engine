@@ -32,7 +32,7 @@ void GameManager::PlaceVehicle(GameObject* go)
     VehicleHandler* vHandler = go->AddComponent<VehicleHandler>();
     vHandler->Init(this->gameObject);
     
-    go->transform.SetRotation(Vector3D(180.f, 90.f, 180.f));
+    go->transform.SetRotationToEuler(Vector3D(180.f, 90.f, 180.f));
     if (Network::GetInstance().GetClient()->GetID() == 0)
         go->transform.SetPosition(Vector3D(100.62f, 6.83f, -183.75f));
     else

@@ -9,8 +9,8 @@ RTTR_REGISTRATION
 {
 	rttr::registration::class_<Transform>("Transform")
 		 .property("position", &Transform::GetPosition, &Transform::SetPosition)
-		 .property("rotation", &Transform::rotation)
-		 .property("scale", &Transform::scale);
+		 .property("rotation", &Transform::GetRotation, &Transform::SetRotation)
+		 .property("scale", &Transform::GetScale, &Transform::SetScale);
 }
 
 Transform::Transform(Math::Vector3D pos, Math::Quaternion rot, Math::Vector3D scale)
@@ -23,13 +23,14 @@ Transform::Transform(Math::Vector3D pos, Math::Quaternion rot, Math::Vector3D sc
 Transform::Transform(Math::Vector3D pos, Math::Vector3D rot, Math::Vector3D scale)
 {
 	SetPosition(pos);
-	SetRotation(rot);
+	SetRotationToEuler(rot);
 	SetScale(scale);
 }
 
 void Transform::SetPosition(Math::Vector3D pos)
 {
-	if (InputManager::GetMouseButtonUp(MOUSE_BUTTON_LEFT))
+	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
 	{
 		Math::Vector3D oldPos = position;
 		Action action("SetPosition", {}, gameObject->GetUUID());
@@ -37,6 +38,7 @@ void Transform::SetPosition(Math::Vector3D pos)
 			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
 			go->transform.SetPosition(oldPos);
 		};
+		Shortcut::AddAction(action);
 	}
 
 	position = pos;
@@ -49,11 +51,22 @@ void Transform::SetPosition(Math::Vector3D pos)
 		if (Physicalbody* pb = gameObject->physicalBody)
 			pb->UpdatePhysicsTransform(false);
 	}
-
 }
 
-void Transform::SetRotation(Math::Quaternion rot)
+void Transform::SetRotation(const Math::Quaternion rot)
 {
+	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
+	{
+		Math::Quaternion oldRot = rotation;
+		Action action("SetRotationToEuler", {}, gameObject->GetUUID());
+		action.action = [action, oldRot]() {
+			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+			go->transform.SetRotation(oldRot);
+		};
+		Shortcut::AddAction(action);
+	}
+
 	rotation = rot;
 
 	if (gameObject)
@@ -66,14 +79,38 @@ void Transform::SetRotation(Math::Quaternion rot)
 	}
 }
 
-void Transform::SetRotation(Math::Vector3D rot)
+void Transform::SetRotationToEuler(Math::Vector3D rot)
 {
+	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
+	{
+		Math::Quaternion oldRot = rotation;
+		Action action("SetRotationToEuler", {}, gameObject->GetUUID());
+		action.action = [action, oldRot]() {
+			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+			go->transform.SetRotation(oldRot);
+		};
+		Shortcut::AddAction(action);
+	}
+
 	Math::Quaternion rotQuat = Math::Quaternion::FromEuler(rot);
 	SetRotation(rotQuat);
 }
 
 void Transform::SetScale(Math::Vector3D _scale)
 {
+	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
+	{
+		Math::Vector3D oldScale = scale;
+		Action action("SetScale", {}, gameObject->GetUUID());
+		action.action = [action, oldScale]() {
+			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+			go->transform.SetScale(oldScale);
+		};
+		Shortcut::AddAction(action);
+	}
+
 	scale = _scale;
 
 	if (gameObject)
@@ -82,7 +119,7 @@ void Transform::SetScale(Math::Vector3D _scale)
 			SceneGraph::GetInstance().UpdateParenting(gameObject, gameObject->GetParent()->transform.global);
 
 		if (Physicalbody* pb = gameObject->physicalBody)
-			pb->UpdatePhysicsTransform(false);
+			pb->UpdatePhysicsTransform(true);
 	}
 }
 

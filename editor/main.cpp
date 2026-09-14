@@ -39,14 +39,10 @@ int main()
 
 	engine.CreateContext();
 
-	if (!InputManager::GetMouseButtonDown(MOUSE_BUTTON_RIGHT))
-	{
-		Shortcut::Clear();
-	}
-
 	Serializer::GetInstance().DeserializeScene(scene);
 	scene->LoadOnlyCurrentSceneAssets(scene, engine.GetRHI());
 	scene->RecreateModelsLoaded(engine.GetRHI());
+	Shortcut::Clear();
 
 	ScriptManager& scriptManager = ScriptManager::GetInstance();
 	SoundManager& soundManager = SoundManager::GetInstance();

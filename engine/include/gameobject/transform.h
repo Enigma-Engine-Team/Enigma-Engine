@@ -19,11 +19,12 @@ struct ENIGMA_API Transform
 
 	Math::Vector3D GetPosition() const { return position; }
 	Math::Quaternion GetRotation() const { return rotation; }
+	Math::Vector3D GetRotationToEuler() { return rotation.ToEuler(); }
 	Math::Vector3D GetScale() const { return scale; }
 
 	void SetPosition(Math::Vector3D pos);
 	void SetRotation(Math::Quaternion rot);
-	void SetRotation(Math::Vector3D rot);
+	void SetRotationToEuler(Math::Vector3D rot);
 	void SetScale(Math::Vector3D _scale);
 
     void ExtractPositionFromWorld();

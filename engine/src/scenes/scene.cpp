@@ -71,7 +71,7 @@ GameObject* Scene::AddGameObject(const std::string& name)
 	return newGameObject;
 }
 
-GameObject* Scene::AddGameObject(const UUID& uuid)
+GameObject* Scene::AddGameObject(const Enigma::UUID& uuid)
 {
 	GameObject* newGameObject = new GameObject();
 	newGameObject->uuid = uuid;
@@ -187,7 +187,7 @@ GameObject* Scene::GetGameObject(const std::string& name) const
 	return nullptr;
 }
 
-GameObject* Scene::GetGameObject(UUID uuid) const
+GameObject* Scene::GetGameObject(Enigma::UUID uuid) const
 {
 	for (const GameObject* gameObject : gameObjects)
 	{

@@ -6,10 +6,10 @@ ActionContext Shortcut::context = UNDO;
 
 Action::Action()
 {
-    this->goID = UUID(0, 0);
+    this->goID = Enigma::UUID(0, 0);
 }
 
-Action::Action(const std::string& actionName, const std::function<void()>& action, const UUID& goID, const nlohmann::json& snapshot)
+Action::Action(const std::string& actionName, const std::function<void()>& action, const Enigma::UUID& goID, const nlohmann::json& snapshot)
 {
     this->actionName = actionName;
     this->action = action;

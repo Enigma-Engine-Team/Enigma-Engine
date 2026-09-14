@@ -8,7 +8,7 @@
 #include "components/icomponent.h"
 #include "physics/physicalBody.h"
 #include "transform.h"
-#include "../utilities/macro.h"
+#include "utilities/macro.h"
 #include "utilities/utility.h"
 
 enum class ELayer
@@ -52,7 +52,7 @@ public:
 	void SetName(std::string name);
 	std::string GetName();
 
-	UUID GetUUID() const { return uuid; }
+	Enigma::UUID GetUUID() const { return uuid; }
 
 	void Destroy();
 	void SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::Vector3D scale);
@@ -74,6 +74,8 @@ public:
 	bool IsAncestorOf(const GameObject* other) const;
 
 private:
+	void RegisterCompAction(const IComponent *component) const;
+	void DeleteCompAction(IComponent *component);
 	RTTR_REGISTRATION_FRIEND
 	std::string name;
 	std::vector<IComponent*> components;
@@ -82,7 +84,7 @@ private:
 	ELayer layer = ELayer::OBJECT;
 	bool isInstancePrefab = false;
 	std::string prefabPath = "";
-	UUID uuid;
+	Enigma::UUID uuid;
 
 	GameObject();
 	~GameObject() = default;

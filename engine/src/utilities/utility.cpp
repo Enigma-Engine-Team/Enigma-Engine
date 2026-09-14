@@ -5,11 +5,11 @@
 
 RTTR_REGISTRATION
 {
-    rttr::registration::class_<UUID>("UUID")
-         .property("id", &UUID::id);
+    rttr::registration::class_<Enigma::UUID>("UUID")
+         .property("id", &Enigma::UUID::id);
 }
 
-UUID::UUID()
+Enigma::UUID::UUID()
 {
     static std::random_device rd;
     static std::mt19937_64 generator(rd());
@@ -19,14 +19,14 @@ UUID::UUID()
     id = ToString(high, low);
 }
 
-UUID::UUID(uint64_t high, uint64_t low)
+Enigma::UUID::UUID(uint64_t high, uint64_t low)
 {
     this->high = high;
     this->low = low;
     id = ToString(high, low);
 }
 
-std::string UUID::ToString(uint64_t high, uint64_t low)
+std::string Enigma::UUID::ToString(uint64_t high, uint64_t low)
 {
     std::stringstream ss;
     ss << std::hex << std::setiosflags(std::ios::uppercase) << std::setw(16) << std::setfill('0') << high
@@ -34,12 +34,12 @@ std::string UUID::ToString(uint64_t high, uint64_t low)
     return ss.str();
 }
 
-std::string UUID::ToString() const
+std::string Enigma::UUID::ToString() const
 {
     return ToString(high, low);
 }
 
-UUID UUID::ToUUID(const std::string& str)
+Enigma::UUID Enigma::UUID::ToUUID(const std::string& str)
 {
     if (str.length() != 32)
     {

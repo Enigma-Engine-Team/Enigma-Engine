@@ -165,22 +165,22 @@ void UI::InspectorPanel::DrawTransform(GameObject* currentGameOject)
 
 	if (UI::CollapsingHeaderImage("Transform", UIEditor::engine.GetEditorTexture("gizmo_icon.png"), flag))
 	{
-		Transform& transform = currentGameObject->transform;
+		Transform transform = currentGameObject->transform;
 		Math::Vector3D eulerRotation = transform.rotation.ToEuler();
 
 		ImGui::Indent();
 
 		if (CreateVector3Control("Position", &transform.position))
-			transform.SetPosition(transform.position);
+			currentGameObject->transform.SetPosition(transform.position);
 
 		if (CreateVector3Control("Rotation", &eulerRotation))
 		{
 			transform.rotation = Math::Quaternion::FromEuler(eulerRotation);
-			transform.SetRotation(transform.rotation);
+			currentGameObject->transform.SetRotation(transform.rotation);
 		}
 
 		if (CreateVector3Control("Scale", &transform.scale, true))
-			transform.SetScale(transform.scale);
+			currentGameObject->transform.SetScale(transform.scale);
 
 		ImGui::Unindent();
 	}

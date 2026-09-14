@@ -19,7 +19,6 @@ bool UI::CreateVector3Control(const char* label, Math::Vector3D* vec, bool activ
 	float normalSliderWidth = 80.0f;
 	const float minSliderWidth = 30.0f;
 	float normalSpaceTextSlider = 10.0f;
-	const float minSpaceTextSlider = 4.0f;
 
 	const char* axisLabels[3] = { "X", "Y", "Z" };
 	float* components[3] = { &vec->x, &vec->y, &vec->z };

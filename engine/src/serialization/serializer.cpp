@@ -177,9 +177,9 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
             {
                 j[objName][prop_name] = val.get_value<std::string>();
             }
-            else if (val_type == rttr::type::get<UUID>())
+            else if (val_type == rttr::type::get<Enigma::UUID>())
             {
-                j[objName][prop_name] = val.get_value<UUID>().ToString();
+                j[objName][prop_name] = val.get_value<Enigma::UUID>().ToString();
             }
             else
             {
@@ -202,7 +202,7 @@ void Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, Gam
     std::string goName = goData["name"];
     std::string goUUID = goData["uuid"];
 
-    GameObject* gameObject = scene->AddGameObject(UUID::ToUUID(goUUID));
+    GameObject* gameObject = scene->AddGameObject(Enigma::UUID::ToUUID(goUUID));
     gameObject->SetName(goName);
     go->AddChild(gameObject);
 
@@ -300,7 +300,7 @@ void Serializer::AttachedScript(Scene* scene)
 
     for (auto& [goName, goData] : obj.items())
     {
-        UUID uuid = UUID::ToUUID(goData["uuid"].get<std::string>());
+        Enigma::UUID uuid = Enigma::UUID::ToUUID(goData["uuid"].get<std::string>());
 
         GameObject* go = scene->GetGameObject(uuid);
         if (!go)
@@ -361,7 +361,7 @@ void Serializer::RecursiveSetProperties(rttr::instance obj, const nlohmann::json
                 GameObject* referencedGameObject = nullptr;
                 if (val.is_object() && val.contains("GameObject") && val["GameObject"].contains("uuid"))
                 {
-                    UUID uuid = UUID::ToUUID(val["GameObject"]["uuid"].get<std::string>());
+                    Enigma::UUID uuid = Enigma::UUID::ToUUID(val["GameObject"]["uuid"].get<std::string>());
                     if (currentSceneContext)
                         referencedGameObject = currentSceneContext->GetGameObject(uuid);
                 }
