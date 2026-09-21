@@ -10,6 +10,9 @@
 #include "events/event.h"
 #include <chrono>
 
+#include "AI/aitool.h"
+#include "utilities/shortcut.h"
+
 int main()
 {
 	Window window;
@@ -18,6 +21,7 @@ int main()
 
 	window.Create(1920, 1080, "EnigmaEngine");
 	window.SetWindowIcon("internal_assets/logos/LogoDark.png");
+	InputManager::SetCurrentWindow(&window);
 
 	Physics& physics = Physics::GetInstance();
 	physics.Create();
@@ -38,12 +42,14 @@ int main()
 	Serializer::GetInstance().DeserializeScene(scene);
 	scene->LoadOnlyCurrentSceneAssets(scene, engine.GetRHI());
 	scene->RecreateModelsLoaded(engine.GetRHI());
+	Shortcut::Clear();
 
 	ScriptManager& scriptManager = ScriptManager::GetInstance();
 	SoundManager& soundManager = SoundManager::GetInstance();
 	Timer timer;
 
 	engine.CreateRenderer(&window);
+	engine.LinkDll();
 
 #ifndef BUILD_MODE
 	UI::UIEditor ui;
@@ -57,6 +63,7 @@ int main()
 	}
 
 	Network::GetInstance().Create("config\\network.ini");
+	Shortcut::Clear();
 
 	while (!window.ShouldClose())
 	{

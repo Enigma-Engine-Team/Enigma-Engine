@@ -8,7 +8,8 @@
 #include "components/icomponent.h"
 #include "physics/physicalBody.h"
 #include "transform.h"
-#include "../utilities/macro.h"
+#include "utilities/macro.h"
+#include "utilities/utility.h"
 
 enum class ELayer
 {
@@ -40,19 +41,18 @@ public:
 	IComponent* GetComponentType(const rttr::type &type) const;
 
 	std::vector<IComponent*> GetComponents();
-
-	template<typename T>
-	requires std::derived_from<T, IComponent>
-	void DeleteComponent();
-
-	void DeleteComponent(IComponent* target);
+	void DeleteComponent(const IComponent* target);
+	void DestroyComponent(const IComponent* target);
 
 	Scripting::IScript* AddScript(const std::string& scriptName);
 	void DeleteScript(const std::string& scriptName);
-	
+	void DeleteScripts();
+
 	void SetInstancePrefab(std::string path);
 	void SetName(std::string name);
 	std::string GetName();
+
+	Enigma::UUID GetUUID() const { return uuid; }
 
 	void Destroy();
 	void SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::Vector3D scale);
@@ -71,10 +71,11 @@ public:
 	void SetLayer(ELayer newLayer) { layer = newLayer; };
 	void RebuildLayer();
 	bool IsInstancePrefab();
-	bool GetPrefabPath();
 	bool IsAncestorOf(const GameObject* other) const;
 
 private:
+	void RegisterCompAction(const IComponent *component) const;
+	void DeleteCompAction(IComponent *component);
 	RTTR_REGISTRATION_FRIEND
 	std::string name;
 	std::vector<IComponent*> components;
@@ -83,6 +84,7 @@ private:
 	ELayer layer = ELayer::OBJECT;
 	bool isInstancePrefab = false;
 	std::string prefabPath = "";
+	Enigma::UUID uuid;
 
 	GameObject();
 	~GameObject() = default;

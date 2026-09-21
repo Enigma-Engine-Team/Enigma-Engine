@@ -27,15 +27,16 @@ public:
 
 	void AttachedScript(Scene* scene);
 
+	void RecursiveSerialize(const rttr::instance& instance, nlohmann::json& j);
+	void RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go);
+	void DeserializeComponent(GameObject* gameObject, const nlohmann::json& component);
 private:
 	Serializer() = default;
 	~Serializer() = default;
 
-	void RecursiveSerialize(const rttr::instance& instance, nlohmann::json& j);
-	void RecursiveDeserialize(Scene* scene, nlohmann::json& j, GameObject* go);
-	void SetScriptElement(nlohmann::json& j, const std::string& scriptName, const std::string& goName);
-	void SetScriptElement(const rttr::instance& instance, const std::string& goName);
-	void PushScriptElement(const std::string& goName, const nlohmann::json& scriptData);
+	void SetScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& goName, const std::string& uuid);
+	void SetScriptElement(const rttr::instance& instance, const std::string& goName, const std::string& uuid);
+	void PushScriptElement(const std::string& goName, const std::string& uuid, const nlohmann::json& scriptData);
 	void AttachScriptData(GameObject* go, const nlohmann::json& scriptData, const nlohmann::json& scriptRoot);
 	void RecursiveSetProperties(rttr::instance obj, const nlohmann::json& j);
 

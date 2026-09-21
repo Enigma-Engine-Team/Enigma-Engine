@@ -19,7 +19,7 @@ void UI::InspectorPanel::Draw()
 {
 	ImGui::Begin("Inspector");
 
-	currentGameObject = UIEditor::engine.GetRenderer()->GetSelectedGameObject();
+	currentGameObject = Engine::GetRenderer()->GetSelectedGameObject();
 
 	if (currentGameObject)
 	{
@@ -165,21 +165,22 @@ void UI::InspectorPanel::DrawTransform(GameObject* currentGameOject)
 
 	if (UI::CollapsingHeaderImage("Transform", UIEditor::engine.GetEditorTexture("gizmo_icon.png"), flag))
 	{
-		Transform& transform = currentGameObject->transform;
-		Math::Vector3D eulerRotation = transform.GetRotation().ToEuler();
+		Transform transform = currentGameObject->transform;
+		Math::Vector3D eulerRotation = transform.rotation.ToEuler();
 
 		ImGui::Indent();
 
-		Math::Vector3D pos = transform.GetPosition();
-		if (CreateVector3Control("Position", &pos))
-			transform.SetPosition(pos);
+		if (CreateVector3Control("Position", &transform.position))
+			currentGameObject->transform.SetPosition(transform.position);
 
 		if (CreateVector3Control("Rotation", &eulerRotation))
-			transform.SetRotation(eulerRotation);
+		{
+			transform.rotation = Math::Quaternion::FromEuler(eulerRotation);
+			currentGameObject->transform.SetRotation(transform.rotation);
+		}
 
-		Math::Vector3D scale = transform.GetScale();
-		if (CreateVector3Control("Scale", &scale, true))
-			transform.SetScale(scale);
+		if (CreateVector3Control("Scale", &transform.scale, true))
+			currentGameObject->transform.SetScale(transform.scale);
 
 		ImGui::Unindent();
 	}

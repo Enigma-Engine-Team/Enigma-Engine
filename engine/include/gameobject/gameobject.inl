@@ -10,6 +10,7 @@ T* GameObject::AddComponent()
 		component->Create();
 		components.push_back(component);
 
+		DeleteCompAction(component);
 		return dynamic_cast<T*>(component);
 	}
 	Debug::LogError("Add component failed");
@@ -47,22 +48,4 @@ T* GameObject::GetComponentInChildren()
 inline std::vector<IComponent*> GameObject::GetComponents()
 {
 	return components;
-}
-
-template<typename T>
-requires std::derived_from<T, IComponent>
-void GameObject::DeleteComponent()
-{
-	auto it = components.begin();
-	for (IComponent* component : components)
-	{
-		if (typeid(*component) == typeid(T))
-		{
-			delete component;
-			components.erase(it);
-			return;
-		}
-		++it;
-	}
-	Debug::LogError("Delete component failed");
 }

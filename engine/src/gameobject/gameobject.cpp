@@ -6,16 +6,127 @@
 #include "scripting/scripting.h"
 #include "components/text.h"
 #include "components/text_mesh.h"
+#include "serialization/serializer.h"
+#include "utilities/shortcut.h"
+#include "window/input.h"
+#include "window/input_manager.h"
 
 RTTR_REGISTRATION
 {
 	rttr::registration::class_<GameObject>("GameObject")
+		 .property("uuid", &GameObject::uuid)
 		 .property("name", &GameObject::name)
 		 .property("isInstancePrefab", &GameObject::isInstancePrefab)
 		 .property("prefabPath", &GameObject::prefabPath)
 		 .property("transform", &GameObject::transform)
 		 .property("components", &GameObject::components)
 		 .property("children", &GameObject::children);
+}
+
+IComponent* GameObject::AddComponentType(rttr::type type)
+{
+	for (IComponent* component : components)
+	{
+		if (rttr::type::get(*component) == type)
+		{
+			Debug::LogWarning("Cannot add component already exist");
+			return component;
+		}
+	}
+
+	rttr::variant v = type.create();
+	IComponent* component = v.get_value<IComponent*>();
+
+	if (!component)
+	{
+		return nullptr;
+	}
+
+	component->SetParent(this);
+	component->Create();
+	components.push_back(component);
+
+	DeleteCompAction(component);
+
+	return component;
+}
+
+IComponent* GameObject::GetComponentType(const rttr::type& type) const
+{
+	for (IComponent* component : components)
+	{
+		if (rttr::type::get(*component) == type)
+		{
+			return component;
+		}
+	}
+	return nullptr;
+}
+
+void GameObject::DeleteComponent(const IComponent* target)
+{
+	RegisterCompAction(target);
+	DestroyComponent(target);
+}
+
+void GameObject::DestroyComponent(const IComponent *target)
+{
+	const auto it = std::ranges::find(components, target);
+	if (it == components.end())
+		return;
+
+	(*it)->Destroy();
+	delete *it;
+	components.erase(it);
+}
+
+Scripting::IScript* GameObject::AddScript(const std::string& scriptName)
+{
+	Scripting::IScript* script = Scripting::ScriptRegistry::GetInstance().Create(scriptName);
+	if (!script)
+	{
+		return nullptr;
+	}
+
+	script->SetParent(this);
+	script->Create();
+	components.push_back(script);
+	return script;
+}
+
+void GameObject::DeleteScript(const std::string& scriptName)
+{
+	components.erase(std::ranges::remove_if(components, [&](IComponent* component)
+	{
+		Scripting::IScript* script = dynamic_cast<Scripting::IScript*>(component);
+		if (script && script->GetScriptName() == scriptName)
+		{
+			script->Destroy();
+			delete script;
+			Debug::LogSuccess("Deleted script " + scriptName + " from GameObject " + name);
+			return true;
+		}
+		return false;
+	}).begin(), components.end());
+}
+
+void GameObject::DeleteScripts()
+{
+	for (int i = components.size() - 1; i >= 0; i--)
+	{
+		if (Scripting::IScript* script = dynamic_cast<Scripting::IScript*>(components[i]))
+		{
+			script->Destroy();
+			delete script;
+			components.erase(components.begin() + i);
+		}
+	}
+}
+
+void GameObject::SetInstancePrefab(std::string path)
+{
+	isInstancePrefab = true;
+	prefabPath = path;
 }
 
 void GameObject::SetName(std::string _name)
@@ -26,20 +137,6 @@ void GameObject::SetName(std::string _name)
 std::string GameObject::GetName()
 {
 	return name;
-}
-
-void GameObject::SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::Vector3D scale)
-{
-	transform.SetPosition(pos);
-	transform.SetRotation(quat);
-	transform.SetScale(scale);
-}
-
-void GameObject::SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vector3D scale)
-{
-	transform.SetPosition(pos);
-	transform.SetRotation(Math::Quaternion::FromEuler(quat));
-	transform.SetScale(scale);
 }
 
 void GameObject::Destroy()
@@ -70,8 +167,49 @@ void GameObject::Destroy()
 	}
 }
 
+void GameObject::SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::Vector3D scale)
+{
+	transform.position = pos;
+	transform.rotation = quat;
+	transform.scale = scale;
+}
+
+void GameObject::SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vector3D scale)
+{
+	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
+	{
+		Math::Vector3D oldPos = transform.position;
+		Math::Vector3D oldRot = transform.rotation.ToEuler();
+		Math::Vector3D oldScale = transform.scale;
+
+		Action action("SetTransform", {}, uuid);
+		action.action = [action, oldPos, oldRot, oldScale]() {
+			GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+			go->SetTransform(oldPos, oldRot, oldScale);
+		};
+		Shortcut::AddAction(action);
+	}
+
+	transform.position = pos;
+	transform.rotation = Math::Quaternion::FromEuler(quat);
+	transform.scale = scale;
+}
+
 void GameObject::SetParent(GameObject* _parent)
 {
+	Action action("SetParent", {}, uuid);
+	Enigma::UUID oldParentUUID = parent ? parent->GetUUID() : Enigma::UUID();
+	action.action = [action, oldParentUUID]()
+	{
+		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+		if (GameObject* oldParent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(oldParentUUID))
+			oldParent->AddChild(go);
+		else
+			SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0)->AddChild(go);
+	};
+	Shortcut::AddAction(action);
+
 	DetachFromParent();
 	parent = _parent;
 }
@@ -93,33 +231,27 @@ void GameObject::AddChild(GameObject* newChild)
 			oldParent->AddChild(this);
 	}
 
-	children.push_back(newChild);
+	Transform worldTransform = newChild->transform;
 
-	newChild->transform.SetPosition(newChild->transform.GetPosition() - this->transform.GetPosition());
-	newChild->transform.SetRotation(this->transform.GetRotation().Inverse() * newChild->transform.GetRotation());
-	newChild->transform.SetScale(newChild->transform.GetScale() / this->transform.GetScale());
+	if (GameObject* oldParent = newChild->parent)
+	{
+		worldTransform.position = oldParent->transform.worldPosition + worldTransform.position * oldParent->transform.scale;
+		worldTransform.rotation = oldParent->transform.worldRotation * worldTransform.rotation;
+		worldTransform.scale = oldParent->transform.worldScale * worldTransform.scale;
+	}
+
+	newChild->transform.position = (worldTransform.worldPosition - this->transform.position) / this->transform.scale;
+	newChild->transform.rotation = this->transform.worldRotation.Inverse() * worldTransform.rotation;
+	newChild->transform.scale = worldTransform.worldScale / this->transform.scale;
 
 	newChild->SetParent(this);
-}
-
-bool GameObject::IsAncestorOf(const GameObject* other) const
-{
-	const GameObject* current = other->parent;
-	while (current)
-	{
-		if (current == this)
-			return true;
-		current = current->parent;
-	}
-	return false;
+	children.push_back(newChild);
 }
 
 void GameObject::RemoveChild(GameObject* child)
 {
 	if (children.empty())
-	{
 		return;
-	}
 
 	auto it = std::find(children.begin(), children.end(), child);
 	if (it != children.end())
@@ -135,70 +267,6 @@ void GameObject::DetachFromParent()
 		if(parent->GetChildren().size() > 0)
 			parent->RemoveChild(this);
 	}
-}
-
-GameObject::GameObject()
-{
-	transform.gameObject = this;
-}
-
-Scripting::IScript* GameObject::AddScript(const std::string& scriptName)
-{
-	Scripting::IScript* script = Scripting::ScriptRegistry::GetInstance().Create(scriptName);
-	if (!script)
-	{
-		return nullptr;
-	}
-
-	script->SetParent(this);
-	script->Create();
-	components.push_back(script);
-	return script;
-}
-
-void GameObject::DeleteComponent(IComponent* target)
-{
-	auto it = std::find(components.begin(), components.end(), target);
-	if (it != components.end())
-	{
-		if (dynamic_cast<Scripting::IScript*>(*it))
-		{
-			DeleteScript(dynamic_cast<Scripting::IScript*>(*it)->GetScriptName());
-			return;
-		}
-		(*it)->Destroy();
-		delete *it;
-		components.erase(it);
-		return;
-	}
-	Debug::LogError("Delete component failed");
-}
-
-void GameObject::DeleteScript(const std::string& scriptName)
-{
-	components.erase(std::ranges::remove_if(components, [&](IComponent* component)
-	{
-		Scripting::IScript* script = dynamic_cast<Scripting::IScript*>(component);
-		if (script && script->GetScriptName() == scriptName)
-		{
-			script->Destroy();
-			delete script;
-			Debug::LogSuccess("Deleted script " + scriptName + " from GameObject " + name);
-			return true;
-		}
-		return false;
-	}).begin(), components.end());
-}
-
-bool GameObject::IsInstancePrefab()
-{
-	return isInstancePrefab;
-}
-
-void GameObject::SetInstancePrefab(std::string path)
-{
-	isInstancePrefab = true;
-	prefabPath = path;
 }
 
 void GameObject::RebuildLayer()
@@ -217,40 +285,45 @@ void GameObject::RebuildLayer()
 	layer = ELayer::OBJECT;
 }
 
-IComponent* GameObject::AddComponentType(rttr::type type)
+bool GameObject::IsInstancePrefab()
 {
-	for (IComponent* component : components)
-	{
-		if (rttr::type::get(*component) == type)
-		{
-			Debug::LogWarning("Cannot add component already exist");
-			return component;
-		}
-	}
-
-	rttr::variant v = type.create();
-	IComponent* component = v.get_value<IComponent*>();
-
-	if (!component)
-	{
-		return nullptr;
-	}
-
-	component->SetParent(this);
-	component->Create();
-	components.push_back(component);
-
-	return component;
+	return isInstancePrefab;
 }
 
-IComponent* GameObject::GetComponentType(const rttr::type& type) const
+bool GameObject::IsAncestorOf(const GameObject* other) const
 {
-	for (IComponent* component : components)
+	const GameObject* current = other->parent;
+	while (current)
 	{
-		if (rttr::type::get(*component) == type)
-		{
-			return component;
-		}
+		if (current == this)
+			return true;
+		current = current->parent;
 	}
-	return nullptr;
+	return false;
+}
+
+void GameObject::RegisterCompAction(const IComponent* component) const
+{
+	Action action("Restore Component", {}, uuid);
+	action.snapshot = nlohmann::json::object();
+	Serializer::GetInstance().RecursiveSerialize(component, action.snapshot);
+	action.action = [action]() {
+		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
+		Serializer::GetInstance().DeserializeComponent(go, action.snapshot);
+	};
+	Shortcut::AddAction(action);
+}
+
+void GameObject::DeleteCompAction(IComponent *component)
+{
+	Action action("Delete Component", {}, uuid);
+	action.action = [this, component]() {
+		DeleteComponent(component);
+	};
+	Shortcut::AddAction(action);
+}
+
+GameObject::GameObject()
+{
+	transform.gameObject = this;
 }

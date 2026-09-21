@@ -1,0 +1,1461 @@
+{
+    "EngineCamera": {
+        "camera": {
+            "Camera": {
+                "Exposure": 1,
+                "Orientation": {
+                    "Quaternion": {
+                        "w": 0.672400712966919,
+                        "x": -0.09300477802753448,
+                        "y": -0.7273958921432495,
+                        "z": -0.10061157494783401
+                    }
+                },
+                "Position": {
+                    "Vector3D": {
+                        "x": -17.46602439880371,
+                        "y": 12.910524368286133,
+                        "z": 30.168376922607422
+                    }
+                },
+                "Velocity": {
+                    "Vector3D": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                }
+            }
+        }
+    },
+    "gameObjects": [
+        {
+            "GameObject": {
+                "children": [
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.75040602684021,
+                                                        "y": 0.1835183948278427,
+                                                        "z": 0.3179320693016052
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.6144860982894897,
+                                                        "y": -0.1267412006855011,
+                                                        "z": -0.3179320693016052
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 0,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_7",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999999403953552,
+                                            "y": 1,
+                                            "z": 0.9999999403953552
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.7803190350532532,
+                                                        "y": 0.32001838088035583,
+                                                        "z": 0.35712409019470215
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.6238959431648254,
+                                                        "y": -0.1383015364408493,
+                                                        "z": -0.35712409019470215
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_8",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999999403953552,
+                                            "y": 0.9999999403953552,
+                                            "z": 0.9999999403953552
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.755555272102356,
+                                                        "y": 0.3341470956802368,
+                                                        "z": 0.34335750341415405
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.6129734516143799,
+                                                        "y": -0.13268457353115082,
+                                                        "z": -0.34335750341415405
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 2,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Collider",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.70710688829422,
+                                            "x": 0,
+                                            "y": 0.7071066498756409,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999963045120239,
+                                            "y": 1,
+                                            "z": 0.9999963045120239
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.28913336992263794,
+                                                        "y": 0.2976871132850647,
+                                                        "z": 0.2765349745750427
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.5404918193817139,
+                                                        "y": 0.1627444624900818,
+                                                        "z": -0.2765349745750427
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 3,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_10",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999999403953552,
+                                            "y": 1,
+                                            "z": 0.9999999403953552
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.7246168255805969,
+                                                        "y": 0.08638735115528107,
+                                                        "z": 0.2539784014225006
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.7046087384223938,
+                                                        "y": 0.01698945090174675,
+                                                        "z": -0.2539784014225006
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 4,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_11",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999999403953552,
+                                            "y": 1,
+                                            "z": 0.9999999403953552
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.539154052734375,
+                                                        "y": 0.17484962940216064,
+                                                        "z": 0.28420111536979675
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.5757060050964355,
+                                                        "y": 0.0468534454703331,
+                                                        "z": -0.28420111536979675
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 5,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_12",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999999403953552,
+                                            "y": 1,
+                                            "z": 0.9999999403953552
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.5379356145858765,
+                                                        "y": 0.1673780381679535,
+                                                        "z": 0.2620881497859955
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.5575760006904602,
+                                                        "y": 0.1614566445350647,
+                                                        "z": -0.2620881497859955
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 6,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_13",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.9999999403953552,
+                                            "y": 1,
+                                            "z": 0.9999999403953552
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.33402371406555176,
+                                                        "y": 0.100218765437603,
+                                                        "z": 0.4730859100818634
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -0.6602835059165955,
+                                                        "y": -0.2260412573814392,
+                                                        "z": -0.4730859100818634
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 7,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_47",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.7350345253944397,
+                                            "y": 0.7350345849990845,
+                                            "z": 0.7350345253944397
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.8274658918380737,
+                                                        "y": 0.08251093327999115,
+                                                        "z": 0.4589948356151581
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": 0.50120609998703,
+                                                        "y": -0.24374909698963165,
+                                                        "z": -0.4589948356151581
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 8,
+                                        "modelName": "fennec.gltf"
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Object_49",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.7071068286895752,
+                                            "x": 0,
+                                            "y": 0.7071067094802856,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.7350345253944397,
+                                            "y": 0.7350345849990845,
+                                            "z": 0.7350345253944397
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "GameCamera": {
+                                        "Camera Mode": "",
+                                        "Exposure": 1,
+                                        "FOV": 90,
+                                        "Far": 1000,
+                                        "Near": 0.10000000149011612
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "Camera",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 8.940696716308594e-8,
+                                            "y": 1.2400000095367432,
+                                            "z": 1.9600000381469727
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 0.9875102639198303,
+                                            "x": -0.15755484998226166,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.3333333432674408,
+                                            "y": 0.3333333432674408,
+                                            "z": 0.3333333432674408
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "components": [
+                    {
+                        "Vehicle Controller": {
+                            "Angular Damping": 0.20000000298023224,
+                            "Automatic": true,
+                            "Back Stiffness": 800,
+                            "Break Force": 4000,
+                            "Collider": "Collider",
+                            "Damping": 0.699999988079071,
+                            "Drive Type": 1,
+                            "Frequency": 6,
+                            "Front Stiffness": 1500,
+                            "Inertia Moment": 0.5,
+                            "Mass": 600,
+                            "Max Engine Torque": 500,
+                            "Max RPM": 7000,
+                            "Min RPM": 1000,
+                            "Roll Angle": 9.999998092651367,
+                            "Steering Angle": 30,
+                            "WheelOffset": {
+                                "Vector3D": {
+                                    "x": 0,
+                                    "y": 0.3499999940395355,
+                                    "z": -0.17000000178813934
+                                }
+                            },
+                            "halfVehicleWidth": 0.8999999761581421,
+                            "halfVehicle_Length": 1.25,
+                            "wheelRadius": 0.3499999940395355,
+                            "wheelWidth": 0.30000001192092896
+                        }
+                    }
+                ],
+                "isInstancePrefab": false,
+                "name": "fennec",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 0.7603563070297241,
+                                "y": 4.556307792663574,
+                                "z": 35.94481658935547
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1,
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 3,
+                                "y": 3,
+                                "z": 3
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "GameObject": {
+                "children": [
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 141.64744567871094,
+                                                        "y": 19.089263916015625,
+                                                        "z": -212.18185424804688
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -141.8644561767578,
+                                                        "y": 1.5683746337890625,
+                                                        "z": -260.3915100097656
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1590,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_goal_inside1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 147.00735473632812,
+                                                        "y": 1.846017837524414,
+                                                        "z": -212.67481994628906
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -147.22439575195312,
+                                                        "y": 1.5472755432128906,
+                                                        "z": -259.89837646484375
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1591,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_goal_Ground1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 130.12521362304688,
+                                                        "y": 20.5509033203125,
+                                                        "z": -210.83499145507812
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -130.34222412109375,
+                                                        "y": 1.5472755432128906,
+                                                        "z": -261.2301330566406
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1592,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_goalRing1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 148.97373962402344,
+                                                        "y": 19.089263916015625,
+                                                        "z": -212.18185424804688
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -149.1907501220703,
+                                                        "y": 8.682743072509766,
+                                                        "z": -260.3915100097656
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1593,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_goal_inner1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 148.97373962402344,
+                                                        "y": 19.089263916015625,
+                                                        "z": -212.18185424804688
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -149.1907501220703,
+                                                        "y": 1.6009712219238281,
+                                                        "z": -260.3915100097656
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1594,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_goal_innerDown1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 127.28482055664062,
+                                                        "y": 46.49408721923828,
+                                                        "z": -151.9807586669922
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -127.50182342529297,
+                                                        "y": 8.607559204101562,
+                                                        "z": -320.59234619140625
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1595,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_play_Glassdome1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 127.26998138427734,
+                                                        "y": 8.641855239868164,
+                                                        "z": -152.0745391845703
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -127.48699951171875,
+                                                        "y": 1.5472736358642578,
+                                                        "z": -320.4986877441406
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1596,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_play_lambert1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 126.79383087158203,
+                                                        "y": 8.56224250793457,
+                                                        "z": -152.23394775390625
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -127.01084899902344,
+                                                        "y": 5.775529861450195,
+                                                        "z": -320.3393249511719
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1597,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_play_rampTop1_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "GameObject": {
+                            "children": [],
+                            "components": [
+                                {
+                                    "MeshRenderer": {
+                                        "Cast Shadows": true,
+                                        "aabb": {
+                                            "AABB": {
+                                                "maxCorner": {
+                                                    "Vector3D": {
+                                                        "x": 126.88388061523438,
+                                                        "y": 44.554420471191406,
+                                                        "z": -152.130859375
+                                                    }
+                                                },
+                                                "minCorner": {
+                                                    "Vector3D": {
+                                                        "x": -127.10089874267578,
+                                                        "y": 1.5982379913330078,
+                                                        "z": -320.3861083984375
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "materialName": "DefaultMaterial",
+                                        "meshIndex": 1598,
+                                        "modelName": "scene.gltf"
+                                    }
+                                },
+                                {
+                                    "MeshCollider": {
+                                        "Collider Position": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        },
+                                        "Collider Rotation": {
+                                            "Vector3D": {
+                                                "x": 0,
+                                                "y": 0,
+                                                "z": 0
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "isInstancePrefab": false,
+                            "name": "polySurface3408_play_ring02_0",
+                            "prefabPath": "",
+                            "transform": {
+                                "Transform": {
+                                    "position": {
+                                        "Vector3D": {
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 5.149937152862549
+                                        }
+                                    },
+                                    "rotation": {
+                                        "Quaternion": {
+                                            "w": 1,
+                                            "x": 0,
+                                            "y": 0,
+                                            "z": 0
+                                        }
+                                    },
+                                    "scale": {
+                                        "Vector3D": {
+                                            "x": 0.021796371787786484,
+                                            "y": 0.021796371787786484,
+                                            "z": 0.021796371787786484
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "components": [],
+                "isInstancePrefab": false,
+                "name": "scene",
+                "prefabPath": "",
+                "transform": {
+                    "Transform": {
+                        "position": {
+                            "Vector3D": {
+                                "x": 4.350131511688232,
+                                "y": 2.656832456588745,
+                                "z": 0.48262321949005127
+                            }
+                        },
+                        "rotation": {
+                            "Quaternion": {
+                                "w": 1,
+                                "x": 0,
+                                "y": 0,
+                                "z": 0
+                            }
+                        },
+                        "scale": {
+                            "Vector3D": {
+                                "x": 30,
+                                "y": 30,
+                                "z": 30
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "skyboxPath": "shaders/sky.hdr"
+}

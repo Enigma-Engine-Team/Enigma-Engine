@@ -19,7 +19,6 @@ bool UI::CreateVector3Control(const char* label, Math::Vector3D* vec, bool activ
 	float normalSliderWidth = 80.0f;
 	const float minSliderWidth = 30.0f;
 	float normalSpaceTextSlider = 10.0f;
-	const float minSpaceTextSlider = 4.0f;
 
 	const char* axisLabels[3] = { "X", "Y", "Z" };
 	float* components[3] = { &vec->x, &vec->y, &vec->z };
@@ -166,10 +165,10 @@ bool UI::TreeNodeImage(const char* text, unsigned int textureID, int flags)
 		ImGuiDragDropFlags dropTargetFlags = ImGuiDragDropFlags_AcceptBeforeDelivery;
 		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(UI::ToLabel(EDragAndDropType::GAMEOBJECT), dropTargetFlags))
 		{
-			if (InputManager::GetMouseButtonUp(Key::MOUSE_BUTTON_LEFT))
+			if (InputManager::GetMouseButtonUp(MOUSE_BUTTON_LEFT))
 			{
 				GameObject* target = *static_cast<GameObject**>(payload->Data);
-				target->SetParent(SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0));
+				SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0)->AddChild(target);
 			}
 		}
 		else

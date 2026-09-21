@@ -6,6 +6,7 @@
 #include "gameobject/gameobject.h"
 #include "Jolt/Renderer/DebugRenderer.h"
 #include "renderer/gizmo.h"
+#include "utilities/shortcut.h"
 
 RTTR_REGISTRATION
 {

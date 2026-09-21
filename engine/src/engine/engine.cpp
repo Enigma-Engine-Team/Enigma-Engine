@@ -46,7 +46,6 @@ void Engine::CreateRenderer(Window* window)
 	renderer = new Renderer();
 	renderer->Create(context);
 	renderer->SetupPipelines();
-	InputManager::SetCurrentWindow(window);
 }
 
 void Engine::Destroy()

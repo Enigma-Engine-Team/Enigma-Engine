@@ -4,10 +4,13 @@
 #include "resources/resource_manager.h"
 #include <rttr/registration.h>
 #include <chrono>
+#include <utility>
 
 #include "components/convex_collider.h"
 #include "components/mesh_collider.h"
 #include "components/vehicle_controller.h"
+#include "engine/engine.h"
+#include "utilities/shortcut.h"
 
 RTTR_REGISTRATION
 {
@@ -47,36 +50,78 @@ void Scene::RecreateModelsLoaded(EnigmaRHI::IRenderInterface* rhi)
 	modelsAwaiting.clear();
 }
 
-GameObject* Scene::AddGameObject(std::string _name)
+GameObject* Scene::AddGameObject(const std::string& name)
 {
 	GameObject* newGameObject = new GameObject();
-	newGameObject->SetName(_name);
+	newGameObject->SetName(name);
 	gameObjects.push_back(newGameObject);
 	world->AddChild(newGameObject);
+
+	Action action("Add GameObject", {}, newGameObject->uuid);
+	action.action = [this, action]()
+	{
+		DeleteGameObject(GetGameObject(action.goID));
+	};
+	Shortcut::AddAction(action);
+
+	return newGameObject;
+}
+
+GameObject* Scene::AddGameObject(const Enigma::UUID& uuid)
+{
+	GameObject* newGameObject = new GameObject();
+	newGameObject->uuid = uuid;
+	gameObjects.push_back(newGameObject);
+	world->AddChild(newGameObject);
+
+	Action action("Add GameObject", {}, newGameObject->uuid);
+	action.action = [this, action]()
+	{
+		DeleteGameObject(GetGameObject(action.goID));
+	};
+	Shortcut::AddAction(action);
+
 	return newGameObject;
 }
 
 void Scene::DeleteGameObject(GameObject* gameObject)
 {
-	auto it = std::find(gameObjects.begin(), gameObjects.end(), gameObject);
-	if (it != gameObjects.end())
+	Action action("Delete GameObject", {}, gameObject->uuid);
+	action.snapshot = nlohmann::json::object();
+	Serializer::GetInstance().RecursiveSerialize(gameObject, action.snapshot);
+	action.action = [action]() {
+		Serializer::GetInstance().RecursiveDeserialize(
+			SceneManager::GetInstance().GetCurrentScene(),
+			action.snapshot,
+			SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0)
+		);
+		Debug::Log("Reverting deletion of GameObject");
+	};
+	Shortcut::AddAction(action);
+
+	DestroyGameObject(gameObject);
+}
+
+void Scene::DestroyGameObject(const GameObject* gameObject)
+{
+	if (GameObject* go = Engine::GetRenderer()->GetSelectedGameObject())
 	{
-		(*it)->Destroy();
-		delete *it;
-		*it = nullptr;
-
-		if (gameObject == gameCam)
-		{
-			gameCam = nullptr;
-		}
-
-		if (gameObjects.back() != *it)
-		{
-			*it = gameObjects.back();
-		}
-
-		gameObjects.pop_back();
+		if (go->GetUUID().IsEqual(gameObject->GetUUID()))
+			Engine::GetRenderer()->SetSelectedGameObject(nullptr);
 	}
+
+	auto it = std::ranges::find(gameObjects, gameObject);
+	if (it == gameObjects.end())
+		return;
+
+	if (gameObject == gameCam)
+		gameCam = nullptr;
+
+	(*it)->Destroy();
+	delete *it;
+
+	*it = gameObjects.back();
+	gameObjects.pop_back();
 }
 
 void Scene::LoadOnlyCurrentSceneAssets(Scene* scene, EnigmaRHI::IRenderInterface* rhi)
@@ -134,6 +179,16 @@ GameObject* Scene::GetGameObject(const std::string& name) const
 		{
 			return gameObject;
 		}
+	}
+	return nullptr;
+}
+
+GameObject* Scene::GetGameObject(Enigma::UUID uuid) const
+{
+	for (const GameObject* gameObject : gameObjects)
+	{
+		if (gameObject->uuid.IsEqual(uuid))
+			return const_cast<GameObject*>(gameObject);
 	}
 	return nullptr;
 }

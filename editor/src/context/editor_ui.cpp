@@ -14,8 +14,8 @@
 #include "context/style_manager.h"
 #include "serialization/serializer.h"
 #include "renderer/widget_renderer.h"
-
-#include <iostream>
+#include "panel/ai_console.h"
+#include "utilities/shortcut.h"
 
 GameObject*  UI::UIEditor::selectedGameObject = nullptr;
 unsigned int UI::UIEditor::gameTexture = 0;
@@ -43,6 +43,9 @@ void UI::UIEditor::Create(Window* window, Engine& engine)
 
 	IUIPanel* debugConsole = new DebugConsolePanel();
 	panels.push_back(debugConsole);
+
+	IUIPanel* aiConsole = new AiConsolePanel();
+	panels.push_back(aiConsole);
 
 	IUIPanel* gameViewport = new GameViewportPanel();
 	panels.push_back(gameViewport);
@@ -229,12 +232,15 @@ void UI::UIEditor::GetEditorInput()
 			GameObject* newGO = newScene->AddGameObject("Camera");
 			newGO->AddComponent<GameCamera>();
 		}
+		else if (InputManager::GetKeyClicked(KEY_Z))
+			Shortcut::Undo();
+		else if (InputManager::GetKeyClicked(KEY_Y) || (InputManager::GetKeyDown(KEY_LEFT_SHIFT) && InputManager::GetKeyClicked(KEY_Z)))
+			Shortcut::Redo();
 	}
 
 	if (InputManager::GetKeyClicked(KEY_DELETE))
 	{
 		SceneManager::GetInstance().GetCurrentScene()->DeleteGameObject(selectedGameObject);
-		engine.GetRenderer()->SetSelectedGameObject(nullptr);
 	}
 
 	if (InputManager::IsCursorHidden())

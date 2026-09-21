@@ -164,7 +164,7 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
                 if (wrapped_val.can_convert<Scripting::IScript*>())
                 {
                     Scripting::IScript* scriptComponent = wrapped_val.convert<Scripting::IScript*>();
-                    SetScriptElement(wrapped_val, scriptComponent->gameObject->GetName());
+                    SetScriptElement(wrapped_val, scriptComponent->gameObject->GetName(), scriptComponent->gameObject->GetUUID().ToString());
                 }
 
                 RecursiveSerialize(wrapped_val, item);
@@ -176,6 +176,10 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
             if (val_type == rttr::type::get<std::string>())
             {
                 j[objName][prop_name] = val.get_value<std::string>();
+            }
+            else if (val_type == rttr::type::get<Enigma::UUID>())
+            {
+                j[objName][prop_name] = val.get_value<Enigma::UUID>().ToString();
             }
             else
             {
@@ -192,23 +196,15 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
     }
 }
 
-void Serializer::RecursiveDeserialize(Scene* scene, nlohmann::json& j, GameObject* go)
+void Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go)
 {
     nlohmann::json goData = j["GameObject"];
     std::string goName = goData["name"];
+    std::string goUUID = goData["uuid"];
 
-    GameObject* gameObject = nullptr;
-
-    if (goData["isInstancePrefab"])
-    {
-        gameObject = scene->AddGameObject(goName);
-        go->AddChild(gameObject);
-    }
-    else
-    {
-        gameObject = scene->AddGameObject(goName);
-        go->AddChild(gameObject);
-    }
+    GameObject* gameObject = scene->AddGameObject(Enigma::UUID::ToUUID(goUUID));
+    gameObject->SetName(goName);
+    go->AddChild(gameObject);
 
     const auto& transformJSON = goData["transform"];
     Transform* transform = &gameObject->transform;
@@ -222,35 +218,38 @@ void Serializer::RecursiveDeserialize(Scene* scene, nlohmann::json& j, GameObjec
 
     for (auto& compWrapper : goData["components"])
     {
-        for (auto it = compWrapper.begin(); it != compWrapper.end(); ++it)
-        {
-            const std::string& compTypeName = it.key();
-            rttr::type t = rttr::type::get_by_name(compTypeName);
-            rttr::type scriptBase = rttr::type::get<Scripting::IScript>();
-
-            if (t.is_valid() && t.is_derived_from(scriptBase))
-                continue;
-
-            if (t.is_valid())
-            {
-                IComponent* comp = gameObject->GetComponentType(t);
-
-                if (comp == nullptr)
-                {
-                    comp = gameObject->AddComponentType(t);
-                }
-
-                RecursiveSetProperties(comp, it.value());
-
-                comp->SetComponent();
-            }
-            else
-                SetScriptElement(compWrapper, compTypeName, goName);
-        }
+        DeserializeComponent(gameObject, compWrapper);
     }
 }
 
-void Serializer::SetScriptElement(nlohmann::json& j, const std::string& scriptName, const std::string& goName)
+void Serializer::DeserializeComponent(GameObject* gameObject, const nlohmann::json& component)
+{
+    for (auto it = component.begin(); it != component.end(); ++it)
+    {
+        const std::string& compTypeName = it.key();
+        rttr::type t = rttr::type::get_by_name(compTypeName);
+        rttr::type scriptBase = rttr::type::get<Scripting::IScript>();
+
+        if (t.is_valid() && t.is_derived_from(scriptBase))
+            return;
+
+        if (t.is_valid())
+        {
+            IComponent* comp = gameObject->GetComponentType(t);
+
+            if (comp == nullptr)
+                comp = gameObject->AddComponentType(t);
+
+            RecursiveSetProperties(comp, it.value());
+
+            comp->SetComponent();
+        }
+        else
+            SetScriptElement(component, compTypeName, gameObject->GetName(), gameObject->GetUUID().ToString());
+    }
+}
+
+void Serializer::SetScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& goName, const std::string& uuid)
 {
     nlohmann::json scriptData;
     scriptData["scriptName"] = scriptName;
@@ -260,10 +259,10 @@ void Serializer::SetScriptElement(nlohmann::json& j, const std::string& scriptNa
     else
         scriptData["variables"] = nlohmann::json::object();
 
-    PushScriptElement(goName, scriptData);
+    PushScriptElement(goName, uuid, scriptData);
 }
 
-void Serializer::SetScriptElement(const rttr::instance& instance, const std::string &goName)
+void Serializer::SetScriptElement(const rttr::instance& instance, const std::string& goName, const std::string& uuid)
 {
     rttr::instance inst = instance.get_type().is_wrapper() ? instance.get_wrapped_instance() : instance;
     if (!inst.is_valid()) return;
@@ -279,24 +278,18 @@ void Serializer::SetScriptElement(const rttr::instance& instance, const std::str
     nlohmann::json scriptData;
     scriptData["scriptName"] = scriptName;
     scriptData["variables"] = serializedScript.value(scriptName, nlohmann::json::object());
-    PushScriptElement(goName, scriptData);
+    PushScriptElement(goName, uuid, scriptData);
 }
 
-void Serializer::PushScriptElement(const std::string& goName, const nlohmann::json& scriptData)
+void Serializer::PushScriptElement(const std::string& goName, const std::string& uuid, const nlohmann::json& scriptData)
 {
-    nlohmann::json& goScripts = script[goName];
-    if (goScripts.is_null())
-    {
-        goScripts = nlohmann::json::array();
-    }
-    else if (!goScripts.is_array())
-    {
-        nlohmann::json previousScript = goScripts;
-        goScripts = nlohmann::json::array();
-        goScripts.push_back(previousScript);
-    }
+    nlohmann::json& goData = script[goName];
+    goData["uuid"] = uuid;
 
-    goScripts.push_back(scriptData);
+    if (!goData.contains("scripts"))
+        goData["scripts"] = nlohmann::json::array();
+
+    goData["scripts"].push_back(scriptData);
 }
 
 void Serializer::AttachedScript(Scene* scene)
@@ -305,11 +298,17 @@ void Serializer::AttachedScript(Scene* scene)
     if (!ReadFromFile("assets\\scripts\\" + scene->GetName() + ".script", obj))
         return;
 
-    for (auto& [goName, scriptData] : obj.items())
+    for (auto& [goName, goData] : obj.items())
     {
-        GameObject* go = scene->GetGameObject(goName);
+        Enigma::UUID uuid = Enigma::UUID::ToUUID(goData["uuid"].get<std::string>());
+
+        GameObject* go = scene->GetGameObject(uuid);
+        if (!go)
+            go = scene->GetGameObject(goName);
         if (!go)
             continue;
+
+        const auto& scriptData = goData["scripts"];
 
         if (scriptData.is_array())
         {
@@ -359,19 +358,26 @@ void Serializer::RecursiveSetProperties(rttr::instance obj, const nlohmann::json
 
             if (original_prop_type == rttr::type::get<GameObject*>())
             {
-                std::string gameObjectName;
-                if (val.is_string())
+                GameObject* referencedGameObject = nullptr;
+                if (val.is_object() && val.contains("GameObject") && val["GameObject"].contains("uuid"))
                 {
-                    gameObjectName = val.get<std::string>();
-                }
-                else if (val.is_object() && val.contains("GameObject") && val["GameObject"].contains("name"))
-                {
-                    gameObjectName = val["GameObject"]["name"].get<std::string>();
+                    Enigma::UUID uuid = Enigma::UUID::ToUUID(val["GameObject"]["uuid"].get<std::string>());
+                    if (currentSceneContext)
+                        referencedGameObject = currentSceneContext->GetGameObject(uuid);
                 }
 
-                GameObject* referencedGameObject = nullptr;
-                if (currentSceneContext && !gameObjectName.empty())
-                    referencedGameObject = currentSceneContext->GetGameObject(gameObjectName);
+                //A retirer après tests
+                if (referencedGameObject == nullptr)
+                {
+                    std::string gameObjectName;
+                    if (val.is_object() && val.contains("GameObject") && val["GameObject"].contains("name"))
+                    {
+                        gameObjectName = val["GameObject"]["name"].get<std::string>();
+                    }
+
+                    if (currentSceneContext && !gameObjectName.empty())
+                        referencedGameObject = currentSceneContext->GetGameObject(gameObjectName);
+                }
 
                 prop.set_value(obj, referencedGameObject);
             }

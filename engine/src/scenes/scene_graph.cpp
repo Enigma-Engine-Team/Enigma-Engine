@@ -6,7 +6,6 @@ void SceneGraph::UpdateParenting(GameObject* gameObject, Math::Matrix4x4 transfo
 		return;
 
 	Math::Matrix4x4 local = Math::Quaternion::TRS(gameObject->transform.position, gameObject->transform.rotation, gameObject->transform.scale);
-
 	gameObject->transform.global = transformParent * local;
 
 	gameObject->transform.ExtractPositionFromWorld();
@@ -17,6 +16,28 @@ void SceneGraph::UpdateParenting(GameObject* gameObject, Math::Matrix4x4 transfo
 	{
 		UpdateParenting(objectChild, gameObject->transform.global);
 	}
+	// if (!gameObject) return;
+	// Transform& t = gameObject->transform;
+	//
+	// if (GameObject* parent = gameObject->GetParent())
+	// {
+	// 	Transform& p = parent->transform;
+	//
+	// 	t.worldRotation = p.worldRotation * t.rotation;
+	// 	t.worldRotation.Normalize();
+	//
+	// 	t.worldScale = p.worldScale * t.scale;
+	//
+	// 	t.worldPosition = t.position;
+	// }
+	// else
+	// {
+	// 	t.worldRotation = t.rotation;
+	// 	t.worldScale    = t.scale;
+	// 	t.worldPosition = t.position;
+	// }
+	//
+	// t.global = Math::Quaternion::TRS(t.worldPosition, t.worldRotation, t.worldScale);
 }
 
 void SceneGraph::Update(Scene* scene)
