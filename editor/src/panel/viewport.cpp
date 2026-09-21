@@ -232,9 +232,7 @@ void UI::ViewportPanel::ComputeGizmos(Scene* scene, Math::Vector2D windowPos, Ma
 			ImGuizmo::DecomposeMatrixToComponents(localMatrix.m, &localPos.x, &localRot.x, &localScale.x);
 		}
 		else
-		{
 			ImGuizmo::DecomposeMatrixToComponents(modifiedGlobalMatrix.m, &localPos.x, &localRot.x, &localScale.x);
-		}
 
 		bool changedScale = (localScale != selectedGameObject->transform.scale);
 

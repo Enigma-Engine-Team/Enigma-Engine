@@ -165,10 +165,10 @@ bool UI::TreeNodeImage(const char* text, unsigned int textureID, int flags)
 		ImGuiDragDropFlags dropTargetFlags = ImGuiDragDropFlags_AcceptBeforeDelivery;
 		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(UI::ToLabel(EDragAndDropType::GAMEOBJECT), dropTargetFlags))
 		{
-			if (InputManager::GetMouseButtonUp(Key::MOUSE_BUTTON_LEFT))
+			if (InputManager::GetMouseButtonUp(MOUSE_BUTTON_LEFT))
 			{
 				GameObject* target = *static_cast<GameObject**>(payload->Data);
-				target->SetParent(SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0));
+				SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0)->AddChild(target);
 			}
 		}
 		else

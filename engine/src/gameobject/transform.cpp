@@ -130,20 +130,13 @@ void Transform::ExtractPositionFromWorld()
 
 void Transform::ExtractRotationFromWorld()
 {
-    Math::Matrix3x3 rotMat;
-    rotMat.m[0] = global.m[0] / worldScale.x;
-    rotMat.m[1] = global.m[1] / worldScale.x;
-    rotMat.m[2] = global.m[2] / worldScale.x;
-
-    rotMat.m[3] = global.m[4] / worldScale.y;
-    rotMat.m[4] = global.m[5] / worldScale.y;
-    rotMat.m[5] = global.m[6] / worldScale.y;
-
-    rotMat.m[6] = global.m[8] / worldScale.z;
-    rotMat.m[7] = global.m[9] / worldScale.z;
-    rotMat.m[8] = global.m[10] / worldScale.z;
-
-    worldRotation = Math::Quaternion::FromRotationMatrix(rotMat);
+	if (!gameObject->GetParent())
+	{
+		worldRotation = rotation;
+		return;
+	}
+	gameObject->transform.worldRotation = gameObject->GetParent()->transform.worldRotation * gameObject->transform.rotation;
+	gameObject->transform.worldRotation.Normalize();
 }
 
 void Transform::ExtractScaleFromWorld()

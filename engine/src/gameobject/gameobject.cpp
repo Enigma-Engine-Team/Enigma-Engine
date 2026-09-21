@@ -203,8 +203,10 @@ void GameObject::SetParent(GameObject* _parent)
 	action.action = [action, oldParentUUID]()
 	{
 		GameObject* go = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(action.goID);
-		GameObject* oldParent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(oldParentUUID);
-		go->SetParent(oldParent);
+		if (GameObject* oldParent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(oldParentUUID))
+			oldParent->AddChild(go);
+		else
+			SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0)->AddChild(go);
 	};
 	Shortcut::AddAction(action);
 
@@ -229,21 +231,27 @@ void GameObject::AddChild(GameObject* newChild)
 			oldParent->AddChild(this);
 	}
 
-	children.push_back(newChild);
+	Transform worldTransform = newChild->transform;
 
-	newChild->transform.position = newChild->transform.position - this->transform.position;
-	newChild->transform.rotation = this->transform.rotation.Inverse() * newChild->transform.rotation;
-	newChild->transform.scale = newChild->transform.scale / this->transform.scale;
+	if (GameObject* oldParent = newChild->parent)
+	{
+		worldTransform.position = oldParent->transform.worldPosition + worldTransform.position * oldParent->transform.scale;
+		worldTransform.rotation = oldParent->transform.worldRotation * worldTransform.rotation;
+		worldTransform.scale = oldParent->transform.worldScale * worldTransform.scale;
+	}
+
+	newChild->transform.position = (worldTransform.worldPosition - this->transform.position) / this->transform.scale;
+	newChild->transform.rotation = this->transform.worldRotation.Inverse() * worldTransform.rotation;
+	newChild->transform.scale = worldTransform.worldScale / this->transform.scale;
 
 	newChild->SetParent(this);
+	children.push_back(newChild);
 }
 
 void GameObject::RemoveChild(GameObject* child)
 {
 	if (children.empty())
-	{
 		return;
-	}
 
 	auto it = std::find(children.begin(), children.end(), child);
 	if (it != children.end())
