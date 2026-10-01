@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "macro.h"
+#include "gameobject/gameobject.h"
 #include "nlohmann/json.hpp"
 #include "nlohmann/json_fwd.hpp"
 #include "utilities/utility.h"
@@ -34,6 +35,7 @@ public:
     static void Undo();
     static void Redo();
     static void Clear();
+    static void Duplicate(GameObject* go);
 
 private:
     static std::vector<Action> undoActions;

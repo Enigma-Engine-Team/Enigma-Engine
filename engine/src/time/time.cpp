@@ -1,9 +1,8 @@
-#include "timer/timer.h"
 #include <chrono>
-
+#include "timer/time.h"
 #include "engine/engine.h"
 
-Timer::Timer()
+Time::Time()
 {
     currentTime = std::chrono::high_resolution_clock::now();
     lastTime = std::chrono::high_resolution_clock::now();
@@ -11,7 +10,7 @@ Timer::Timer()
     fixedDeltaTime = 1.f / 60.f;
 }
 
-void Timer::Reset()
+void Time::Reset()
 {
     currentTime = std::chrono::high_resolution_clock::now();
     lastTime = std::chrono::high_resolution_clock::now();
@@ -19,7 +18,7 @@ void Timer::Reset()
     accumulator = 0.0f;
 }
 
-void Timer::Update()
+void Time::Update()
 {
     currentTime = std::chrono::high_resolution_clock::now();
     auto duration = currentTime - lastTime;
@@ -29,7 +28,7 @@ void Timer::Update()
         accumulator += deltaTime;
 }
 
-bool Timer::Accumulate()
+bool Time::Accumulate()
 {
     bool accumulated = accumulator >= fixedDeltaTime;
     if (accumulated)

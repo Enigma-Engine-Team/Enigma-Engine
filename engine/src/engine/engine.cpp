@@ -276,7 +276,7 @@ void Engine::LaunchGame()
 	isRunning = true;
 }
 
-void Engine::StopGame(Timer& timer)
+void Engine::StopGame(Time& timer)
 {
 	if (!requestStopGame)
 		return;

@@ -44,12 +44,13 @@ public:
 	void DeleteComponent(const IComponent* target);
 	void DestroyComponent(const IComponent* target);
 
+	std::vector<Scripting::IScript*> GetScripts() const;
 	Scripting::IScript* AddScript(const std::string& scriptName);
 	void DeleteScript(const std::string& scriptName);
 	void DeleteScripts();
 
 	void SetInstancePrefab(std::string path);
-	void SetName(std::string name);
+	void SetName(const std::string &name);
 	std::string GetName();
 
 	Enigma::UUID GetUUID() const { return uuid; }
@@ -72,10 +73,12 @@ public:
 	void RebuildLayer();
 	bool IsInstancePrefab();
 	bool IsAncestorOf(const GameObject* other) const;
+	void Duplicate();
 
 private:
 	void RegisterCompAction(const IComponent *component) const;
 	void DeleteCompAction(IComponent *component);
+	std::string GetBaseName(const std::string& _name);
 	RTTR_REGISTRATION_FRIEND
 	std::string name;
 	std::vector<IComponent*> components;

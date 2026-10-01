@@ -236,6 +236,10 @@ void UI::UIEditor::GetEditorInput()
 			Shortcut::Undo();
 		else if (InputManager::GetKeyClicked(KEY_Y) || (InputManager::GetKeyDown(KEY_LEFT_SHIFT) && InputManager::GetKeyClicked(KEY_Z)))
 			Shortcut::Redo();
+		else if (InputManager::GetKeyClicked(KEY_D) && selectedGameObject != nullptr)
+		{
+			Shortcut::Duplicate(selectedGameObject);
+		}
 	}
 
 	if (InputManager::GetKeyClicked(KEY_DELETE))

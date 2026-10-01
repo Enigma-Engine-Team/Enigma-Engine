@@ -12,7 +12,7 @@
 #include <variant>
 #include <vector>
 
-#include "timer/timer.h"
+#include "timer/time.h"
 
 class Material;
 class FontTexture;
@@ -76,7 +76,7 @@ public:
 	bool SetComponentPropertyValue(IComponent* component, const std::string& propertyPath, const ComponentPropertyValue& value);
 
 	static void LaunchGame();
-	void StopGame(Timer& timer);
+	void StopGame(Time& timer);
 	static void PauseGame();
 	static void RequestStopGame();
 	static void LinkDll();

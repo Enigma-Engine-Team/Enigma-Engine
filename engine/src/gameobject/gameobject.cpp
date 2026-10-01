@@ -80,6 +80,19 @@ void GameObject::DestroyComponent(const IComponent *target)
 	components.erase(it);
 }
 
+std::vector<Scripting::IScript*> GameObject::GetScripts() const
+{
+	std::vector<Scripting::IScript*> scripts;
+	for (IComponent* component : components)
+	{
+		if (Scripting::IScript* script = dynamic_cast<Scripting::IScript*>(component))
+		{
+			scripts.push_back(script);
+		}
+	}
+	return scripts;
+}
+
 Scripting::IScript* GameObject::AddScript(const std::string& scriptName)
 {
 	Scripting::IScript* script = Scripting::ScriptRegistry::GetInstance().Create(scriptName);
@@ -129,9 +142,25 @@ void GameObject::SetInstancePrefab(std::string path)
 	prefabPath = path;
 }
 
-void GameObject::SetName(std::string _name)
+void GameObject::SetName(const std::string& _name)
 {
-	name = _name;
+	if (_name == "world")
+	{
+		name = _name;
+		return;
+	}
+
+	int index = 0;
+	std::string resultName = _name;
+	std::string baseName = GetBaseName(_name);
+
+	while(SceneManager::GetInstance().GetCurrentScene()->GetGameObject(resultName))
+	{
+		index++;
+		resultName = baseName + " (" + std::to_string(index) + ")";
+	}
+
+	name = resultName;
 }
 
 std::string GameObject::GetName()
@@ -302,6 +331,24 @@ bool GameObject::IsAncestorOf(const GameObject* other) const
 	return false;
 }
 
+void GameObject::Duplicate()
+{
+	GameObject* go = this;
+	nlohmann::json j;
+	if (!parent)
+		parent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0);
+	Serializer::GetInstance().RecursiveSerialize(go, j);
+	GameObject* newGo = Serializer::GetInstance().RecursiveDeserialize(SceneManager::GetInstance().GetCurrentScene(), j, parent);
+
+	// Ne marche pas pour la duplication de variable, obligé de serializer le script pour récupérer les variables
+	// + Faire en sorte de supprimer les anciennes dll de script pour que les nouvelles soient prises en compte
+	std::vector<Scripting::IScript*> scripts = GetScripts();
+	for (Scripting::IScript* script : scripts)
+	{
+		newGo->AddScript(script->GetScriptName());
+	}
+}
+
 void GameObject::RegisterCompAction(const IComponent* component) const
 {
 	Action action("Restore Component", {}, uuid);
@@ -321,6 +368,31 @@ void GameObject::DeleteCompAction(IComponent *component)
 		DeleteComponent(component);
 	};
 	Shortcut::AddAction(action);
+}
+
+std::string GameObject::GetBaseName(const std::string& _name)
+{
+	size_t open = _name.rfind('(');
+
+	if (open == std::string::npos)
+		return _name;
+
+	if (_name.back() != ')')
+		return _name;
+
+	std::string number = _name.substr(
+		open + 1,
+		_name.size() - open - 2
+	);
+
+	if (number.empty() || !std::all_of(number.begin(), number.end(), ::isdigit))
+		return _name;
+
+
+	if (open == 0 || _name[open - 1] != ' ')
+		return _name;
+
+	return _name.substr(0, open - 1);
 }
 
 GameObject::GameObject()

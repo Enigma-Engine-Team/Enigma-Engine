@@ -2,12 +2,14 @@
 #include <__msvc_chrono.hpp>
 #include "../utilities/macro.h"
 
-class ENIGMA_API Timer {
+class ENIGMA_API Time {
 public:
-    Timer();
+    Time();
     void Reset();
     void Update();
     bool Accumulate();
+    static float GetTime() { return std::chrono::duration<float>(std::chrono::high_resolution_clock::now() - startTime).count(); }
+    //Get the time accumulated with the Accumulate function
     float GetDeltaTime() const { return deltaTime; }
     float GetFixedDeltaTime() const { return fixedDeltaTime; }
     float GetAccumulator() const { return accumulator; }
@@ -19,4 +21,5 @@ private:
     float deltaTime;
     float fixedDeltaTime;
     float accumulator = 0.0f;
+    inline static const auto startTime = std::chrono::high_resolution_clock::now();
 };

@@ -16,6 +16,7 @@ void SceneGraph::UpdateParenting(GameObject* gameObject, Math::Matrix4x4 transfo
 	{
 		UpdateParenting(objectChild, gameObject->transform.global);
 	}
+
 	// if (!gameObject) return;
 	// Transform& t = gameObject->transform;
 	//

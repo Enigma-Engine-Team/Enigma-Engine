@@ -1,7 +1,7 @@
 #include "network/network.h"
 #include "context/editor_ui.h"
 #include "scenes/scene_manager.h"
-#include "timer/timer.h"
+#include "timer/time.h"
 #include "engine/engine.h"
 #include "scripting/script_manager.h"
 #include "physics/physics.h"
@@ -15,6 +15,7 @@
 
 int main()
 {
+	Time timer;
 	Window window;
 	window.SetCursorPosCallBack(InputManager::MousePositionCallback);
 	window.SetScrollCallBack(InputManager::MouseScrollCallback);
@@ -32,34 +33,35 @@ int main()
 	Engine engine;
 
 #ifndef BUILD_MODE
-	engine.SetBuildMode(EBuildMode::EDITOR);
+	Engine::SetBuildMode(EBuildMode::EDITOR);
 #else
-	engine.SetBuildMode(EBuildMode::GAME);
+	Engine::SetBuildMode(EBuildMode::GAME);
 #endif
 
 	engine.CreateContext();
 
+	float timeBeforeDeserialization = Time::GetTime();
 	Serializer::GetInstance().DeserializeScene(scene);
-	scene->LoadOnlyCurrentSceneAssets(scene, engine.GetRHI());
-	scene->RecreateModelsLoaded(engine.GetRHI());
+	Debug::Log("Time to deserialize scene: " + ToString(Time::GetTime() - timeBeforeDeserialization) + " seconds");
+	scene->LoadOnlyCurrentSceneAssets(scene, Engine::GetRHI());
+	scene->RecreateModelsLoaded(Engine::GetRHI());
 	Shortcut::Clear();
 
 	ScriptManager& scriptManager = ScriptManager::GetInstance();
 	SoundManager& soundManager = SoundManager::GetInstance();
-	Timer timer;
 
 	engine.CreateRenderer(&window);
-	engine.LinkDll();
+	Engine::LinkDll();
 
 #ifndef BUILD_MODE
 	UI::UIEditor ui;
 	ui.Create(&window, engine);
 #endif
 
-	if (engine.IsInGameBuild())
+	if (Engine::IsInGameBuild())
 	{
-		engine.LinkDll();
-		engine.LaunchGame();
+		Engine::LinkDll();
+		Engine::LaunchGame();
 	}
 
 	Network::GetInstance().Create("config\\network.ini");

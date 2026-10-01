@@ -1,5 +1,7 @@
 #include "utilities/shortcut.h"
 
+#include "serialization/serializer.h"
+
 std::vector<Action> Shortcut::undoActions;
 std::vector<Action> Shortcut::redoActions;
 ActionContext Shortcut::context = UNDO;
@@ -51,4 +53,9 @@ void Shortcut::Clear()
 {
     undoActions.clear();
     redoActions.clear();
+}
+
+void Shortcut::Duplicate(GameObject* go)
+{
+    go->Duplicate();
 }

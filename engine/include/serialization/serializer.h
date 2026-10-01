@@ -28,7 +28,7 @@ public:
 	void AttachedScript(Scene* scene);
 
 	void RecursiveSerialize(const rttr::instance& instance, nlohmann::json& j);
-	void RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go);
+	GameObject* RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go);
 	void DeserializeComponent(GameObject* gameObject, const nlohmann::json& component);
 private:
 	Serializer() = default;

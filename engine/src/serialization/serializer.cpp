@@ -196,13 +196,17 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
     }
 }
 
-void Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go)
+GameObject* Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, GameObject* go)
 {
     nlohmann::json goData = j["GameObject"];
     std::string goName = goData["name"];
     std::string goUUID = goData["uuid"];
 
-    GameObject* gameObject = scene->AddGameObject(Enigma::UUID::ToUUID(goUUID));
+    Enigma::UUID uuid = Enigma::UUID::ToUUID(goUUID);
+    if (scene->GetGameObject(uuid))
+        uuid = Enigma::UUID();
+
+    GameObject* gameObject = scene->AddGameObject(uuid);
     gameObject->SetName(goName);
     go->AddChild(gameObject);
 
@@ -220,6 +224,7 @@ void Serializer::RecursiveDeserialize(Scene* scene, const nlohmann::json& j, Gam
     {
         DeserializeComponent(gameObject, compWrapper);
     }
+    return gameObject;
 }
 
 void Serializer::DeserializeComponent(GameObject* gameObject, const nlohmann::json& component)
@@ -303,6 +308,7 @@ void Serializer::AttachedScript(Scene* scene)
         Enigma::UUID uuid = Enigma::UUID::ToUUID(goData["uuid"].get<std::string>());
 
         GameObject* go = scene->GetGameObject(uuid);
+        //To modify after tests, to remove the name search
         if (!go)
             go = scene->GetGameObject(goName);
         if (!go)
