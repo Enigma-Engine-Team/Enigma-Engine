@@ -35,13 +35,13 @@ void EngineCamera::GetInputs()
 
     if (camera.useCamera && !camera.isMiddleMouseButtonPressed)
     {
-        if (InputManager::GetKeyDown(KEY_Z)) moveDirection += camera.forward;
-        if (InputManager::GetKeyDown(KEY_S)) moveDirection -= camera.forward;
-        if (InputManager::GetKeyDown(KEY_D)) moveDirection += camera.right;
-        if (InputManager::GetKeyDown(KEY_Q)) moveDirection -= camera.right;
-        if (InputManager::GetKeyDown(KEY_E)) moveDirection += camera.up;
-        if (InputManager::GetKeyDown(KEY_A)) moveDirection -= camera.up;
-        if (InputManager::GetKeyDown(KEY_LEFT_SHIFT)) camera.speed = camera.fastSpeed;
+        if (InputManager::GetKey(KEY_Z)) moveDirection += camera.forward;
+        if (InputManager::GetKey(KEY_S)) moveDirection -= camera.forward;
+        if (InputManager::GetKey(KEY_D)) moveDirection += camera.right;
+        if (InputManager::GetKey(KEY_Q)) moveDirection -= camera.right;
+        if (InputManager::GetKey(KEY_E)) moveDirection += camera.up;
+        if (InputManager::GetKey(KEY_A)) moveDirection -= camera.up;
+        if (InputManager::GetKey(KEY_LEFT_SHIFT)) camera.speed = camera.fastSpeed;
             else camera.speed = camera.defaultSpeed;
     }
 
@@ -71,7 +71,7 @@ void EngineCamera::GetInputs()
 
 void EngineCamera::MousePositionCallback()
 {
-    if (InputManager::GetMouseButtonDown(MOUSE_BUTTON_RIGHT) && !InputManager::IsInputBlocked())
+    if (InputManager::GetMouseButton(MOUSE_BUTTON_RIGHT) && !InputManager::IsInputBlocked())
     {
         if (!camera.isRightMousePressed)
         {

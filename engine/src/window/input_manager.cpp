@@ -9,9 +9,6 @@ void InputManager::Update()
 		return;
 	}
 
-	if (IsCursorHidden())
-		ResetMouseDelta();
-
 	if (isScrolling)
 	{
 		mouseScroll = { 0.f, 0.f };
