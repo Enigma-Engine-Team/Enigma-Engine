@@ -34,9 +34,9 @@ private:
 	Serializer() = default;
 	~Serializer() = default;
 
-	void SetScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& goName, const std::string& uuid);
-	void SetScriptElement(const rttr::instance& instance, const std::string& goName, const std::string& uuid);
-	void PushScriptElement(const std::string& goName, const std::string& uuid, const nlohmann::json& scriptData);
+	void DeserializeScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& uuid);
+	void SerializeScriptElement(const rttr::instance& instance, const std::string& uuid);
+	void PushScriptElement(const std::string& uuid, const nlohmann::json& scriptData);
 	void AttachScriptData(GameObject* go, const nlohmann::json& scriptData, const nlohmann::json& scriptRoot);
 	void RecursiveSetProperties(rttr::instance obj, const nlohmann::json& j);
 

@@ -105,6 +105,7 @@ int main()
 #endif
 		window.SwapBuffers();
 		window.PollEvents();
+		InputManager::Update();
 		engine.StopGame(timer);
 	}
 

@@ -25,7 +25,7 @@ bool UI::UIEditor::requestMaterialEditor = false;
 Material* UI::UIEditor::materialToDisplay = nullptr;
 Engine UI::UIEditor::engine;
 
-void UI::UIEditor::Create(Window* window, Engine& engine)
+void UI::UIEditor::Create(Window* window, const Engine& engine)
 {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -34,7 +34,7 @@ void UI::UIEditor::Create(Window* window, Engine& engine)
 	UI::Style::ApplyGeneralStyle();
 	UI::Style::SetEnigmaFont();
 
-	this->engine = engine;
+	UI::UIEditor::engine = engine;
 
 	InitForGraphicsAPI(window);
 	
@@ -217,14 +217,17 @@ float UI::UIEditor::UpdateMenuBar()
 
 void UI::UIEditor::GetEditorInput()
 {
-	if (InputManager::GetKeyDown(KEY_LEFT_CONTROL))
+	if (Engine::IsRunning())
+		return;
+
+	if (InputManager::GetKey(KEY_LEFT_CONTROL))
 	{
-		if (InputManager::GetKeyClicked(KEY_S))
-		{
+		if (InputManager::GetKeyDown(KEY_S))
 			engine.Save();
-		}
-		else if(InputManager::GetKeyClicked(KEY_N))
+
+		else if(InputManager::GetKeyDown(KEY_N))
 		{
+			//Do a "create new scene" func
 			LightManager::GetInstance().ClearLights();
 			WidgetRenderer::GetInstance().ClearWidgets();
 			Scene* newScene = SceneManager::GetInstance().AddScene();
@@ -232,20 +235,16 @@ void UI::UIEditor::GetEditorInput()
 			GameObject* newGO = newScene->AddGameObject("Camera");
 			newGO->AddComponent<GameCamera>();
 		}
-		else if (InputManager::GetKeyClicked(KEY_Z))
+		else if (InputManager::GetKeyDown(KEY_Z))
 			Shortcut::Undo();
-		else if (InputManager::GetKeyClicked(KEY_Y) || (InputManager::GetKeyDown(KEY_LEFT_SHIFT) && InputManager::GetKeyClicked(KEY_Z)))
+		else if (InputManager::GetKeyDown(KEY_Y) || (InputManager::GetKeyDown(KEY_LEFT_SHIFT) && InputManager::GetKeyDown(KEY_Z)))
 			Shortcut::Redo();
-		else if (InputManager::GetKeyClicked(KEY_D) && selectedGameObject != nullptr)
-		{
+		else if (InputManager::GetKeyDown(KEY_D) && selectedGameObject != nullptr)
 			Shortcut::Duplicate(selectedGameObject);
-		}
 	}
 
-	if (InputManager::GetKeyClicked(KEY_DELETE))
-	{
+	if (InputManager::GetKeyDown(KEY_DELETE) && selectedGameObject != nullptr)
 		SceneManager::GetInstance().GetCurrentScene()->DeleteGameObject(selectedGameObject);
-	}
 
 	if (InputManager::IsCursorHidden())
 	{

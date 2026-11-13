@@ -9,7 +9,7 @@ namespace UI
 	class UIEditor
 	{
 	public:
-		void Create(Window* window, Engine& engine);
+		void Create(Window* window, const Engine& engine);
 		void Update();
 		void Destroy();
 

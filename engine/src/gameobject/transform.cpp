@@ -32,7 +32,7 @@ void Transform::SetPosition(Math::Vector3D pos)
 	if (position == pos)
 		return;
 		
-	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	if (InputManager::GetMouseButton(MOUSE_BUTTON_LEFT) ||
 	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
 	{
 		Math::Vector3D oldPos = position;
@@ -62,7 +62,7 @@ void Transform::SetRotation(const Math::Quaternion rot)
 	if (rotation == rot)
 		return;
 		
-	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	if (InputManager::GetMouseButton(MOUSE_BUTTON_LEFT) ||
 	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
 	{
 		Math::Quaternion oldRot = rotation;
@@ -89,7 +89,7 @@ void Transform::SetRotation(const Math::Quaternion rot)
 
 void Transform::SetRotationToEuler(Math::Vector3D rot)
 {
-	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	if (InputManager::GetMouseButton(MOUSE_BUTTON_LEFT) ||
 	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
 	{
 		Math::Quaternion oldRot = rotation;
@@ -110,7 +110,7 @@ void Transform::SetScale(Math::Vector3D _scale)
 	if (scale == _scale)
 		return;
 		
-	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	if (InputManager::GetMouseButton(MOUSE_BUTTON_LEFT) ||
 	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
 	{
 		Math::Vector3D oldScale = scale;

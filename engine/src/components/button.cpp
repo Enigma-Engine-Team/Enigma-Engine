@@ -79,7 +79,7 @@ void Button::OnUpdate()
     isHovered = mousePos.x >= buttonBorder.x && mousePos.x <= buttonBorder.x + size.x &&
         mousePos.y >= buttonBorder.y && mousePos.y <= buttonBorder.y + size.y;
 
-    if (isHovered && InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) && !isPressed)
+    if (isHovered && InputManager::GetMouseButton(MOUSE_BUTTON_LEFT) && !isPressed)
     {
         isPressed = true;
         if (onClick) 

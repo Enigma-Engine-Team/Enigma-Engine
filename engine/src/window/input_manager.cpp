@@ -1,56 +1,30 @@
 #include "window/input_manager.h"
 #include <iostream>
 
-Math::Vector2D InputManager::mousePos = { 0.f, 0.f };
-Math::Vector2D InputManager::gameMousePos = { 0.f, 0.f };
-Math::Vector2D InputManager::mouseScroll = { 0.f, 0.f };
-Math::Vector2D InputManager::lastMousePos = { 0.f, 0.f };
-float InputManager::gameWidth = 0.f;
-float InputManager::gameHeight = 0.f;
-ECursorState InputManager::cursorState = ECursorState::ENABLED;
-bool InputManager::isScrolling = false;
-bool InputManager::inputBlocked = false;
-Window* InputManager::window = nullptr;
-std::unordered_map<int, bool> InputManager::previousKeys{};
-
-bool InputManager::GetKeyUp(int key)
+void InputManager::Update()
 {
-	return window->GetKey(key) == EKeyState::RELEASED;
-}
+	if (window == nullptr)
+	{
+		std::cerr << "InputManager::Update: window is nullptr" << std::endl;
+		return;
+	}
 
-bool InputManager::GetKeyDown(int key)
-{
-	return window->GetKey(key) == EKeyState::PRESSED;
-}
+	if (IsCursorHidden())
+		ResetMouseDelta();
 
-bool InputManager::GetMouseButtonClicked(int key)
-{
-	bool current = window->GetMouseButton(key) == EKeyState::PRESSED;
-	bool previous = previousKeys[key];
+	if (isScrolling)
+	{
+		mouseScroll = { 0.f, 0.f };
+		isScrolling = false;
+	}
 
-	previousKeys[key] = current;
+	previousKeys = currentKeys;
+	previousMouse = currentMouse;
 
-	return current && !previous;
-}
-
-bool InputManager::GetKeyClicked(int key)
-{
-	bool current = window->GetKey(key) == EKeyState::PRESSED;
-	bool previous = previousKeys[key];
-
-	previousKeys[key] = current;
-
-	return current && !previous;
-}
-
-bool InputManager::GetMouseButtonDown(int key)
-{
-	return window->GetMouseButton(key) == EKeyState::PRESSED;
-}
-
-bool InputManager::GetMouseButtonUp(int key)
-{
-	return window->GetMouseButton(key) == EKeyState::RELEASED;
+	for (int i = 0; i < GLFW_KEY_LAST + 1; i++)
+		currentKeys[i] = window->GetKey(i) == EKeyState::PRESSED;
+	for (int i = 0; i < GLFW_MOUSE_BUTTON_LAST + 1; i++)
+		currentMouse[i] = window->GetMouseButton(i) == EKeyState::PRESSED;
 }
 
 void InputManager::MousePositionCallback(double xPos, double yPos)

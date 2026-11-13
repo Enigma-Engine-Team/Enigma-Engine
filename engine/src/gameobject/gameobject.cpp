@@ -205,7 +205,7 @@ void GameObject::SetTransform(Math::Vector3D pos, Math::Quaternion quat, Math::V
 
 void GameObject::SetTransform(Math::Vector3D pos, Math::Vector3D quat, Math::Vector3D scale)
 {
-	if (InputManager::GetMouseButtonClicked(MOUSE_BUTTON_LEFT) ||
+	if (InputManager::GetMouseButton(MOUSE_BUTTON_LEFT) ||
 	   (InputManager::GetKeyDown(KEY_LEFT_CONTROL) && (InputManager::GetKeyDown(KEY_Z) || InputManager::GetKeyDown(KEY_Y))))
 	{
 		Math::Vector3D oldPos = transform.position;
@@ -331,24 +331,6 @@ bool GameObject::IsAncestorOf(const GameObject* other) const
 	return false;
 }
 
-void GameObject::Duplicate()
-{
-	GameObject* go = this;
-	nlohmann::json j;
-	if (!parent)
-		parent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0);
-	Serializer::GetInstance().RecursiveSerialize(go, j);
-	GameObject* newGo = Serializer::GetInstance().RecursiveDeserialize(SceneManager::GetInstance().GetCurrentScene(), j, parent);
-
-	// Ne marche pas pour la duplication de variable, obligé de serializer le script pour récupérer les variables
-	// + Faire en sorte de supprimer les anciennes dll de script pour que les nouvelles soient prises en compte
-	std::vector<Scripting::IScript*> scripts = GetScripts();
-	for (Scripting::IScript* script : scripts)
-	{
-		newGo->AddScript(script->GetScriptName());
-	}
-}
-
 void GameObject::RegisterCompAction(const IComponent* component) const
 {
 	Action action("Restore Component", {}, uuid);
@@ -359,6 +341,19 @@ void GameObject::RegisterCompAction(const IComponent* component) const
 		Serializer::GetInstance().DeserializeComponent(go, action.snapshot);
 	};
 	Shortcut::AddAction(action);
+}
+
+void GameObject::Duplicate()
+{
+	GameObject* go = this;
+	nlohmann::json j;
+	if (!parent)
+		parent = SceneManager::GetInstance().GetCurrentScene()->GetGameObject(0);
+	Serializer::GetInstance().RecursiveSerialize(go, j);
+	Serializer::GetInstance().RecursiveDeserialize(SceneManager::GetInstance().GetCurrentScene(), j, parent);
+
+	// Ne marche pas pour la duplication de variable, obligé de serializer le script pour récupérer les variables
+	// + Faire en sorte de supprimer les anciennes dll de script pour que les nouvelles soient prises en compte
 }
 
 void GameObject::DeleteCompAction(IComponent *component)

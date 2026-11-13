@@ -164,7 +164,7 @@ void Serializer::RecursiveSerialize(const rttr::instance& instance, nlohmann::js
                 if (wrapped_val.can_convert<Scripting::IScript*>())
                 {
                     Scripting::IScript* scriptComponent = wrapped_val.convert<Scripting::IScript*>();
-                    SetScriptElement(wrapped_val, scriptComponent->gameObject->GetName(), scriptComponent->gameObject->GetUUID().ToString());
+                    SerializeScriptElement(wrapped_val, scriptComponent->gameObject->GetUUID().ToString());
                 }
 
                 RecursiveSerialize(wrapped_val, item);
@@ -250,11 +250,12 @@ void Serializer::DeserializeComponent(GameObject* gameObject, const nlohmann::js
             comp->SetComponent();
         }
         else
-            SetScriptElement(component, compTypeName, gameObject->GetName(), gameObject->GetUUID().ToString());
+            DeserializeScriptElement(component, compTypeName, gameObject->GetUUID().ToString());
     }
 }
 
-void Serializer::SetScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& goName, const std::string& uuid)
+//Deserialization
+void Serializer::DeserializeScriptElement(const nlohmann::json& j, const std::string& scriptName, const std::string& uuid)
 {
     nlohmann::json scriptData;
     scriptData["scriptName"] = scriptName;
@@ -264,10 +265,11 @@ void Serializer::SetScriptElement(const nlohmann::json& j, const std::string& sc
     else
         scriptData["variables"] = nlohmann::json::object();
 
-    PushScriptElement(goName, uuid, scriptData);
+    PushScriptElement(uuid, scriptData);
 }
 
-void Serializer::SetScriptElement(const rttr::instance& instance, const std::string& goName, const std::string& uuid)
+//Serialization
+void Serializer::SerializeScriptElement(const rttr::instance& instance, const std::string& uuid)
 {
     rttr::instance inst = instance.get_type().is_wrapper() ? instance.get_wrapped_instance() : instance;
     if (!inst.is_valid()) return;
@@ -283,13 +285,12 @@ void Serializer::SetScriptElement(const rttr::instance& instance, const std::str
     nlohmann::json scriptData;
     scriptData["scriptName"] = scriptName;
     scriptData["variables"] = serializedScript.value(scriptName, nlohmann::json::object());
-    PushScriptElement(goName, uuid, scriptData);
+    PushScriptElement(uuid, scriptData);
 }
 
-void Serializer::PushScriptElement(const std::string& goName, const std::string& uuid, const nlohmann::json& scriptData)
+void Serializer::PushScriptElement(const std::string& uuid, const nlohmann::json& scriptData)
 {
-    nlohmann::json& goData = script[goName];
-    goData["uuid"] = uuid;
+    nlohmann::json& goData = script[uuid];
 
     if (!goData.contains("scripts"))
         goData["scripts"] = nlohmann::json::array();
@@ -303,14 +304,11 @@ void Serializer::AttachedScript(Scene* scene)
     if (!ReadFromFile("assets\\scripts\\" + scene->GetName() + ".script", obj))
         return;
 
-    for (auto& [goName, goData] : obj.items())
+    for (auto& [key, goData] : obj.items())
     {
-        Enigma::UUID uuid = Enigma::UUID::ToUUID(goData["uuid"].get<std::string>());
+        Enigma::UUID uuid = Enigma::UUID::ToUUID(key);
 
         GameObject* go = scene->GetGameObject(uuid);
-        //To modify after tests, to remove the name search
-        if (!go)
-            go = scene->GetGameObject(goName);
         if (!go)
             continue;
 
